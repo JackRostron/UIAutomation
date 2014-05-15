@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F1FD8D0319253639008A1D2B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FD8D0219253639008A1D2B /* Cocoa.framework */; };
+		F1FD8D0D19253639008A1D2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1FD8D0B19253639008A1D2B /* InfoPlist.strings */; };
+		F1FD8D0F19253639008A1D2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FD8D0E19253639008A1D2B /* main.m */; };
+		F1FD8D1319253639008A1D2B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F1FD8D1119253639008A1D2B /* Credits.rtf */; };
+		F1FD8D1619253639008A1D2B /* IATAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FD8D1519253639008A1D2B /* IATAppDelegate.m */; };
+		F1FD8D1919253639008A1D2B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1FD8D1719253639008A1D2B /* MainMenu.xib */; };
+		F1FD8D1B19253639008A1D2B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1FD8D1A19253639008A1D2B /* Images.xcassets */; };
+		F1FD8D2219253639008A1D2B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FD8D2119253639008A1D2B /* XCTest.framework */; };
+		F1FD8D2319253639008A1D2B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FD8D0219253639008A1D2B /* Cocoa.framework */; };
+		F1FD8D2B19253639008A1D2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1FD8D2919253639008A1D2B /* InfoPlist.strings */; };
+		F1FD8D2D19253639008A1D2B /* UIAutomationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FD8D2C19253639008A1D2B /* UIAutomationTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1FD8D2419253639008A1D2B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1FD8CF719253639008A1D2B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1FD8CFE19253639008A1D2B;
+			remoteInfo = UIAutomation;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F1FD8CFF19253639008A1D2B /* UIAutomation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIAutomation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1FD8D0219253639008A1D2B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		F1FD8D0519253639008A1D2B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		F1FD8D0619253639008A1D2B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F1FD8D0719253639008A1D2B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F1FD8D0A19253639008A1D2B /* UIAutomation-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIAutomation-Info.plist"; sourceTree = "<group>"; };
+		F1FD8D0C19253639008A1D2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F1FD8D0E19253639008A1D2B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F1FD8D1019253639008A1D2B /* UIAutomation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAutomation-Prefix.pch"; sourceTree = "<group>"; };
+		F1FD8D1219253639008A1D2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		F1FD8D1419253639008A1D2B /* IATAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IATAppDelegate.h; sourceTree = "<group>"; };
+		F1FD8D1519253639008A1D2B /* IATAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IATAppDelegate.m; sourceTree = "<group>"; };
+		F1FD8D1819253639008A1D2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F1FD8D1A19253639008A1D2B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F1FD8D2019253639008A1D2B /* UIAutomationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIAutomationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1FD8D2119253639008A1D2B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		F1FD8D2819253639008A1D2B /* UIAutomationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIAutomationTests-Info.plist"; sourceTree = "<group>"; };
+		F1FD8D2A19253639008A1D2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F1FD8D2C19253639008A1D2B /* UIAutomationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIAutomationTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1FD8CFC19253639008A1D2B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1FD8D0319253639008A1D2B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1FD8D1D19253639008A1D2B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1FD8D2319253639008A1D2B /* Cocoa.framework in Frameworks */,
+				F1FD8D2219253639008A1D2B /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F1FD8CF619253639008A1D2B = {
+			isa = PBXGroup;
+			children = (
+				F1FD8D0819253639008A1D2B /* UIAutomation */,
+				F1FD8D2619253639008A1D2B /* UIAutomationTests */,
+				F1FD8D0119253639008A1D2B /* Frameworks */,
+				F1FD8D0019253639008A1D2B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F1FD8D0019253639008A1D2B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1FD8CFF19253639008A1D2B /* UIAutomation.app */,
+				F1FD8D2019253639008A1D2B /* UIAutomationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1FD8D0119253639008A1D2B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F1FD8D0219253639008A1D2B /* Cocoa.framework */,
+				F1FD8D2119253639008A1D2B /* XCTest.framework */,
+				F1FD8D0419253639008A1D2B /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F1FD8D0419253639008A1D2B /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F1FD8D0519253639008A1D2B /* AppKit.framework */,
+				F1FD8D0619253639008A1D2B /* CoreData.framework */,
+				F1FD8D0719253639008A1D2B /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		F1FD8D0819253639008A1D2B /* UIAutomation */ = {
+			isa = PBXGroup;
+			children = (
+				F1FD8D1419253639008A1D2B /* IATAppDelegate.h */,
+				F1FD8D1519253639008A1D2B /* IATAppDelegate.m */,
+				F1FD8D1719253639008A1D2B /* MainMenu.xib */,
+				F1FD8D1A19253639008A1D2B /* Images.xcassets */,
+				F1FD8D0919253639008A1D2B /* Supporting Files */,
+			);
+			path = UIAutomation;
+			sourceTree = "<group>";
+		};
+		F1FD8D0919253639008A1D2B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1FD8D0A19253639008A1D2B /* UIAutomation-Info.plist */,
+				F1FD8D0B19253639008A1D2B /* InfoPlist.strings */,
+				F1FD8D0E19253639008A1D2B /* main.m */,
+				F1FD8D1019253639008A1D2B /* UIAutomation-Prefix.pch */,
+				F1FD8D1119253639008A1D2B /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1FD8D2619253639008A1D2B /* UIAutomationTests */ = {
+			isa = PBXGroup;
+			children = (
+				F1FD8D2C19253639008A1D2B /* UIAutomationTests.m */,
+				F1FD8D2719253639008A1D2B /* Supporting Files */,
+			);
+			path = UIAutomationTests;
+			sourceTree = "<group>";
+		};
+		F1FD8D2719253639008A1D2B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F1FD8D2819253639008A1D2B /* UIAutomationTests-Info.plist */,
+				F1FD8D2919253639008A1D2B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1FD8CFE19253639008A1D2B /* UIAutomation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1FD8D3019253639008A1D2B /* Build configuration list for PBXNativeTarget "UIAutomation" */;
+			buildPhases = (
+				F1FD8CFB19253639008A1D2B /* Sources */,
+				F1FD8CFC19253639008A1D2B /* Frameworks */,
+				F1FD8CFD19253639008A1D2B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UIAutomation;
+			productName = UIAutomation;
+			productReference = F1FD8CFF19253639008A1D2B /* UIAutomation.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1FD8D1F19253639008A1D2B /* UIAutomationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1FD8D3319253639008A1D2B /* Build configuration list for PBXNativeTarget "UIAutomationTests" */;
+			buildPhases = (
+				F1FD8D1C19253639008A1D2B /* Sources */,
+				F1FD8D1D19253639008A1D2B /* Frameworks */,
+				F1FD8D1E19253639008A1D2B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1FD8D2519253639008A1D2B /* PBXTargetDependency */,
+			);
+			name = UIAutomationTests;
+			productName = UIAutomationTests;
+			productReference = F1FD8D2019253639008A1D2B /* UIAutomationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1FD8CF719253639008A1D2B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = IAT;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Jack Rostron";
+				TargetAttributes = {
+					F1FD8D1F19253639008A1D2B = {
+						TestTargetID = F1FD8CFE19253639008A1D2B;
+					};
+				};
+			};
+			buildConfigurationList = F1FD8CFA19253639008A1D2B /* Build configuration list for PBXProject "UIAutomation" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1FD8CF619253639008A1D2B;
+			productRefGroup = F1FD8D0019253639008A1D2B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F1FD8CFE19253639008A1D2B /* UIAutomation */,
+				F1FD8D1F19253639008A1D2B /* UIAutomationTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1FD8CFD19253639008A1D2B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1FD8D0D19253639008A1D2B /* InfoPlist.strings in Resources */,
+				F1FD8D1B19253639008A1D2B /* Images.xcassets in Resources */,
+				F1FD8D1319253639008A1D2B /* Credits.rtf in Resources */,
+				F1FD8D1919253639008A1D2B /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1FD8D1E19253639008A1D2B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1FD8D2B19253639008A1D2B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1FD8CFB19253639008A1D2B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1FD8D0F19253639008A1D2B /* main.m in Sources */,
+				F1FD8D1619253639008A1D2B /* IATAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1FD8D1C19253639008A1D2B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1FD8D2D19253639008A1D2B /* UIAutomationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1FD8D2519253639008A1D2B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1FD8CFE19253639008A1D2B /* UIAutomation */;
+			targetProxy = F1FD8D2419253639008A1D2B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F1FD8D0B19253639008A1D2B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1FD8D0C19253639008A1D2B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F1FD8D1119253639008A1D2B /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1FD8D1219253639008A1D2B /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		F1FD8D1719253639008A1D2B /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1FD8D1819253639008A1D2B /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		F1FD8D2919253639008A1D2B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1FD8D2A19253639008A1D2B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1FD8D2E19253639008A1D2B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F1FD8D2F19253639008A1D2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F1FD8D3119253639008A1D2B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UIAutomation/UIAutomation-Prefix.pch";
+				INFOPLIST_FILE = "UIAutomation/UIAutomation-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F1FD8D3219253639008A1D2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UIAutomation/UIAutomation-Prefix.pch";
+				INFOPLIST_FILE = "UIAutomation/UIAutomation-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F1FD8D3419253639008A1D2B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/UIAutomation.app/Contents/MacOS/UIAutomation";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UIAutomation/UIAutomation-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "UIAutomationTests/UIAutomationTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		F1FD8D3519253639008A1D2B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/UIAutomation.app/Contents/MacOS/UIAutomation";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UIAutomation/UIAutomation-Prefix.pch";
+				INFOPLIST_FILE = "UIAutomationTests/UIAutomationTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1FD8CFA19253639008A1D2B /* Build configuration list for PBXProject "UIAutomation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1FD8D2E19253639008A1D2B /* Debug */,
+				F1FD8D2F19253639008A1D2B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1FD8D3019253639008A1D2B /* Build configuration list for PBXNativeTarget "UIAutomation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1FD8D3119253639008A1D2B /* Debug */,
+				F1FD8D3219253639008A1D2B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F1FD8D3319253639008A1D2B /* Build configuration list for PBXNativeTarget "UIAutomationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1FD8D3419253639008A1D2B /* Debug */,
+				F1FD8D3519253639008A1D2B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1FD8CF719253639008A1D2B /* Project object */;
+}
