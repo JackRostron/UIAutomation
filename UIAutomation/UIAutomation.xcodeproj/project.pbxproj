@@ -18,6 +18,9 @@
 		F1FD8D2319253639008A1D2B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FD8D0219253639008A1D2B /* Cocoa.framework */; };
 		F1FD8D2B19253639008A1D2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1FD8D2919253639008A1D2B /* InfoPlist.strings */; };
 		F1FD8D2D19253639008A1D2B /* UIAutomationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FD8D2C19253639008A1D2B /* UIAutomationTests.m */; };
+		F1FD8D3819253767008A1D2B /* IATRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FD8D3719253767008A1D2B /* IATRunner.m */; };
+		F1FD8D3C19253941008A1D2B /* NSString+CommandLineScript.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FD8D3B19253941008A1D2B /* NSString+CommandLineScript.m */; };
+		F1FD8D3F19253F09008A1D2B /* IATApp.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FD8D3E19253F09008A1D2B /* IATApp.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,12 +47,18 @@
 		F1FD8D1419253639008A1D2B /* IATAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IATAppDelegate.h; sourceTree = "<group>"; };
 		F1FD8D1519253639008A1D2B /* IATAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IATAppDelegate.m; sourceTree = "<group>"; };
 		F1FD8D1819253639008A1D2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		F1FD8D1A19253639008A1D2B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F1FD8D1A19253639008A1D2B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = UIAutomation/Images.xcassets; sourceTree = "<group>"; };
 		F1FD8D2019253639008A1D2B /* UIAutomationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIAutomationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FD8D2119253639008A1D2B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F1FD8D2819253639008A1D2B /* UIAutomationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UIAutomationTests-Info.plist"; sourceTree = "<group>"; };
 		F1FD8D2A19253639008A1D2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F1FD8D2C19253639008A1D2B /* UIAutomationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIAutomationTests.m; sourceTree = "<group>"; };
+		F1FD8D3619253767008A1D2B /* IATRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IATRunner.h; path = Runner/IATRunner.h; sourceTree = "<group>"; };
+		F1FD8D3719253767008A1D2B /* IATRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IATRunner.m; path = Runner/IATRunner.m; sourceTree = "<group>"; };
+		F1FD8D3A19253941008A1D2B /* NSString+CommandLineScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CommandLineScript.h"; sourceTree = "<group>"; };
+		F1FD8D3B19253941008A1D2B /* NSString+CommandLineScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CommandLineScript.m"; sourceTree = "<group>"; };
+		F1FD8D3D19253F09008A1D2B /* IATApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IATApp.h; path = IATApp/IATApp.h; sourceTree = "<group>"; };
+		F1FD8D3E19253F09008A1D2B /* IATApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IATApp.m; path = IATApp/IATApp.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +86,11 @@
 			isa = PBXGroup;
 			children = (
 				F1FD8D0819253639008A1D2B /* UIAutomation */,
+				F1FD8D1A19253639008A1D2B /* Images.xcassets */,
 				F1FD8D2619253639008A1D2B /* UIAutomationTests */,
 				F1FD8D0119253639008A1D2B /* Frameworks */,
 				F1FD8D0019253639008A1D2B /* Products */,
+				F1FD8D0919253639008A1D2B /* Supporting Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,9 +128,13 @@
 			children = (
 				F1FD8D1419253639008A1D2B /* IATAppDelegate.h */,
 				F1FD8D1519253639008A1D2B /* IATAppDelegate.m */,
+				F1FD8D3619253767008A1D2B /* IATRunner.h */,
+				F1FD8D3719253767008A1D2B /* IATRunner.m */,
+				F1FD8D3D19253F09008A1D2B /* IATApp.h */,
+				F1FD8D3E19253F09008A1D2B /* IATApp.m */,
+				F1FD8D3A19253941008A1D2B /* NSString+CommandLineScript.h */,
+				F1FD8D3B19253941008A1D2B /* NSString+CommandLineScript.m */,
 				F1FD8D1719253639008A1D2B /* MainMenu.xib */,
-				F1FD8D1A19253639008A1D2B /* Images.xcassets */,
-				F1FD8D0919253639008A1D2B /* Supporting Files */,
 			);
 			path = UIAutomation;
 			sourceTree = "<group>";
@@ -134,6 +149,7 @@
 				F1FD8D1119253639008A1D2B /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			path = UIAutomation;
 			sourceTree = "<group>";
 		};
 		F1FD8D2619253639008A1D2B /* UIAutomationTests */ = {
@@ -254,7 +270,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1FD8D0F19253639008A1D2B /* main.m in Sources */,
+				F1FD8D3819253767008A1D2B /* IATRunner.m in Sources */,
+				F1FD8D3C19253941008A1D2B /* NSString+CommandLineScript.m in Sources */,
 				F1FD8D1619253639008A1D2B /* IATAppDelegate.m in Sources */,
+				F1FD8D3F19253F09008A1D2B /* IATApp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
