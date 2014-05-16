@@ -1,0 +1,47 @@
+2014-04-16 14:52:14 +0000 logElementTree:
+UIATarget "iPhone Simulator" {{0, 0}, {320, 568}}
+elements: {
+	UIAApplication "PowaTag" {{0, 20}, {320, 548}}
+	elements: {
+		UIAWindow "(null)" {{0, 0}, {320, 568}}
+		elements: {
+			UIANavigationBar "Cards" {{0, 20}, {320, 44}}
+			elements: {
+				UIAImage "(null)" {{0, 0}, {320, 64}}
+				elements: {
+					UIAImage "(null)" {{0, 64}, {320, 0.5}}
+				}
+				UIAButton "CardsViewControllerRevealMenuButton" {{5, 26}, {40, 30}}
+				UIAButton "UINavigationBarBackIndicatorDefault.png" {{8, 32}, {12.5, 20.5}}
+				UIAStaticText "Cards" {{134, 28}, {52.5, 27}}
+				UIAButton "CardsViewControllerAddNewButton" {{275.5, 26}, {40, 30}}
+			}
+			UIATableView "Empty list" {{0, 64}, {320, 504}}
+			elements: {
+				UIAImage "Swipe-Left-Delete-Icon-Grey" {{87, 79}, {30.5, 14}}
+				UIAStaticText "swipe left to delete" {{125.5, 77}, {108, 18}}
+				UIATableCell "CardsViewControllerDefaultCard" {{0, 108}, {320, 75}}
+				elements: {
+					UIAStaticText "CardsViewControllerDefaultCard" {{0, 108}, {320, 75}}
+					UIAButton "Size Tick On Green" {{266, 112}, {44, 44}}
+				}
+				UIATableCell "CardsViewControllerStandardCard1" {{0, 183}, {320, 75}}
+				elements: {
+					UIAStaticText "CardsViewControllerStandardCard1" {{0, 183}, {320, 75}}
+					UIAButton "Size Tick Off Grey" {{266, 187}, {44, 44}}
+				}
+			}
+		}
+		UIAWindow "(null)" {{0, 0}, {320, 568}}
+		elements: {
+			UIAStatusBar "(null)" {{0, 0}, {320, 20}}
+			elements: {
+				UIAElement "Swipe down with three fingers to reveal the notification center., Swipe up with three fingers to reveal the control center, Double-tap to scroll to top" {{6, 0}, {38, 20}}
+				UIAElement "3 of 3 Wi-Fi bars" {{49, 0}, {13, 20}}
+				UIAElement "3:52 PM" {{137, 0}, {47, 20}}
+				UIAElement "100% battery power" {{290, 0}, {25, 20}}
+			}
+		}
+		UIAWindow "(null)" {{0, 0}, {320, 568}}
+	}
+}
