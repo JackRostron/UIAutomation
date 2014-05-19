@@ -66,6 +66,13 @@
     NSLog(@"%@", [compiledString commandLineOutput]);
 }
 
+- (void)runTestForApp:(IATApp *)app onSimulator:(IATSimulatorDevice *)simulator
+{
+    NSString *compiledString = [NSString stringWithFormat:@"instruments -w '%@' -t '%s' '%@' -e UIASCRIPT '/Users/JackRostron/Documents/Repos/powatag-ios-testing/runners/signUpRunner.js'", [simulator getCommandLineVersionWithSimulatorDevice:kiOSSimulatoriPhone andSize:kSimulatorSize4inch andBitRate:kSimulatorProcessorBitRate32] ,traceTemplateLocation, app.projectLocation];
+    
+    NSLog(@"%@", [compiledString commandLineOutput]);
+}
+
 @end
 
 

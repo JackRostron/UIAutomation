@@ -27,20 +27,25 @@
     
     NSLog(@"%@", myApp.name);
     
+    //IATSimulatorDevice *simulator = [[IATSimulatorDevice alloc] initWithVersion:@"6.0"];
     //[[IATRunner sharedRunner] runTestForApp:myApp];
+    //[[IATRunner sharedRunner] runTestForApp:myApp onSimulator:simulator];
+    
+    [[IATAvailableTargetsManager sharedManager] availableTargetMenu];
     
     
-    NSLog(@"%@", [[IATAvailableTargetsManager sharedManager] simulators]);
     
-    for (int x = 0; x < [[[IATAvailableTargetsManager sharedManager] simulators] count]; x++) {
-        
-        IATSimulatorDevice *device = [[IATSimulatorDevice alloc] initWithVersion:[[[IATAvailableTargetsManager sharedManager] simulators] objectAtIndex:x]];
-        
-        NSLog(@"%@", [device getCommandLineVersionWithSimulatorDevice:kiOSSimulatoriPad andSize:kSimulatorSizeiPad andBitRate:kSimulatorProcessorBitRate64]);
-        
-        NSLog(@"%@", [device getCleanLocationWithBitRate:kSimulatorProcessorBitRate64]);
-        
-    }
+//    NSLog(@"%@", [[IATAvailableTargetsManager sharedManager] simulators]);
+//    
+//    for (int x = 0; x < [[[IATAvailableTargetsManager sharedManager] simulators] count]; x++) {
+//        
+//        IATSimulatorDevice *device = [[IATSimulatorDevice alloc] initWithVersion:[[[IATAvailableTargetsManager sharedManager] simulators] objectAtIndex:x]];
+//        
+//        NSLog(@"%@", [device getCommandLineVersionWithSimulatorDevice:kiOSSimulatoriPad andSize:kSimulatorSizeiPad andBitRate:kSimulatorProcessorBitRate64]);
+//        
+//        NSLog(@"%@", [device getCleanLocationWithBitRate:kSimulatorProcessorBitRate64]);
+//        
+//    }
     
 }
 

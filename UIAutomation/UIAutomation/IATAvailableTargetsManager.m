@@ -13,6 +13,8 @@
 @interface IATAvailableTargetsManager ()
 @property (nonatomic, strong) NSMutableArray *attachedDevices;
 @property (nonatomic, strong) NSMutableArray *availableSimulators;
+
+@property (nonatomic, strong) NSDate *lastCheckForSimulators;
 @end
 
 @implementation IATAvailableTargetsManager
@@ -43,7 +45,10 @@
 #pragma mark - Public methods
 - (NSArray *)simulators
 {
-    [self getSimulatorVersions];
+    if ([self.lastCheckForSimulators timeIntervalSinceNow] > 60 || !self.lastCheckForSimulators) { //Less than a minute since last check
+        self.lastCheckForSimulators = [NSDate date];
+        [self getSimulatorVersions];
+    }
     return self.availableSimulators;
 }
 
@@ -54,6 +59,11 @@
 
 - (NSMenu *)availableTargetMenu
 {
+    //NSLog(@"%@", [self getFormattedSimulatorList]);
+    
+    NSArray *simulators = [self getFormattedSimulatorList];
+    
+    
     
     
     return nil;
@@ -73,18 +83,70 @@
 
 - (void)getSimulatorVersions
 {
-    [self.availableSimulators removeAllObjects];
+    if ([self.lastCheckForSimulators timeIntervalSinceNow] > 60 || !self.lastCheckForSimulators) { //Less than a minute since last check
+        self.lastCheckForSimulators = [NSDate date];
+        
+        [self.availableSimulators removeAllObjects];
+        
+        //NSString *availableSimulators = @"xcodebuild -showsdks";
+        NSString *availableSimulators = @"instruments -w printSimulators";
+        NSString *unparsedSimulators = [availableSimulators commandLineOutput];
+        NSArray *sdkLines = [unparsedSimulators componentsSeparatedByString:@"\n"];
+        
+        for (NSString *line in sdkLines) {
+            if ([line rangeOfString:@" - Simulator - "].location != NSNotFound) {
+                [self.availableSimulators addObject:line];
+            }
+        }
+        
+    } else {
+        NSLog(@"Not updating since last check within 60seconds");
+    }
+}
+
+- (NSArray *)getFormattedSimulatorList
+{
+    if ([self.simulators count] == 0) {
+        [self getSimulatorVersions];
+    }
     
-    NSString *availableSimulators = @"xcodebuild -showsdks";
-    NSString *unparsedSimulators = [availableSimulators commandLineOutput];
-    NSArray *sdkLines = [unparsedSimulators componentsSeparatedByString:@"\n"];
+    NSMutableArray *simulatorArray = [[NSMutableArray alloc] initWithCapacity:[self.simulators count]];
     
-    for (NSString *line in sdkLines) {
-        if ([line rangeOfString:@"iphonesimulator"].location != NSNotFound) {
-            NSString *simulatorVersion = [line substringFromIndex:(line.length - 3)];
-            [self.availableSimulators addObject:simulatorVersion];
+    for (int x = 0; x < [self.simulators count]; x++) {
+        NSString *line = [self.simulators objectAtIndex:x];
+        NSArray *brokenLine = [line componentsSeparatedByString:@" - "];
+        
+        if (![simulatorArray containsObject:[brokenLine firstObject]]) {
+            [simulatorArray addObject:[brokenLine firstObject]];
         }
     }
+    
+    NSMutableArray *finalArray = [[NSMutableArray alloc] initWithCapacity:[self.simulators count]];
+    
+    for (int x = 0; x < [simulatorArray count]; x++) {
+        NSDictionary *simulatorSetup = @{@"device" : [simulatorArray objectAtIndex:x],
+                                         @"versions" : [self getVersionsForSimulatorDeviceType:[simulatorArray objectAtIndex:x]]};
+        
+        [finalArray addObject:simulatorSetup];
+    }
+    
+    return finalArray;
+}
+
+- (NSArray *)getVersionsForSimulatorDeviceType:(NSString *)deviceString
+{
+    NSMutableArray *versionsAvailable = [[NSMutableArray alloc] init];
+    
+    for (int x = 0; x < [self.simulators count]; x++) {
+        NSString *line = [self.simulators objectAtIndex:x];
+        NSArray *brokenLine = [line componentsSeparatedByString:@" - "];
+        
+        if ([[brokenLine firstObject] isEqualToString:deviceString]) {
+            [versionsAvailable addObject:[brokenLine lastObject]];
+        }
+    }
+    
+    return versionsAvailable;
 }
 
 @end
