@@ -63,8 +63,25 @@
     
     NSArray *simulators = [self getFormattedSimulatorList];
     
+    NSMenu *compiledMenu = [[NSMenu alloc] init];
     
+    for (NSDictionary *simulator in simulators) {
+        //NSMenu *simulatorMenu = [[NSMenu alloc] initWithTitle:[simulator objectForKey:@"device"]];
+        NSMenuItem *simulatorMenu = [[NSMenuItem alloc] initWithTitle:[simulator objectForKey:@"device"] action:NULL keyEquivalent:@""];
+        NSArray *versionList = [simulator objectForKey:@"versions"];
+        
+        
+        NSMenu *versionMenu = [[NSMenu alloc] initWithTitle:[simulator objectForKey:@"device"]];
+        for (NSString *version in versionList) {
+            NSMenuItem *versionItem = [[NSMenuItem alloc] initWithTitle:version action:NULL keyEquivalent:@""];
+            [versionMenu addItem:versionItem];
+        }
+        
+        [simulatorMenu setSubmenu:versionMenu];
+        [compiledMenu addItem:simulatorMenu];
+    }
     
+    NSLog(@"%@", compiledMenu);
     
     return nil;
 }
