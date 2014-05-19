@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F11BFE49192A6F3300A42BC8 /* IATAvailableTargetsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F11BFE47192A6F3300A42BC8 /* IATAvailableTargetsManager.m */; };
+		F11BFE4E192A6FE000A42BC8 /* JGRiOSDeviceMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = F11BFE4B192A6FE000A42BC8 /* JGRiOSDeviceMonitor.m */; };
+		F11BFE4F192A6FE000A42BC8 /* JGRUSBDeviceMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = F11BFE4D192A6FE000A42BC8 /* JGRUSBDeviceMonitor.m */; };
+		F11BFE55192A709E00A42BC8 /* IATSimulatorDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = F11BFE54192A709E00A42BC8 /* IATSimulatorDevice.m */; };
 		F1FD8D0319253639008A1D2B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1FD8D0219253639008A1D2B /* Cocoa.framework */; };
 		F1FD8D0D19253639008A1D2B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1FD8D0B19253639008A1D2B /* InfoPlist.strings */; };
 		F1FD8D0F19253639008A1D2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FD8D0E19253639008A1D2B /* main.m */; };
@@ -34,6 +38,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F11BFE47192A6F3300A42BC8 /* IATAvailableTargetsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATAvailableTargetsManager.m; sourceTree = "<group>"; };
+		F11BFE48192A6F3300A42BC8 /* IATAvailableTargetsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IATAvailableTargetsManager.h; sourceTree = "<group>"; };
+		F11BFE4A192A6FE000A42BC8 /* JGRiOSDeviceMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGRiOSDeviceMonitor.h; sourceTree = "<group>"; };
+		F11BFE4B192A6FE000A42BC8 /* JGRiOSDeviceMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGRiOSDeviceMonitor.m; sourceTree = "<group>"; };
+		F11BFE4C192A6FE000A42BC8 /* JGRUSBDeviceMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGRUSBDeviceMonitor.h; sourceTree = "<group>"; };
+		F11BFE4D192A6FE000A42BC8 /* JGRUSBDeviceMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGRUSBDeviceMonitor.m; sourceTree = "<group>"; };
+		F11BFE53192A709E00A42BC8 /* IATSimulatorDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IATSimulatorDevice.h; sourceTree = "<group>"; };
+		F11BFE54192A709E00A42BC8 /* IATSimulatorDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATSimulatorDevice.m; sourceTree = "<group>"; };
 		F1FD8CFF19253639008A1D2B /* UIAutomation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIAutomation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FD8D0219253639008A1D2B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F1FD8D0519253639008A1D2B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -132,8 +144,16 @@
 				F1FD8D3719253767008A1D2B /* IATRunner.m */,
 				F1FD8D3D19253F09008A1D2B /* IATApp.h */,
 				F1FD8D3E19253F09008A1D2B /* IATApp.m */,
+				F11BFE53192A709E00A42BC8 /* IATSimulatorDevice.h */,
+				F11BFE54192A709E00A42BC8 /* IATSimulatorDevice.m */,
+				F11BFE48192A6F3300A42BC8 /* IATAvailableTargetsManager.h */,
+				F11BFE47192A6F3300A42BC8 /* IATAvailableTargetsManager.m */,
 				F1FD8D3A19253941008A1D2B /* NSString+CommandLineScript.h */,
 				F1FD8D3B19253941008A1D2B /* NSString+CommandLineScript.m */,
+				F11BFE4A192A6FE000A42BC8 /* JGRiOSDeviceMonitor.h */,
+				F11BFE4B192A6FE000A42BC8 /* JGRiOSDeviceMonitor.m */,
+				F11BFE4C192A6FE000A42BC8 /* JGRUSBDeviceMonitor.h */,
+				F11BFE4D192A6FE000A42BC8 /* JGRUSBDeviceMonitor.m */,
 				F1FD8D1719253639008A1D2B /* MainMenu.xib */,
 			);
 			path = UIAutomation;
@@ -271,7 +291,11 @@
 			files = (
 				F1FD8D0F19253639008A1D2B /* main.m in Sources */,
 				F1FD8D3819253767008A1D2B /* IATRunner.m in Sources */,
+				F11BFE55192A709E00A42BC8 /* IATSimulatorDevice.m in Sources */,
+				F11BFE4E192A6FE000A42BC8 /* JGRiOSDeviceMonitor.m in Sources */,
 				F1FD8D3C19253941008A1D2B /* NSString+CommandLineScript.m in Sources */,
+				F11BFE49192A6F3300A42BC8 /* IATAvailableTargetsManager.m in Sources */,
+				F11BFE4F192A6FE000A42BC8 /* JGRUSBDeviceMonitor.m in Sources */,
 				F1FD8D1619253639008A1D2B /* IATAppDelegate.m in Sources */,
 				F1FD8D3F19253F09008A1D2B /* IATApp.m in Sources */,
 			);
@@ -486,6 +510,7 @@
 				F1FD8D3219253639008A1D2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F1FD8D3319253639008A1D2B /* Build configuration list for PBXNativeTarget "UIAutomationTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +519,7 @@
 				F1FD8D3519253639008A1D2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

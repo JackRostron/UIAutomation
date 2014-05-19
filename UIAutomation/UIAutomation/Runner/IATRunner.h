@@ -14,7 +14,6 @@
 + (id)sharedRunner;
 
 - (void)testWeCanTalkToInstruments;
-
 - (void)runTestForApp:(IATApp *)app;
 
 @end

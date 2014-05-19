@@ -9,6 +9,8 @@
 #import "IATAppDelegate.h"
 #import "IATRunner.h"
 #import "IATApp.h"
+#import "IATAvailableTargetsManager.h"
+#import "IATSimulatorDevice.h"
 
 @implementation IATAppDelegate
 
@@ -25,7 +27,20 @@
     
     NSLog(@"%@", myApp.name);
     
-    [[IATRunner sharedRunner] runTestForApp:myApp];
+    //[[IATRunner sharedRunner] runTestForApp:myApp];
+    
+    
+    NSLog(@"%@", [[IATAvailableTargetsManager sharedManager] simulators]);
+    
+    for (int x = 0; x < [[[IATAvailableTargetsManager sharedManager] simulators] count]; x++) {
+        
+        IATSimulatorDevice *device = [[IATSimulatorDevice alloc] initWithVersion:[[[IATAvailableTargetsManager sharedManager] simulators] objectAtIndex:x]];
+        
+        NSLog(@"%@", [device getCommandLineVersionWithSimulatorDevice:kiOSSimulatoriPad andSize:kSimulatorSizeiPad andBitRate:kSimulatorProcessorBitRate64]);
+        
+        NSLog(@"%@", [device getCleanLocationWithBitRate:kSimulatorProcessorBitRate64]);
+        
+    }
     
 }
 
