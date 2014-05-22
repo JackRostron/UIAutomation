@@ -52,27 +52,7 @@
     
     //Loop through - get range of lines in the array that are children or grandchildren
     
-    
-    for (Element *e in elements) {
-        
-        
-        
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    return nil;
+    return elements;
 }
 
 + (NSArray *)stripTabSpacingFromListTree:(NSArray *)listTreeArray

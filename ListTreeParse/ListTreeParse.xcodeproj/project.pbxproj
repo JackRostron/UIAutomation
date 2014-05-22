@@ -7,6 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F183341E192E497E001910F8 /* Automation Results.plist in Resources */ = {isa = PBXBuildFile; fileRef = F1833402192E497E001910F8 /* Automation Results.plist */; };
+		F183341F192E497E001910F8 /* UIAApplication- name-CC rect-{{0, 20}, {320, 548}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833404192E497E001910F8 /* UIAApplication- name-CC rect-{{0, 20}, {320, 548}}.png */; };
+		F1833420192E497E001910F8 /* UIAButton- name-audio off rect-{{120, 465}, {80, 80}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833405192E497E001910F8 /* UIAButton- name-audio off rect-{{120, 465}, {80, 80}}.png */; };
+		F1833421192E497E001910F8 /* UIAButton- name-ScanViewControllerFlashImageButton rect-{{5, 71}, {40, 40}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833406192E497E001910F8 /* UIAButton- name-ScanViewControllerFlashImageButton rect-{{5, 71}, {40, 40}}.png */; };
+		F1833422192E497E001910F8 /* UIAButton- name-ScanViewControllerGridButton rect-{{185, 71}, {61, 40}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833407192E497E001910F8 /* UIAButton- name-ScanViewControllerGridButton rect-{{185, 71}, {61, 40}}.png */; };
+		F1833423192E497E001910F8 /* UIAButton- name-ScanViewControllerHintsButton rect-{{254, 71}, {61, 40}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833408192E497E001910F8 /* UIAButton- name-ScanViewControllerHintsButton rect-{{254, 71}, {61, 40}}.png */; };
+		F1833424192E497E001910F8 /* UIAButton- name-ScanViewControllerRevealMenuButton rect-{{5, 21}, {40, 40}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833409192E497E001910F8 /* UIAButton- name-ScanViewControllerRevealMenuButton rect-{{5, 21}, {40, 40}}.png */; };
+		F1833425192E497E001910F8 /* UIAElement- name-100% battery power rect-{{290, 0}, {25, 20}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F183340A192E497E001910F8 /* UIAElement- name-100% battery power rect-{{290, 0}, {25, 20}}.png */; };
+		F1833426192E497E001910F8 /* UIAElement- name-3 of 3 Wi-Fi bars rect-{{49, 0}, {13, 20}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F183340B192E497E001910F8 /* UIAElement- name-3 of 3 Wi-Fi bars rect-{{49, 0}, {13, 20}}.png */; };
+		F1833427192E497E001910F8 /* UIAElement- name-3-33 PM rect-{{137, 0}, {47, 20}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F183340C192E497E001910F8 /* UIAElement- name-3-33 PM rect-{{137, 0}, {47, 20}}.png */; };
+		F1833428192E497E001910F8 /* UIAElement- name-ScanViewControllerHintsImage rect-{{10, 133}, {74, 74}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F183340D192E497E001910F8 /* UIAElement- name-ScanViewControllerHintsImage rect-{{10, 133}, {74, 74}}.png */; };
+		F1833429192E497E001910F8 /* UIAElement- name-StandardLocationTrackingOn rect-{{275, 0}, {9, 20}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F183340E192E497E001910F8 /* UIAElement- name-StandardLocationTrackingOn rect-{{275, 0}, {9, 20}}.png */; };
+		F183342A192E497E001910F8 /* UIAElement- name-Swipe down with three fingers to reveal the notification center., Swipe up with three fingers to reveal the control center, Double-tap to scroll to top rect-{{6, 0}, {38, 20}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F183340F192E497E001910F8 /* UIAElement- name-Swipe down with three fingers to reveal the notification center., Swipe up with three fingers to reveal the control center, Double-tap to scroll to top rect-{{6, 0}, {38, 20}}.png */; };
+		F183342B192E497E001910F8 /* UIAImage- name-Flash-Off rect-{{14, 80}, {22, 22}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833410192E497E001910F8 /* UIAImage- name-Flash-Off rect-{{14, 80}, {22, 22}}.png */; };
+		F183342C192E497E001910F8 /* UIAImage- name-Grid rect-{{8, 130}, {304, 379}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833411192E497E001910F8 /* UIAImage- name-Grid rect-{{8, 130}, {304, 379}}.png */; };
+		F183342D192E497E001910F8 /* UIAImage- name-PowaTag-Logo rect-{{103, 32}, {114, 18}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833412192E497E001910F8 /* UIAImage- name-PowaTag-Logo rect-{{103, 32}, {114, 18}}.png */; };
+		F183342E192E497E001910F8 /* UIAImage- name-Scan-UI-Tap-To-Focus-Ring rect-{{118, 278}, {84, 84}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833413192E497E001910F8 /* UIAImage- name-Scan-UI-Tap-To-Focus-Ring rect-{{118, 278}, {84, 84}}.png */; };
+		F183342F192E497E001910F8 /* UIAImage- rect-{{0, 0}, {320, 0}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833414192E497E001910F8 /* UIAImage- rect-{{0, 0}, {320, 0}}.png */; };
+		F1833430192E497E001910F8 /* UIAImage- rect-{{0, 568}, {320, 0}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833415192E497E001910F8 /* UIAImage- rect-{{0, 568}, {320, 0}}.png */; };
+		F1833431192E497E001910F8 /* UIAStaticText- name-ScanViewControllerFlashTextButton value-ScanViewControllerFlashTextButton rect-{{46, 69}, {55, 40}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833416192E497E001910F8 /* UIAStaticText- name-ScanViewControllerFlashTextButton value-ScanViewControllerFlashTextButton rect-{{46, 69}, {55, 40}}.png */; };
+		F1833432192E497E001910F8 /* UIAStaticText- name-Tap to focus value-Tap to focus rect-{{131, 279}, {62, 84}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833417192E497E001910F8 /* UIAStaticText- name-Tap to focus value-Tap to focus rect-{{131, 279}, {62, 84}}.png */; };
+		F1833433192E497E001910F8 /* UIAStatusBar- rect-{{0, 0}, {320, 20}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833418192E497E001910F8 /* UIAStatusBar- rect-{{0, 0}, {320, 20}}.png */; };
+		F1833434192E497E001910F8 /* UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}} 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F1833419192E497E001910F8 /* UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}} 2.png */; };
+		F1833435192E497E001910F8 /* UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F183341A192E497E001910F8 /* UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}}.png */; };
+		F1833436192E497E001910F8 /* UIAWindow- rect-{{0, 0}, {320, 568}} 2.png in Resources */ = {isa = PBXBuildFile; fileRef = F183341B192E497E001910F8 /* UIAWindow- rect-{{0, 0}, {320, 568}} 2.png */; };
+		F1833437192E497E001910F8 /* UIAWindow- rect-{{0, 0}, {320, 568}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F183341C192E497E001910F8 /* UIAWindow- rect-{{0, 0}, {320, 568}}.png */; };
+		F1833438192E497E001910F8 /* UIATarget- name-iPhone Simulator rect-{{0, 0}, {320, 568}}.png in Resources */ = {isa = PBXBuildFile; fileRef = F183341D192E497E001910F8 /* UIATarget- name-iPhone Simulator rect-{{0, 0}, {320, 568}}.png */; };
 		F1F3BDAE18FFFED80018D219 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1F3BDAD18FFFED80018D219 /* Cocoa.framework */; };
 		F1F3BDB818FFFED80018D219 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1F3BDB618FFFED80018D219 /* InfoPlist.strings */; };
 		F1F3BDBA18FFFED80018D219 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F3BDB918FFFED80018D219 /* main.m */; };
@@ -34,6 +61,33 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F1833402192E497E001910F8 /* Automation Results.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Automation Results.plist"; sourceTree = "<group>"; };
+		F1833404192E497E001910F8 /* UIAApplication- name-CC rect-{{0, 20}, {320, 548}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAApplication- name-CC rect-{{0, 20}, {320, 548}}.png"; sourceTree = "<group>"; };
+		F1833405192E497E001910F8 /* UIAButton- name-audio off rect-{{120, 465}, {80, 80}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAButton- name-audio off rect-{{120, 465}, {80, 80}}.png"; sourceTree = "<group>"; };
+		F1833406192E497E001910F8 /* UIAButton- name-ScanViewControllerFlashImageButton rect-{{5, 71}, {40, 40}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAButton- name-ScanViewControllerFlashImageButton rect-{{5, 71}, {40, 40}}.png"; sourceTree = "<group>"; };
+		F1833407192E497E001910F8 /* UIAButton- name-ScanViewControllerGridButton rect-{{185, 71}, {61, 40}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAButton- name-ScanViewControllerGridButton rect-{{185, 71}, {61, 40}}.png"; sourceTree = "<group>"; };
+		F1833408192E497E001910F8 /* UIAButton- name-ScanViewControllerHintsButton rect-{{254, 71}, {61, 40}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAButton- name-ScanViewControllerHintsButton rect-{{254, 71}, {61, 40}}.png"; sourceTree = "<group>"; };
+		F1833409192E497E001910F8 /* UIAButton- name-ScanViewControllerRevealMenuButton rect-{{5, 21}, {40, 40}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAButton- name-ScanViewControllerRevealMenuButton rect-{{5, 21}, {40, 40}}.png"; sourceTree = "<group>"; };
+		F183340A192E497E001910F8 /* UIAElement- name-100% battery power rect-{{290, 0}, {25, 20}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAElement- name-100% battery power rect-{{290, 0}, {25, 20}}.png"; sourceTree = "<group>"; };
+		F183340B192E497E001910F8 /* UIAElement- name-3 of 3 Wi-Fi bars rect-{{49, 0}, {13, 20}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAElement- name-3 of 3 Wi-Fi bars rect-{{49, 0}, {13, 20}}.png"; sourceTree = "<group>"; };
+		F183340C192E497E001910F8 /* UIAElement- name-3-33 PM rect-{{137, 0}, {47, 20}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAElement- name-3-33 PM rect-{{137, 0}, {47, 20}}.png"; sourceTree = "<group>"; };
+		F183340D192E497E001910F8 /* UIAElement- name-ScanViewControllerHintsImage rect-{{10, 133}, {74, 74}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAElement- name-ScanViewControllerHintsImage rect-{{10, 133}, {74, 74}}.png"; sourceTree = "<group>"; };
+		F183340E192E497E001910F8 /* UIAElement- name-StandardLocationTrackingOn rect-{{275, 0}, {9, 20}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAElement- name-StandardLocationTrackingOn rect-{{275, 0}, {9, 20}}.png"; sourceTree = "<group>"; };
+		F183340F192E497E001910F8 /* UIAElement- name-Swipe down with three fingers to reveal the notification center., Swipe up with three fingers to reveal the control center, Double-tap to scroll to top rect-{{6, 0}, {38, 20}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAElement- name-Swipe down with three fingers to reveal the notification center., Swipe up with three fingers to reveal the control center, Double-tap to scroll to top rect-{{6, 0}, {38, 20}}.png"; sourceTree = "<group>"; };
+		F1833410192E497E001910F8 /* UIAImage- name-Flash-Off rect-{{14, 80}, {22, 22}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAImage- name-Flash-Off rect-{{14, 80}, {22, 22}}.png"; sourceTree = "<group>"; };
+		F1833411192E497E001910F8 /* UIAImage- name-Grid rect-{{8, 130}, {304, 379}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAImage- name-Grid rect-{{8, 130}, {304, 379}}.png"; sourceTree = "<group>"; };
+		F1833412192E497E001910F8 /* UIAImage- name-PowaTag-Logo rect-{{103, 32}, {114, 18}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAImage- name-PowaTag-Logo rect-{{103, 32}, {114, 18}}.png"; sourceTree = "<group>"; };
+		F1833413192E497E001910F8 /* UIAImage- name-Scan-UI-Tap-To-Focus-Ring rect-{{118, 278}, {84, 84}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAImage- name-Scan-UI-Tap-To-Focus-Ring rect-{{118, 278}, {84, 84}}.png"; sourceTree = "<group>"; };
+		F1833414192E497E001910F8 /* UIAImage- rect-{{0, 0}, {320, 0}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAImage- rect-{{0, 0}, {320, 0}}.png"; sourceTree = "<group>"; };
+		F1833415192E497E001910F8 /* UIAImage- rect-{{0, 568}, {320, 0}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAImage- rect-{{0, 568}, {320, 0}}.png"; sourceTree = "<group>"; };
+		F1833416192E497E001910F8 /* UIAStaticText- name-ScanViewControllerFlashTextButton value-ScanViewControllerFlashTextButton rect-{{46, 69}, {55, 40}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAStaticText- name-ScanViewControllerFlashTextButton value-ScanViewControllerFlashTextButton rect-{{46, 69}, {55, 40}}.png"; sourceTree = "<group>"; };
+		F1833417192E497E001910F8 /* UIAStaticText- name-Tap to focus value-Tap to focus rect-{{131, 279}, {62, 84}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAStaticText- name-Tap to focus value-Tap to focus rect-{{131, 279}, {62, 84}}.png"; sourceTree = "<group>"; };
+		F1833418192E497E001910F8 /* UIAStatusBar- rect-{{0, 0}, {320, 20}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAStatusBar- rect-{{0, 0}, {320, 20}}.png"; sourceTree = "<group>"; };
+		F1833419192E497E001910F8 /* UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}} 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}} 2.png"; sourceTree = "<group>"; };
+		F183341A192E497E001910F8 /* UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}}.png"; sourceTree = "<group>"; };
+		F183341B192E497E001910F8 /* UIAWindow- rect-{{0, 0}, {320, 568}} 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAWindow- rect-{{0, 0}, {320, 568}} 2.png"; sourceTree = "<group>"; };
+		F183341C192E497E001910F8 /* UIAWindow- rect-{{0, 0}, {320, 568}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIAWindow- rect-{{0, 0}, {320, 568}}.png"; sourceTree = "<group>"; };
+		F183341D192E497E001910F8 /* UIATarget- name-iPhone Simulator rect-{{0, 0}, {320, 568}}.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UIATarget- name-iPhone Simulator rect-{{0, 0}, {320, 568}}.png"; sourceTree = "<group>"; };
 		F1F3BDAA18FFFED80018D219 /* ListTreeParse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListTreeParse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1F3BDAD18FFFED80018D219 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F1F3BDB018FFFED80018D219 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -80,6 +134,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F1833401192E497E001910F8 /* Run 1 (3) */ = {
+			isa = PBXGroup;
+			children = (
+				F1833402192E497E001910F8 /* Automation Results.plist */,
+				F1833403192E497E001910F8 /* UIATarget- name-iPhone Simulator rect-{{0, 0}, {320, 568}} */,
+				F183341D192E497E001910F8 /* UIATarget- name-iPhone Simulator rect-{{0, 0}, {320, 568}}.png */,
+			);
+			path = "Run 1 (3)";
+			sourceTree = "<group>";
+		};
+		F1833403192E497E001910F8 /* UIATarget- name-iPhone Simulator rect-{{0, 0}, {320, 568}} */ = {
+			isa = PBXGroup;
+			children = (
+				F1833404192E497E001910F8 /* UIAApplication- name-CC rect-{{0, 20}, {320, 548}}.png */,
+				F1833405192E497E001910F8 /* UIAButton- name-audio off rect-{{120, 465}, {80, 80}}.png */,
+				F1833406192E497E001910F8 /* UIAButton- name-ScanViewControllerFlashImageButton rect-{{5, 71}, {40, 40}}.png */,
+				F1833407192E497E001910F8 /* UIAButton- name-ScanViewControllerGridButton rect-{{185, 71}, {61, 40}}.png */,
+				F1833408192E497E001910F8 /* UIAButton- name-ScanViewControllerHintsButton rect-{{254, 71}, {61, 40}}.png */,
+				F1833409192E497E001910F8 /* UIAButton- name-ScanViewControllerRevealMenuButton rect-{{5, 21}, {40, 40}}.png */,
+				F183340A192E497E001910F8 /* UIAElement- name-100% battery power rect-{{290, 0}, {25, 20}}.png */,
+				F183340B192E497E001910F8 /* UIAElement- name-3 of 3 Wi-Fi bars rect-{{49, 0}, {13, 20}}.png */,
+				F183340C192E497E001910F8 /* UIAElement- name-3-33 PM rect-{{137, 0}, {47, 20}}.png */,
+				F183340D192E497E001910F8 /* UIAElement- name-ScanViewControllerHintsImage rect-{{10, 133}, {74, 74}}.png */,
+				F183340E192E497E001910F8 /* UIAElement- name-StandardLocationTrackingOn rect-{{275, 0}, {9, 20}}.png */,
+				F183340F192E497E001910F8 /* UIAElement- name-Swipe down with three fingers to reveal the notification center., Swipe up with three fingers to reveal the control center, Double-tap to scroll to top rect-{{6, 0}, {38, 20}}.png */,
+				F1833410192E497E001910F8 /* UIAImage- name-Flash-Off rect-{{14, 80}, {22, 22}}.png */,
+				F1833411192E497E001910F8 /* UIAImage- name-Grid rect-{{8, 130}, {304, 379}}.png */,
+				F1833412192E497E001910F8 /* UIAImage- name-PowaTag-Logo rect-{{103, 32}, {114, 18}}.png */,
+				F1833413192E497E001910F8 /* UIAImage- name-Scan-UI-Tap-To-Focus-Ring rect-{{118, 278}, {84, 84}}.png */,
+				F1833414192E497E001910F8 /* UIAImage- rect-{{0, 0}, {320, 0}}.png */,
+				F1833415192E497E001910F8 /* UIAImage- rect-{{0, 568}, {320, 0}}.png */,
+				F1833416192E497E001910F8 /* UIAStaticText- name-ScanViewControllerFlashTextButton value-ScanViewControllerFlashTextButton rect-{{46, 69}, {55, 40}}.png */,
+				F1833417192E497E001910F8 /* UIAStaticText- name-Tap to focus value-Tap to focus rect-{{131, 279}, {62, 84}}.png */,
+				F1833418192E497E001910F8 /* UIAStatusBar- rect-{{0, 0}, {320, 20}}.png */,
+				F1833419192E497E001910F8 /* UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}} 2.png */,
+				F183341A192E497E001910F8 /* UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}}.png */,
+				F183341B192E497E001910F8 /* UIAWindow- rect-{{0, 0}, {320, 568}} 2.png */,
+				F183341C192E497E001910F8 /* UIAWindow- rect-{{0, 0}, {320, 568}}.png */,
+			);
+			path = "UIATarget- name-iPhone Simulator rect-{{0, 0}, {320, 568}}";
+			sourceTree = "<group>";
+		};
 		F1F3BDA118FFFED80018D219 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +218,7 @@
 		F1F3BDB318FFFED80018D219 /* ListTreeParse */ = {
 			isa = PBXGroup;
 			children = (
+				F1833401192E497E001910F8 /* Run 1 (3) */,
 				F1F3BDE118FFFEE40018D219 /* elementTree.txt */,
 				F1F3BDE619000C2E0018D219 /* list2.txt */,
 				F1F3BDBF18FFFED80018D219 /* AppDelegate.h */,
@@ -241,12 +338,39 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1833433192E497E001910F8 /* UIAStatusBar- rect-{{0, 0}, {320, 20}}.png in Resources */,
+				F1833426192E497E001910F8 /* UIAElement- name-3 of 3 Wi-Fi bars rect-{{49, 0}, {13, 20}}.png in Resources */,
+				F1833420192E497E001910F8 /* UIAButton- name-audio off rect-{{120, 465}, {80, 80}}.png in Resources */,
+				F1833434192E497E001910F8 /* UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}} 2.png in Resources */,
+				F183342A192E497E001910F8 /* UIAElement- name-Swipe down with three fingers to reveal the notification center., Swipe up with three fingers to reveal the control center, Double-tap to scroll to top rect-{{6, 0}, {38, 20}}.png in Resources */,
+				F1833435192E497E001910F8 /* UIATextField- name-simulator_qrCode value- rect-{{60, 182}, {200, 44}}.png in Resources */,
+				F1833421192E497E001910F8 /* UIAButton- name-ScanViewControllerFlashImageButton rect-{{5, 71}, {40, 40}}.png in Resources */,
+				F183342C192E497E001910F8 /* UIAImage- name-Grid rect-{{8, 130}, {304, 379}}.png in Resources */,
+				F1833424192E497E001910F8 /* UIAButton- name-ScanViewControllerRevealMenuButton rect-{{5, 21}, {40, 40}}.png in Resources */,
 				F1F3BDB818FFFED80018D219 /* InfoPlist.strings in Resources */,
+				F183341E192E497E001910F8 /* Automation Results.plist in Resources */,
+				F1833431192E497E001910F8 /* UIAStaticText- name-ScanViewControllerFlashTextButton value-ScanViewControllerFlashTextButton rect-{{46, 69}, {55, 40}}.png in Resources */,
+				F1833423192E497E001910F8 /* UIAButton- name-ScanViewControllerHintsButton rect-{{254, 71}, {61, 40}}.png in Resources */,
+				F1833429192E497E001910F8 /* UIAElement- name-StandardLocationTrackingOn rect-{{275, 0}, {9, 20}}.png in Resources */,
 				F1F3BDC618FFFED80018D219 /* Images.xcassets in Resources */,
+				F183342F192E497E001910F8 /* UIAImage- rect-{{0, 0}, {320, 0}}.png in Resources */,
+				F1833425192E497E001910F8 /* UIAElement- name-100% battery power rect-{{290, 0}, {25, 20}}.png in Resources */,
 				F1F3BDE218FFFEE40018D219 /* elementTree.txt in Resources */,
+				F183342E192E497E001910F8 /* UIAImage- name-Scan-UI-Tap-To-Focus-Ring rect-{{118, 278}, {84, 84}}.png in Resources */,
+				F183341F192E497E001910F8 /* UIAApplication- name-CC rect-{{0, 20}, {320, 548}}.png in Resources */,
+				F1833428192E497E001910F8 /* UIAElement- name-ScanViewControllerHintsImage rect-{{10, 133}, {74, 74}}.png in Resources */,
+				F1833436192E497E001910F8 /* UIAWindow- rect-{{0, 0}, {320, 568}} 2.png in Resources */,
 				F1F3BDBE18FFFED80018D219 /* Credits.rtf in Resources */,
+				F1833422192E497E001910F8 /* UIAButton- name-ScanViewControllerGridButton rect-{{185, 71}, {61, 40}}.png in Resources */,
+				F183342D192E497E001910F8 /* UIAImage- name-PowaTag-Logo rect-{{103, 32}, {114, 18}}.png in Resources */,
+				F1833432192E497E001910F8 /* UIAStaticText- name-Tap to focus value-Tap to focus rect-{{131, 279}, {62, 84}}.png in Resources */,
+				F1833430192E497E001910F8 /* UIAImage- rect-{{0, 568}, {320, 0}}.png in Resources */,
+				F183342B192E497E001910F8 /* UIAImage- name-Flash-Off rect-{{14, 80}, {22, 22}}.png in Resources */,
 				F1F3BDC418FFFED80018D219 /* MainMenu.xib in Resources */,
 				F1F3BDE719000C2E0018D219 /* list2.txt in Resources */,
+				F1833437192E497E001910F8 /* UIAWindow- rect-{{0, 0}, {320, 568}}.png in Resources */,
+				F1833438192E497E001910F8 /* UIATarget- name-iPhone Simulator rect-{{0, 0}, {320, 568}}.png in Resources */,
+				F1833427192E497E001910F8 /* UIAElement- name-3-33 PM rect-{{137, 0}, {47, 20}}.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,6 +604,7 @@
 				F1F3BDDD18FFFED80018D219 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F1F3BDDE18FFFED80018D219 /* Build configuration list for PBXNativeTarget "ListTreeParseTests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +613,7 @@
 				F1F3BDE018FFFED80018D219 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
