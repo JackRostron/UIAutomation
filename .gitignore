@@ -12,6 +12,9 @@
 **/*.xccheckout
 **/*.xcbkptlist
 
+#Instruments
+**/*.trace
+
 
 
 #####
