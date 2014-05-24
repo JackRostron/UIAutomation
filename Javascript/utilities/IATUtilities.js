@@ -1,4 +1,4 @@
-var UIA = {
+var IAT = {
 
 	testStart: function(name){
 		UIALogger.logMessage("Starting Test:" + name);
