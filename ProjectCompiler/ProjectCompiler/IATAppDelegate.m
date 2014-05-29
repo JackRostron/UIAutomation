@@ -14,22 +14,25 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    //NSLog(@"%@", [self loadXcodeProject]);
-    
     NSDictionary *project = [self loadXcodeProject];
     
-    NSLog(@"%@", [self getConfigurationsMenuForProject:project]);
+    //NSLog(@"%@", [self getConfigurationsMenuForProject:project]);
     
-    NSLog(@"%@", [self getAppBuildLocationWithDirectory:[project objectForKey:@"url"] andTarget:[[project objectForKey:@"targets"] firstObject] withConfiguration:[[project objectForKey:@"configurations"] firstObject]]);
+    //NSLog(@"%@", [self getAppBuildLocationWithDirectory:[project objectForKey:@"url"] andTarget:[[project objectForKey:@"targets"] firstObject] withConfiguration:[[project objectForKey:@"configurations"] firstObject]]);
+    
+    //BOOL buildSuccessful = [self buildAppWithDirectory:[project objectForKey:@"url"] andTarget:[[project objectForKey:@"targets"] firstObject] withConfiguration:[[project objectForKey:@"configurations"] firstObject]];
+    
+    //NSLog(@"%d", buildSuccessful);
+    
+    [self buildAppWithDirectory:[project objectForKey:@"url"] andTarget:[[project objectForKey:@"targets"] firstObject] andConfiguration:[[project objectForKey:@"configurations"] firstObject] withCompletion:^(BOOL success) {
+        
+        if (success) {
+            NSLog(@"Compiled");
+        } else {
+            NSLog(@"Error");
+        }
+    }];
 }
-
-/*
- ///<xctool.sh> -workspace AnyBet.xcworkspace -scheme AnyBet -sdk iphonesimulator
- //xcodebuild -workspace AnyBet.xcworkspace -scheme AnyBet -configuration Debug -sdk iphonesimulator
- //   /Users/Jack/Documents/Repos/BullOrBear/any-bet-ios/AnyBet/AnyBet.xcworkspace
- //   BUILT_PRODUCTS_DIR=
- //   EXECUTABLE_FOLDER_PATH=
- */
 
 - (NSDictionary *)loadXcodeProject
 {
@@ -165,10 +168,35 @@
     return [buildDirectory stringByAppendingPathComponent:appLocation];
 }
 
-- (BOOL)buildProjectFromDictionary:(NSDictionary *)projectDictionary
+- (BOOL)buildAppWithDirectory:(NSString *)url andTarget:(NSString *)target withConfiguration:(NSString *)configuration
 {
-    //NSString *testBuildProject = @"xcodebuild -workspace /Users/Jack/Documents/Repos/BullOrBear/any-bet-ios/AnyBet/AnyBet.xcworkspace -scheme AnyBet -configuration Debug -sdk iphonesimulator";
-    return FALSE;
+    NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
+    
+    NSArray *outputLines = [[buildSettingsCommand commandLineOutput] componentsSeparatedByString:@"\n"];
+    
+    if ([[outputLines objectAtIndex:([outputLines count] - 3)] isEqualToString:@"** BUILD SUCCEEDED **"]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)buildAppWithDirectory:(NSString *)url andTarget:(NSString *)target andConfiguration:(NSString *)configuration withCompletion:(void(^)(BOOL success))block
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        BOOL success = NO;
+        
+        NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
+        
+        NSArray *outputLines = [[buildSettingsCommand commandLineOutput] componentsSeparatedByString:@"\n"];
+        
+        if ([[outputLines objectAtIndex:([outputLines count] - 3)] isEqualToString:@"** BUILD SUCCEEDED **"]) {
+            success = YES;
+        }
+        
+        block(success);
+    });
 }
 
 @end
