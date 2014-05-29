@@ -17,6 +17,7 @@
 @property (nonatomic, strong) IBOutlet NSButton *openProjectButton;
 @property (nonatomic, strong) IBOutlet NSPopUpButton *targetMenu;
 @property (nonatomic, strong) IBOutlet NSPopUpButton *configurationMenu;
+@property (nonatomic, strong) IBOutlet NSPopUpButton *simulatorMenu;
 
 @property (nonatomic, strong) IBOutlet NSButton *runButton;
 
@@ -34,6 +35,8 @@
     [self.targetMenu setEnabled:NO];
     [self.configurationMenu setEnabled:NO];
     [self.runButton setEnabled:NO];
+    
+    [self getSimulatorMenu];
 }
 
 #pragma mark - IBActions
@@ -103,6 +106,93 @@
 }
 
 #pragma mark - Retrieve simulators
+- (void)getSimulatorMenu
+{
+    [self getFormattedSimulatorListWithCompletion:^(NSArray *formattedSimualators) {
+        NSMenu *compiledMenu = [[NSMenu alloc] init];
+        
+        for (NSDictionary *simulator in formattedSimualators) {
+            NSMenuItem *simulatorMenu = [[NSMenuItem alloc] initWithTitle:[simulator objectForKey:@"device"] action:NULL keyEquivalent:@""];
+            NSArray *versionList = [simulator objectForKey:@"versions"];
+            
+            
+            NSMenu *versionMenu = [[NSMenu alloc] initWithTitle:[simulator objectForKey:@"device"]];
+            for (NSString *version in versionList) {
+                NSMenuItem *versionItem = [[NSMenuItem alloc] initWithTitle:version action:NULL keyEquivalent:@""];
+                [versionMenu addItem:versionItem];
+            }
+            
+            [simulatorMenu setSubmenu:versionMenu];
+            [compiledMenu addItem:simulatorMenu];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.simulatorMenu.menu = compiledMenu;
+        });
+    }];
+}
+
+- (void)loadSimulatorVersionsWithCompletion:(void(^)(NSArray *simulators))block
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *availableSimulators = @"instruments -w printSimulators";
+        NSString *unparsedSimulators = [availableSimulators commandLineOutput];
+        NSArray *sdkLines = [unparsedSimulators componentsSeparatedByString:@"\n"];
+        
+        NSMutableArray *simulators = [[NSMutableArray alloc] init];
+        
+        for (NSString *line in sdkLines) {
+            if ([line rangeOfString:@" - Simulator - "].location != NSNotFound) {
+                [simulators addObject:line];
+            }
+        }
+        
+        block(simulators);
+    });
+}
+
+- (void)getFormattedSimulatorListWithCompletion:(void(^)(NSArray *formattedSimualators))block
+{
+    [self loadSimulatorVersionsWithCompletion:^(NSArray *simulators) {
+        NSMutableArray *simulatorArray = [[NSMutableArray alloc] init];
+        
+        for (int x = 0; x < [simulators count]; x++) {
+            NSString *line = [simulators objectAtIndex:x];
+            NSArray *brokenLine = [line componentsSeparatedByString:@" - "];
+            
+            if (![simulatorArray containsObject:[brokenLine firstObject]]) {
+                [simulatorArray addObject:[brokenLine firstObject]];
+            }
+        }
+        
+        NSMutableArray *finalArray = [[NSMutableArray alloc] initWithCapacity:[simulators count]];
+        
+        for (int x = 0; x < [simulatorArray count]; x++) {
+            NSDictionary *simulatorSetup = @{@"device" : [simulatorArray objectAtIndex:x],
+                                             @"versions" : [self getVersionsForSimulatorDeviceType:[simulatorArray objectAtIndex:x] fromSimulatorList:simulators]};
+            
+            [finalArray addObject:simulatorSetup];
+        }
+        
+        block(finalArray);
+    }];
+}
+
+- (NSArray *)getVersionsForSimulatorDeviceType:(NSString *)deviceString fromSimulatorList:(NSArray *)simulators
+{
+    NSMutableArray *versionsAvailable = [[NSMutableArray alloc] init];
+    
+    for (int x = 0; x < [simulators count]; x++) {
+        NSString *line = [simulators objectAtIndex:x];
+        NSArray *brokenLine = [line componentsSeparatedByString:@" - "];
+        
+        if ([[brokenLine firstObject] isEqualToString:deviceString]) {
+            [versionsAvailable addObject:[brokenLine lastObject]];
+        }
+    }
+    
+    return versionsAvailable;
+}
 
 
 #pragma mark - Project Compiler

@@ -16,6 +16,7 @@
                 <outlet property="configurationMenu" destination="5Oz-yk-VW0" id="z6K-1l-R7F"/>
                 <outlet property="openProjectButton" destination="0LH-XA-XhP" id="n4m-fM-oHJ"/>
                 <outlet property="runButton" destination="iza-RG-ZBn" id="Jv1-Vl-AWi"/>
+                <outlet property="simulatorMenu" destination="kJ0-PM-E1p" id="5pu-SP-niO"/>
                 <outlet property="targetMenu" destination="3Kr-1J-Hkl" id="Xwa-mp-XL5"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
@@ -221,12 +222,12 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="3Kr-1J-Hkl">
                             <rect key="frame" x="0.0" y="14" width="220" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" title="No project selected" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="Sis-xj-Pya" id="42U-uf-NYb">
+                            <popUpButtonCell key="cell" type="roundTextured" title="No project selected" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="Sis-xj-Pya" id="42U-uf-NYb">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="menu"/>
                                 <menu key="menu" title="OtherViews" id="i7L-No-SGH">
                                     <items>
-                                        <menuItem title="No project selected" id="Sis-xj-Pya"/>
+                                        <menuItem title="No project selected" state="on" id="Sis-xj-Pya"/>
                                     </items>
                                 </menu>
                             </popUpButtonCell>
@@ -239,12 +240,12 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="5Oz-yk-VW0">
                             <rect key="frame" x="0.0" y="14" width="220" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" title="No project selected" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="CcJ-2W-M12" id="0nL-t3-w6Y">
+                            <popUpButtonCell key="cell" type="roundTextured" title="No project selected" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="CcJ-2W-M12" id="0nL-t3-w6Y">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="menu"/>
                                 <menu key="menu" title="OtherViews" id="10F-1d-4yc">
                                     <items>
-                                        <menuItem title="No project selected" id="CcJ-2W-M12"/>
+                                        <menuItem title="No project selected" state="on" id="CcJ-2W-M12"/>
                                     </items>
                                 </menu>
                             </popUpButtonCell>
@@ -259,7 +260,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <popUpButtonCell key="cell" type="roundTextured" title="No project selected" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="bdQ-Ul-6n8" id="TOp-Ea-nMe">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="menu"/>
                                 <menu key="menu" title="OtherViews" id="nVO-0v-ZP6">
                                     <items>
                                         <menuItem title="No project selected" state="on" id="bdQ-Ul-6n8"/>
