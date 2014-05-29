@@ -11,6 +11,7 @@
 #import "IATApp.h"
 #import "IATAvailableTargetsManager.h"
 #import "IATSimulatorDevice.h"
+#import "NSString+CommandLineScript.h"
 
 @implementation IATAppDelegate
 
@@ -31,7 +32,7 @@
     //[[IATRunner sharedRunner] runTestForApp:myApp];
     //[[IATRunner sharedRunner] runTestForApp:myApp onSimulator:simulator];
     
-    [[IATAvailableTargetsManager sharedManager] availableTargetMenu];
+    //[[IATAvailableTargetsManager sharedManager] availableTargetMenu];
     
     
     
@@ -46,6 +47,14 @@
 //        NSLog(@"%@", [device getCleanLocationWithBitRate:kSimulatorProcessorBitRate64]);
 //        
 //    }
+    
+    
+    NSString *testBuildProject = @"xcodebuild -workspace /Users/Jack/Documents/Repos/BullOrBear/any-bet-ios/AnyBet/AnyBet.xcworkspace -scheme AnyBet -configuration Debug -sdk iphonesimulator";
+    
+    NSString *listTargets = @"xcodebuild -project /Users/Jack/Documents/Repos/BullOrBear/any-bet-ios/AnyBet/AnyBet.xcodeproj -list";
+    
+    NSLog(@"%@", [listTargets commandLineOutput]);
+    
     
 }
 
