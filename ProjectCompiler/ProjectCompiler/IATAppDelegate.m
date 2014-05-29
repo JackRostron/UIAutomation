@@ -16,7 +16,11 @@
 {
     //NSLog(@"%@", [self loadXcodeProject]);
     
-    NSLog(@"%@", [self getConfigurationsMenuForProject:[self loadXcodeProject]]);
+    NSDictionary *project = [self loadXcodeProject];
+    
+    NSLog(@"%@", [self getConfigurationsMenuForProject:project]);
+    
+    NSLog(@"%@", [self getAppBuildLocationWithDirectory:[project objectForKey:@"url"] andTarget:[[project objectForKey:@"targets"] firstObject] withConfiguration:[[project objectForKey:@"configurations"] firstObject]]);
 }
 
 /*
@@ -135,17 +139,31 @@
     return menu;
 }
 
-/*
-- (NSString *)getAppBuildLocationFromDictionary:(NSDictionary *)projectDictionary
+- (NSString *)getAppBuildLocationWithDirectory:(NSString *)url andTarget:(NSString *)target withConfiguration:(NSString *)configuration;
 {
-    NSString *projectLocation = ([[projectDictionary objectForKey:@"isProject"] boolValue]) ? [projectDictionary objectForKey:@"url"] : [[projectDictionary objectForKey:@"url"] stringByReplacingOccurrencesOfString:@"xcworkspace" withString:@"xcodeproj"];
+    NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@ -showBuildSettings", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
     
-    NSString *listTargetsCommand = [NSString stringWithFormat:@"xcodebuild -project %@ -list", projectLocation];
-    NSString *parseableTargets = [listTargetsCommand commandLineOutput];
+    NSArray *outputLines = [[buildSettingsCommand commandLineOutput] componentsSeparatedByString:@"\n"];
     
-    return @"";
+    NSString *buildDirectory;
+    NSString *appLocation;
+    
+    for (NSString *line in outputLines) {
+        if ([line rangeOfString:@" BUILT_PRODUCTS_DIR"].location != NSNotFound) {
+            buildDirectory = [[line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"BUILT_PRODUCTS_DIR = " withString:@""];
+            break;
+        }
+    }
+    
+    for (NSString *line in outputLines) {
+        if ([line rangeOfString:@" EXECUTABLE_FOLDER_PATH"].location != NSNotFound) {
+            appLocation = [[line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"EXECUTABLE_FOLDER_PATH = " withString:@""];
+            break;
+        }
+    }
+    
+    return [buildDirectory stringByAppendingPathComponent:appLocation];
 }
- */
 
 - (BOOL)buildProjectFromDictionary:(NSDictionary *)projectDictionary
 {
