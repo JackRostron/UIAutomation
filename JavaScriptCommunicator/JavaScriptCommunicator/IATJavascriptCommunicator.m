@@ -10,4 +10,24 @@
 
 @implementation IATJavascriptCommunicator
 
++ (BOOL)sendCommandToInstruments:(kInstrumentsCommand)command throughDirectory:(NSString *)directory
+{
+    NSString *commandString;
+    
+    switch (command) {
+        case kInstrumentsCommandListTree:
+            commandString = @"ListTree";
+            break;
+            break;
+    }
+    
+    if (commandString) {
+        NSError *error;
+        [commandString writeToFile:[directory stringByAppendingPathComponent:@"message.txt"] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        return (error) ? NO : YES;
+    }
+    
+    return NO;
+}
+
 @end

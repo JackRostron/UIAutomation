@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0411289A1937840D00DBC422 /* IATJavascriptCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 041128991937840D00DBC422 /* IATJavascriptCommunicator.m */; };
 		F183338E192E0AA7001910F8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F183338D192E0AA7001910F8 /* Cocoa.framework */; };
 		F1833398192E0AA7001910F8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1833396192E0AA7001910F8 /* InfoPlist.strings */; };
 		F183339A192E0AA7001910F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1833399192E0AA7001910F8 /* main.m */; };
@@ -31,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		041128981937840D00DBC422 /* IATJavascriptCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IATJavascriptCommunicator.h; sourceTree = "<group>"; };
+		041128991937840D00DBC422 /* IATJavascriptCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATJavascriptCommunicator.m; sourceTree = "<group>"; };
 		F183338A192E0AA7001910F8 /* JavaScriptCommunicator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JavaScriptCommunicator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F183338D192E0AA7001910F8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F1833390192E0AA7001910F8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -117,6 +120,8 @@
 			children = (
 				F183339F192E0AA7001910F8 /* IATAppDelegate.h */,
 				F18333A0192E0AA7001910F8 /* IATAppDelegate.m */,
+				041128981937840D00DBC422 /* IATJavascriptCommunicator.h */,
+				041128991937840D00DBC422 /* IATJavascriptCommunicator.m */,
 				F18333A2192E0AA7001910F8 /* MainMenu.xib */,
 				F18333A5192E0AA7001910F8 /* Images.xcassets */,
 				F1833394192E0AA7001910F8 /* Supporting Files */,
@@ -253,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0411289A1937840D00DBC422 /* IATJavascriptCommunicator.m in Sources */,
 				F183339A192E0AA7001910F8 /* main.m in Sources */,
 				F18333A1192E0AA7001910F8 /* IATAppDelegate.m in Sources */,
 			);

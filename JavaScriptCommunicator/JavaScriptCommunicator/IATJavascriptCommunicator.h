@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    kInstrumentsCommandListTree,
+} kInstrumentsCommand;
+
 @interface IATJavascriptCommunicator : NSObject
+
++ (BOOL)sendCommandToInstruments:(kInstrumentsCommand)command throughDirectory:(NSString *)directory;
 
 @end
