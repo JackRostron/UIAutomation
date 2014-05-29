@@ -14,7 +14,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSLog(@"%@", [self loadXcodeProject]);
+    //NSLog(@"%@", [self loadXcodeProject]);
+    
+    NSLog(@"%@", [self getConfigurationsMenuForProject:[self loadXcodeProject]]);
 }
 
 /*
@@ -52,9 +54,6 @@
             [projectDictionary setObject:url.path forKey:@"url"];
         }
         
-        //Now we have the project, we need to run xcodebuild so we can get the target information for it
-        //NSString *listTargetsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -list", ([[projectDictionary objectForKey:@"isProject"] boolValue]) ? @"-project" : @"-workspace", [projectDictionary objectForKey:@"url"]];
-        
         NSString *projectLocation = ([[projectDictionary objectForKey:@"isProject"] boolValue]) ? [projectDictionary objectForKey:@"url"] : [[projectDictionary objectForKey:@"url"] stringByReplacingOccurrencesOfString:@"xcworkspace" withString:@"xcodeproj"];
         
         NSString *listTargetsCommand = [NSString stringWithFormat:@"xcodebuild -project %@ -list", projectLocation];
@@ -65,8 +64,6 @@
         
         NSArray *configurations = [self getAvailableConfigurationsFromString:parseableTargets];
         [projectDictionary setObject:configurations forKey:@"configurations"];
-        
-        
     }
     
     return projectDictionary;
@@ -113,6 +110,42 @@
     
     return targets;
 }
+
+- (NSMenu *)getTargetsMenuForProject:(NSDictionary *)projectDictionary
+{
+    NSArray *targets = [projectDictionary objectForKey:@"targets"];
+    NSMenu *menu = [[NSMenu alloc] init];
+    
+    for (NSString *target in targets) {
+        [menu addItemWithTitle:target action:NULL keyEquivalent:@""];
+    }
+    
+    return menu;
+}
+
+- (NSMenu *)getConfigurationsMenuForProject:(NSDictionary *)projectDictionary
+{
+    NSArray *configs = [projectDictionary objectForKey:@"configurations"];
+    NSMenu *menu = [[NSMenu alloc] init];
+    
+    for (NSString *config in configs) {
+        [menu addItemWithTitle:config action:NULL keyEquivalent:@""];
+    }
+    
+    return menu;
+}
+
+/*
+- (NSString *)getAppBuildLocationFromDictionary:(NSDictionary *)projectDictionary
+{
+    NSString *projectLocation = ([[projectDictionary objectForKey:@"isProject"] boolValue]) ? [projectDictionary objectForKey:@"url"] : [[projectDictionary objectForKey:@"url"] stringByReplacingOccurrencesOfString:@"xcworkspace" withString:@"xcodeproj"];
+    
+    NSString *listTargetsCommand = [NSString stringWithFormat:@"xcodebuild -project %@ -list", projectLocation];
+    NSString *parseableTargets = [listTargetsCommand commandLineOutput];
+    
+    return @"";
+}
+ */
 
 - (BOOL)buildProjectFromDictionary:(NSDictionary *)projectDictionary
 {
