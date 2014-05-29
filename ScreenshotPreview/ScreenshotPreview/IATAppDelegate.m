@@ -18,7 +18,7 @@
 @property (nonatomic, strong) IBOutlet NSPopUpButton *targetMenu;
 @property (nonatomic, strong) IBOutlet NSPopUpButton *configurationMenu;
 
-@property (nonatomic, strong) IBOutlet NSToolbarItem *runButton;
+@property (nonatomic, strong) IBOutlet NSButton *runButton;
 
 @property (nonatomic, strong) NSDictionary *xcodeProject;
 
@@ -30,6 +30,9 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     self.isProjectRunning = NO;
+    
+    [self.targetMenu setEnabled:NO];
+    [self.configurationMenu setEnabled:NO];
     [self.runButton setEnabled:NO];
 }
 
@@ -43,7 +46,12 @@
         if (self.xcodeProject) {
             self.targetMenu.menu = [self getTargetsMenuForProject:self.xcodeProject];
             self.configurationMenu.menu = [self getConfigurationsMenuForProject:self.xcodeProject];
-            [self.runButton setEnabled:YES];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.targetMenu setEnabled:YES];
+                [self.configurationMenu setEnabled:YES];
+            });
+            
         } else {
             NSAlert *alert = [[NSAlert alloc] init];
             alert.messageText = @"There was an error opening the Xcode project. Please try again.";
