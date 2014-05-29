@@ -9,13 +9,6 @@
 #import "IATAppDelegate.h"
 #import "NSString+CommandLineScript.h"
 
-@interface IATAppDelegate ()
-
-@property (nonatomic, strong) NSDictionary *selectedProjectDictionary;
-
-@end
-
-
 
 @implementation IATAppDelegate
 
@@ -48,8 +41,11 @@
                 [projectDictionary setObject:@0 forKey:@"isProject"];
             }
             
-            [projectDictionary setObject:url forKey:@"url"];
+            [projectDictionary setObject:url.path forKey:@"url"];
         }
+        
+        //Now we have the project, we need to run xcodebuild so we can get the target information for it
+        
         
     }
     
