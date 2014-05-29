@@ -50,6 +50,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.targetMenu setEnabled:YES];
                 [self.configurationMenu setEnabled:YES];
+                [self.runButton setEnabled:YES];
             });
             
         } else {
@@ -62,7 +63,32 @@
 
 - (IBAction)run:(id)sender
 {
+    __block NSString *appBuildLocation = [self getAppBuildLocationWithDirectory:[self.xcodeProject objectForKey:@"url"]
+                                                                      andTarget:self.targetMenu.selectedItem.title
+                                                              withConfiguration:self.configurationMenu.selectedItem.title];
     
+    [self buildAppWithDirectory:[self.xcodeProject objectForKey:@"url"]
+                      andTarget:self.targetMenu.selectedItem.title
+               andConfiguration:self.configurationMenu.selectedItem.title
+                 withCompletion:^(BOOL success) {
+                     
+                     if (success) {
+                         [self launchInstrumentsWithAppInDirectory:appBuildLocation];
+                         
+                     } else {
+                         dispatch_async(dispatch_get_main_queue(), ^{
+                             NSAlert *alert = [[NSAlert alloc] init];
+                             alert.messageText = @"There was an error compiling the Xcode project.\n\nCheck you can compile correctly in Xcode and ensure you are opening the .xcworkspace if required.";
+                             [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {}];
+                         });
+                     }
+                 }];
+}
+
+#pragma mark - Launch project in Instruments
+- (void)launchInstrumentsWithAppInDirectory:(NSString *)directory
+{
+    NSLog(@"Launching Instruments...");
 }
 
 #pragma mark - JavaScript Communicator
@@ -75,6 +101,9 @@
         NSLog(@"Project not running - handle error");
     }
 }
+
+#pragma mark - Retrieve simulators
+
 
 #pragma mark - Project Compiler
 - (void)loadXcodeProjectWithCompletionHandler:(void(^)(NSDictionary *project))block

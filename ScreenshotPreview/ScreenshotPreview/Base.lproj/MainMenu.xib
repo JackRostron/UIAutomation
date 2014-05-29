@@ -126,10 +126,10 @@
         <window title="ScreenshotPreview" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="867" height="602"/>
+            <rect key="contentRect" x="335" y="390" width="1044" height="602"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="867" height="602"/>
+                <rect key="frame" x="0.0" y="0.0" width="1044" height="602"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c2n-OT-mXB">
@@ -141,14 +141,14 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="XIA-CF-ciH"/>
                     </imageView>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh4-Wf-dOm">
-                        <rect key="frame" x="339" y="23" width="508" height="556"/>
+                        <rect key="frame" x="339" y="23" width="685" height="556"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" focusRingType="none" id="Ljs-Fr-3Ar">
-                            <rect key="frame" x="1" y="17" width="506" height="538"/>
+                            <rect key="frame" x="1" y="17" width="683" height="538"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="b5y-ba-voX" indentationPerLevel="16" outlineTableColumn="s0D-qA-C8A" id="hkS-64-hBW">
-                                    <rect key="frame" x="0.0" y="0.0" width="506" height="538"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="683" height="538"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -181,7 +181,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" focusRingType="none" id="b5y-ba-voX">
-                            <rect key="frame" x="0.0" y="0.0" width="506" height="17"/>
+                            <rect key="frame" x="0.0" y="0.0" width="683" height="17"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
@@ -250,6 +250,24 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="6B55C07B-1A70-45C6-B6C1-C3AC142DEB58" label="Simulator to use" paletteLabel="Simulator to use" id="gpT-If-HXP">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="100" height="28"/>
+                        <size key="maxSize" width="224" height="31"/>
+                        <popUpButton key="view" verticalHuggingPriority="750" id="kJ0-PM-E1p">
+                            <rect key="frame" x="0.0" y="14" width="220" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <popUpButtonCell key="cell" type="roundTextured" title="No project selected" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="bdQ-Ul-6n8" id="TOp-Ea-nMe">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                                <menu key="menu" title="OtherViews" id="nVO-0v-ZP6">
+                                    <items>
+                                        <menuItem title="No project selected" state="on" id="bdQ-Ul-6n8"/>
+                                    </items>
+                                </menu>
+                            </popUpButtonCell>
+                        </popUpButton>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="4C723D0F-9260-44A7-B4CB-632B6DAC0E1D" label="Run" paletteLabel="Run" tag="-1" image="runButton" selectable="YES" id="zXc-fD-mUB">
                         <size key="maxSize" width="30" height="30"/>
                     </toolbarItem>
@@ -276,6 +294,7 @@
                     <toolbarItem reference="RAe-or-9to"/>
                     <toolbarItem reference="ndw-x8-zXS"/>
                     <toolbarItem reference="1P5-Qf-eQC"/>
+                    <toolbarItem reference="gpT-If-HXP"/>
                     <toolbarItem reference="pgQ-n7-IAb"/>
                     <toolbarItem reference="Mlp-Pa-amq"/>
                 </defaultToolbarItems>
