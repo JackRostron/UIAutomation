@@ -98,8 +98,19 @@
     NSLog(@"Launching Instruments...");
     NSString *traceTemplateLocation = [[NSBundle mainBundle] pathForResource:@"Automation" ofType:@".tracetemplate"];
     
-    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '/Users/JackRostron/Documents/Repos/powatag-ios-testing/runners/signUpRunner.js'", self.selectedSimulatorString, traceTemplateLocation, directory];
+    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, @"SCREENSHOT TEST SCRIPT", [self createTemporaryDirectory]];
     
+    NSLog(@"%@", instrumentsCommand);
+}
+
+- (NSString *)createTemporaryDirectory //Create a unique directory in the system temporary directory for storing plist output
+{
+    NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];
+    NSString *path = [NSTemporaryDirectory() stringByAppendingPathComponent:guid];
+    if (![[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:nil]) {
+        return nil;
+    }
+    return path;
 }
 
 #pragma mark - JavaScript Communicator
