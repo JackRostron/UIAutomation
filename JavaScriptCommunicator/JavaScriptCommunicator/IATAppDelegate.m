@@ -8,6 +8,12 @@
 
 #import "IATAppDelegate.h"
 
+///<xctool.sh> -workspace AnyBet.xcworkspace -scheme AnyBet -sdk iphonesimulator
+//xcodebuild -workspace AnyBet.xcworkspace -scheme AnyBet -configuration Debug -sdk iphonesimulator
+//   /Users/Jack/Documents/Repos/BullOrBear/any-bet-ios/AnyBet/AnyBet.xcworkspace
+//   BUILT_PRODUCTS_DIR=
+//   EXECUTABLE_FOLDER_PATH=
+
 typedef enum {
     kInstrumentsCommandListTree,
 } kInstrumentsCommand;
