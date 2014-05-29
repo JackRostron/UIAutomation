@@ -68,32 +68,38 @@
 
 - (IBAction)run:(id)sender
 {
-    __block NSString *appBuildLocation = [self getAppBuildLocationWithDirectory:[self.xcodeProject objectForKey:@"url"]
-                                                                      andTarget:self.targetMenu.selectedItem.title
-                                                              withConfiguration:self.configurationMenu.selectedItem.title];
-    
-    [self buildAppWithDirectory:[self.xcodeProject objectForKey:@"url"]
-                      andTarget:self.targetMenu.selectedItem.title
-               andConfiguration:self.configurationMenu.selectedItem.title
-                 withCompletion:^(BOOL success) {
-                     
-                     if (success) {
-                         [self launchInstrumentsWithAppInDirectory:appBuildLocation];
-                         
-                     } else {
-                         dispatch_async(dispatch_get_main_queue(), ^{
-                             NSAlert *alert = [[NSAlert alloc] init];
-                             alert.messageText = @"There was an error compiling the Xcode project.\n\nCheck you can compile correctly in Xcode and ensure you are opening the .xcworkspace if required.";
-                             [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {}];
-                         });
-                     }
-                 }];
+    [self getAppBuildLocationWithDirectory:[self.xcodeProject objectForKey:@"url"]
+                                 andTarget:self.targetMenu.selectedItem.title
+                          andConfiguration:self.configurationMenu.selectedItem.title
+                            withCompletion:^(NSString *location) {
+                                
+                                [self buildAppWithDirectory:[self.xcodeProject objectForKey:@"url"]
+                                                  andTarget:self.targetMenu.selectedItem.title
+                                           andConfiguration:self.configurationMenu.selectedItem.title
+                                             withCompletion:^(BOOL success) {
+                                                 
+                                                 if (success) {
+                                                     [self launchInstrumentsWithAppInDirectory:location];
+                                                     
+                                                 } else {
+                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                         NSAlert *alert = [[NSAlert alloc] init];
+                                                         alert.messageText = @"There was an error compiling the Xcode project.\n\nCheck you can compile correctly in Xcode and ensure you are opening the .xcworkspace if required.";
+                                                         [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {}];
+                                                     });
+                                                 }
+                                             }];
+                            }];
 }
 
 #pragma mark - Launch project in Instruments
 - (void)launchInstrumentsWithAppInDirectory:(NSString *)directory
 {
     NSLog(@"Launching Instruments...");
+    NSString *traceTemplateLocation = [[NSBundle mainBundle] pathForResource:@"Automation" ofType:@".tracetemplate"];
+    
+    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '/Users/JackRostron/Documents/Repos/powatag-ios-testing/runners/signUpRunner.js'", self.selectedSimulatorString, traceTemplateLocation, directory];
+    
 }
 
 #pragma mark - JavaScript Communicator
@@ -326,43 +332,32 @@
     return menu;
 }
 
-- (NSString *)getAppBuildLocationWithDirectory:(NSString *)url andTarget:(NSString *)target withConfiguration:(NSString *)configuration;
+- (void)getAppBuildLocationWithDirectory:(NSString *)url andTarget:(NSString *)target andConfiguration:(NSString *)configuration withCompletion:(void(^)(NSString *location))block
 {
-    NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@ -showBuildSettings", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
-    
-    NSArray *outputLines = [[buildSettingsCommand commandLineOutput] componentsSeparatedByString:@"\n"];
-    
-    NSString *buildDirectory;
-    NSString *appLocation;
-    
-    for (NSString *line in outputLines) {
-        if ([line rangeOfString:@" BUILT_PRODUCTS_DIR"].location != NSNotFound) {
-            buildDirectory = [[line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"BUILT_PRODUCTS_DIR = " withString:@""];
-            break;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@ -showBuildSettings", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
+        
+        NSArray *outputLines = [[buildSettingsCommand commandLineOutput] componentsSeparatedByString:@"\n"];
+        
+        NSString *buildDirectory;
+        NSString *appLocation;
+        
+        for (NSString *line in outputLines) {
+            if ([line rangeOfString:@" BUILT_PRODUCTS_DIR"].location != NSNotFound) {
+                buildDirectory = [[line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"BUILT_PRODUCTS_DIR = " withString:@""];
+                break;
+            }
         }
-    }
-    
-    for (NSString *line in outputLines) {
-        if ([line rangeOfString:@" EXECUTABLE_FOLDER_PATH"].location != NSNotFound) {
-            appLocation = [[line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"EXECUTABLE_FOLDER_PATH = " withString:@""];
-            break;
+        
+        for (NSString *line in outputLines) {
+            if ([line rangeOfString:@" EXECUTABLE_FOLDER_PATH"].location != NSNotFound) {
+                appLocation = [[line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"EXECUTABLE_FOLDER_PATH = " withString:@""];
+                break;
+            }
         }
-    }
-    
-    return [buildDirectory stringByAppendingPathComponent:appLocation];
-}
-
-- (BOOL)buildAppWithDirectory:(NSString *)url andTarget:(NSString *)target withConfiguration:(NSString *)configuration
-{
-    NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
-    
-    NSArray *outputLines = [[buildSettingsCommand commandLineOutput] componentsSeparatedByString:@"\n"];
-    
-    if ([[outputLines objectAtIndex:([outputLines count] - 3)] isEqualToString:@"** BUILD SUCCEEDED **"]) {
-        return YES;
-    }
-    
-    return NO;
+        
+        block([buildDirectory stringByAppendingPathComponent:appLocation]);
+    });
 }
 
 - (void)buildAppWithDirectory:(NSString *)url andTarget:(NSString *)target andConfiguration:(NSString *)configuration withCompletion:(void(^)(BOOL success))block
