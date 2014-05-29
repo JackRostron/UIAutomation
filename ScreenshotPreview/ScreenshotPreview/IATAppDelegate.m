@@ -22,6 +22,7 @@
 @property (nonatomic, strong) IBOutlet NSButton *runButton;
 
 @property (nonatomic, strong) NSDictionary *xcodeProject;
+@property (nonatomic, strong) NSString *selectedSimulatorString;
 
 @end
 
@@ -34,6 +35,7 @@
     
     [self.targetMenu setEnabled:NO];
     [self.configurationMenu setEnabled:NO];
+    [self.simulatorMenu setEnabled:NO];
     [self.runButton setEnabled:NO];
     
     [self getSimulatorMenu];
@@ -106,6 +108,25 @@
 }
 
 #pragma mark - Retrieve simulators
+- (void)simulatorSelectedFromMenu:(id)sender
+{
+    NSMenuItem *selectedMenuItem = sender;
+    
+    for (NSMenuItem *menuItem in self.simulatorMenu.menu.itemArray) {
+        [menuItem setState:NSOffState];
+        if (menuItem.submenu) {
+            for (NSMenuItem *subMenuItem in menuItem.submenu.itemArray) {
+                [subMenuItem setState:NSOffState];
+            }
+        }
+    }
+    
+    [selectedMenuItem setState:NSOnState];
+    [self.simulatorMenu selectItemWithTitle:selectedMenuItem.menu.title];
+    
+    self.selectedSimulatorString = [NSString stringWithFormat:@"%@ - Simulator - %@", selectedMenuItem.menu.title, selectedMenuItem.title];
+}
+
 - (void)getSimulatorMenu
 {
     [self getFormattedSimulatorListWithCompletion:^(NSArray *formattedSimualators) {
@@ -115,11 +136,9 @@
             NSMenuItem *simulatorMenu = [[NSMenuItem alloc] initWithTitle:[simulator objectForKey:@"device"] action:NULL keyEquivalent:@""];
             NSArray *versionList = [simulator objectForKey:@"versions"];
             
-            
             NSMenu *versionMenu = [[NSMenu alloc] initWithTitle:[simulator objectForKey:@"device"]];
             for (NSString *version in versionList) {
-                NSMenuItem *versionItem = [[NSMenuItem alloc] initWithTitle:version action:NULL keyEquivalent:@""];
-                [versionMenu addItem:versionItem];
+                [versionMenu addItemWithTitle:version action:@selector(simulatorSelectedFromMenu:) keyEquivalent:@""];
             }
             
             [simulatorMenu setSubmenu:versionMenu];
@@ -128,6 +147,9 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             self.simulatorMenu.menu = compiledMenu;
+            [self.simulatorMenu setEnabled:YES];
+            [[self.simulatorMenu.menu itemAtIndex:0] setState:NSOnState];
+            [self simulatorSelectedFromMenu:[[self.simulatorMenu.menu itemAtIndex:0].submenu itemAtIndex:0]];
         });
     }];
 }

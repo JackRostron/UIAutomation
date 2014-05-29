@@ -125,10 +125,12 @@
             </items>
         </menu>
         <window title="ScreenshotPreview" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="1044" height="602"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+            <value key="minSize" type="size" width="500" height="602"/>
+            <value key="maxSize" type="size" width="1044" height="602"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="1044" height="602"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -258,12 +260,12 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="kJ0-PM-E1p">
                             <rect key="frame" x="0.0" y="14" width="220" height="31"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <popUpButtonCell key="cell" type="roundTextured" title="No project selected" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="bdQ-Ul-6n8" id="TOp-Ea-nMe">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TOp-Ea-nMe">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" title="OtherViews" id="nVO-0v-ZP6">
                                     <items>
-                                        <menuItem title="No project selected" state="on" id="bdQ-Ul-6n8"/>
+                                        <menuItem title="Detecting simulators..." id="bdQ-Ul-6n8"/>
                                     </items>
                                 </menu>
                             </popUpButtonCell>
