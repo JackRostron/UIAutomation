@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) NSDictionary *xcodeProject;
 @property (nonatomic, strong) NSString *selectedSimulatorString;
+@property (nonatomic, strong) NSString *temporaryDirectory;
 
 @end
 
@@ -32,6 +33,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     self.isProjectRunning = NO;
+    self.temporaryDirectory = [self createTemporaryDirectory];
     
     [self.targetMenu setEnabled:NO];
     [self.configurationMenu setEnabled:NO];
@@ -39,6 +41,7 @@
     [self.runButton setEnabled:NO];
     
     [self getSimulatorMenu];
+    [self launchInstrumentsWithAppInDirectory:@""];
 }
 
 #pragma mark - IBActions
@@ -95,14 +98,41 @@
 #pragma mark - Launch project in Instruments
 - (void)launchInstrumentsWithAppInDirectory:(NSString *)directory
 {
+    //New locations
+    NSString *editedBashScriptLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"fileUpdated.sh"];
+    NSString *editedIATUtilitiesLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"IATUtilities.js"];
+    NSString *editedLoopJavascriptLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"loop.js"];
+    
+    //Bash script
+    NSString *bashScript = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"fileUpdated" ofType:@".sh"] encoding:NSUTF8StringEncoding error:nil];
+    NSString *bashScriptStringToReplace = @"IATSUITEIATUTILITIESJAVASCRIPT";
+    bashScript = [bashScript stringByReplacingOccurrencesOfString:bashScriptStringToReplace withString:editedIATUtilitiesLocation];
+    
+    //IAT Utilities - Does not need modifying
+    NSString *iatUtilitiesJavascript = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"IATUtilities" ofType:@".js"] encoding:NSUTF8StringEncoding error:nil];
+    
+    //Loop Javascript
+    NSString *loopJavascript = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"loop" ofType:@".js"] encoding:NSUTF8StringEncoding error:nil];
+    NSString *loopJavascriptBashStringToReplace = @"IATSUITEFILEUPDATEDBASHSCRIPT";
+    NSString *loopJavascriptIATStringToReplace = @"IATSUITEIATUTILITIESJAVASCRIPT";
+    loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:loopJavascriptBashStringToReplace withString:[NSString stringWithFormat:@"./%@", editedBashScriptLocation]];
+    loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:loopJavascriptIATStringToReplace withString:[NSString stringWithFormat:@"./%@", editedIATUtilitiesLocation]];
+    
+    //Write to temporary directory - need to remove these when finished
+    [bashScript writeToFile:editedBashScriptLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    [iatUtilitiesJavascript writeToFile:editedIATUtilitiesLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    [loopJavascript writeToFile:editedLoopJavascriptLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    
+    
     NSLog(@"Launching Instruments...");
     NSString *traceTemplateLocation = [[NSBundle mainBundle] pathForResource:@"Automation" ofType:@".tracetemplate"];
     
-    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, @"SCREENSHOT TEST SCRIPT", [self createTemporaryDirectory]];
+    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, @"SCREENSHOT TEST SCRIPT", self.temporaryDirectory];
     
     NSLog(@"%@", instrumentsCommand);
 }
 
+#pragma mark - Temporary Directory
 - (NSString *)createTemporaryDirectory //Create a unique directory in the system temporary directory for storing plist output
 {
     NSString *guid = [[NSProcessInfo processInfo] globallyUniqueString];

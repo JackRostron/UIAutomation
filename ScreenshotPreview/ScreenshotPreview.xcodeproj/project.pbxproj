@@ -10,6 +10,11 @@
 		04112897193782ED00DBC422 /* NSString+CommandLineScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 04112896193782ED00DBC422 /* NSString+CommandLineScript.m */; };
 		0411289D1937849400DBC422 /* IATJavascriptCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411289C1937849400DBC422 /* IATJavascriptCommunicator.m */; };
 		04A6609E1937F98A00C90481 /* Automation.tracetemplate in Resources */ = {isa = PBXBuildFile; fileRef = 04A6609D1937F98A00C90481 /* Automation.tracetemplate */; };
+		04A660A219385CA600C90481 /* fileUpdated.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04A6609F19385CA600C90481 /* fileUpdated.sh */; };
+		04A660A319385CA600C90481 /* IATUtilities.js in Sources */ = {isa = PBXBuildFile; fileRef = 04A660A019385CA600C90481 /* IATUtilities.js */; };
+		04A660A419385CA600C90481 /* loop.js in Sources */ = {isa = PBXBuildFile; fileRef = 04A660A119385CA600C90481 /* loop.js */; };
+		04A660A619385F3300C90481 /* IATUtilities.js in Resources */ = {isa = PBXBuildFile; fileRef = 04A660A019385CA600C90481 /* IATUtilities.js */; };
+		04A660A719385F3300C90481 /* loop.js in Resources */ = {isa = PBXBuildFile; fileRef = 04A660A119385CA600C90481 /* loop.js */; };
 		F18333CE192E434A001910F8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F18333CD192E434A001910F8 /* Cocoa.framework */; };
 		F18333D8192E434A001910F8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F18333D6192E434A001910F8 /* InfoPlist.strings */; };
 		F18333DA192E434A001910F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F18333D9192E434A001910F8 /* main.m */; };
@@ -39,6 +44,9 @@
 		0411289B1937849400DBC422 /* IATJavascriptCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IATJavascriptCommunicator.h; sourceTree = "<group>"; };
 		0411289C1937849400DBC422 /* IATJavascriptCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATJavascriptCommunicator.m; sourceTree = "<group>"; };
 		04A6609D1937F98A00C90481 /* Automation.tracetemplate */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Automation.tracetemplate; sourceTree = "<group>"; };
+		04A6609F19385CA600C90481 /* fileUpdated.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = fileUpdated.sh; sourceTree = "<group>"; };
+		04A660A019385CA600C90481 /* IATUtilities.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = IATUtilities.js; sourceTree = "<group>"; };
+		04A660A119385CA600C90481 /* loop.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = loop.js; sourceTree = "<group>"; };
 		F18333CA192E434A001910F8 /* ScreenshotPreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenshotPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F18333CD192E434A001910F8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F18333D0192E434A001910F8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -92,6 +100,16 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
+		04A660A519385CAB00C90481 /* Javascript */ = {
+			isa = PBXGroup;
+			children = (
+				04A6609F19385CA600C90481 /* fileUpdated.sh */,
+				04A660A019385CA600C90481 /* IATUtilities.js */,
+				04A660A119385CA600C90481 /* loop.js */,
+			);
+			name = Javascript;
+			sourceTree = "<group>";
+		};
 		F18333C1192E434A001910F8 = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				04A6609D1937F98A00C90481 /* Automation.tracetemplate */,
+				04A660A519385CAB00C90481 /* Javascript */,
 				04112894193782D700DBC422 /* Components */,
 				F18333DF192E434A001910F8 /* IATAppDelegate.h */,
 				F18333E0192E434A001910F8 /* IATAppDelegate.m */,
@@ -252,8 +271,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04A660A619385F3300C90481 /* IATUtilities.js in Resources */,
+				04A660A719385F3300C90481 /* loop.js in Resources */,
 				F18333D8192E434A001910F8 /* InfoPlist.strings in Resources */,
 				04A6609E1937F98A00C90481 /* Automation.tracetemplate in Resources */,
+				04A660A219385CA600C90481 /* fileUpdated.sh in Resources */,
 				F18333E6192E434A001910F8 /* Images.xcassets in Resources */,
 				F18333DE192E434A001910F8 /* Credits.rtf in Resources */,
 				F18333E4192E434A001910F8 /* MainMenu.xib in Resources */,
@@ -275,9 +297,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04A660A419385CA600C90481 /* loop.js in Sources */,
 				0411289D1937849400DBC422 /* IATJavascriptCommunicator.m in Sources */,
 				04112897193782ED00DBC422 /* NSString+CommandLineScript.m in Sources */,
 				F18333DA192E434A001910F8 /* main.m in Sources */,
+				04A660A319385CA600C90481 /* IATUtilities.js in Sources */,
 				F18333E1192E434A001910F8 /* IATAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
