@@ -16,6 +16,7 @@
                 <outlet property="configurationMenu" destination="5Oz-yk-VW0" id="z6K-1l-R7F"/>
                 <outlet property="openProjectButton" destination="0LH-XA-XhP" id="n4m-fM-oHJ"/>
                 <outlet property="runButton" destination="iza-RG-ZBn" id="Jv1-Vl-AWi"/>
+                <outlet property="screenshotImageView" destination="c2n-OT-mXB" id="U8X-HM-CMJ"/>
                 <outlet property="simulatorMenu" destination="kJ0-PM-E1p" id="5pu-SP-niO"/>
                 <outlet property="targetMenu" destination="3Kr-1J-Hkl" id="Xwa-mp-XL5"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>

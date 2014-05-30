@@ -12,18 +12,17 @@
 
 @interface IATAppDelegate ()
 
-@property (nonatomic, strong) IBOutlet NSButton *openProjectButton;
-@property (nonatomic, strong) IBOutlet NSPopUpButton *targetMenu;
-@property (nonatomic, strong) IBOutlet NSPopUpButton *configurationMenu;
-@property (nonatomic, strong) IBOutlet NSPopUpButton *simulatorMenu;
+@property (nonatomic, weak) IBOutlet NSButton *openProjectButton;
+@property (nonatomic, weak) IBOutlet NSPopUpButton *targetMenu;
+@property (nonatomic, weak) IBOutlet NSPopUpButton *configurationMenu;
+@property (nonatomic, weak) IBOutlet NSPopUpButton *simulatorMenu;
+@property (nonatomic, weak) IBOutlet NSButton *runButton;
 
-@property (nonatomic, strong) IBOutlet NSButton *runButton;
+@property (nonatomic, weak) IBOutlet NSImageView *screenshotImageView;
 
 @property (nonatomic, strong) NSDictionary *xcodeProject;
 @property (nonatomic, strong) NSString *selectedSimulatorString;
 @property (nonatomic, strong) NSString *temporaryDirectory;
-
-@property (nonatomic, strong) NSMetadataQuery *screenshotDirectoryQuery;
 
 @end
 
@@ -153,9 +152,6 @@
     
     //Create Instruments command
     NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, editedLoopJavascriptLocation, resultsOutputPath];
-    
-    //Start monitoring for changes in directory
-    [self setupWatchedFolder];
     
     NSLog(@"%@", instrumentsCommand);
     
@@ -447,39 +443,29 @@
 }
 
 #pragma mark - Monitor changes in Instruments output directory
-- (void)setupWatchedFolder
+- (void)monitorForListTreeResultWithCompletion:(void(^)(NSString *imageURL, NSString *plist))block
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSURL *watchedFolder = [NSURL URLWithString:[[NSString stringWithFormat:@"%@/Output/Run 1/", self.temporaryDirectory] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        self.screenshotDirectoryQuery = [[NSMetadataQuery alloc] init];
-        [self.screenshotDirectoryQuery setSearchScopes:@[watchedFolder]];
-        [self.screenshotDirectoryQuery setPredicate:[NSPredicate predicateWithFormat:@"kMDItemFSName LIKE 'UIATarget*.png'"]];
-        
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self selector:@selector(queryFoundStuff:) name:NSMetadataQueryDidFinishGatheringNotification object:self.screenshotDirectoryQuery];
-        [nc addObserver:self selector:@selector(queryFoundStuff:) name:NSMetadataQueryDidUpdateNotification object:self.screenshotDirectoryQuery];
-        
-        NSLog(@"SETUP AND STARTING MONITORING");
-        [self.screenshotDirectoryQuery startQuery];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        BOOL locatedContents = NO;
+        while (locatedContents != YES) {
+            NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self.temporaryDirectory stringByAppendingString:@"/Output/Run 1/"] error:nil];
+            if ([contents count] > 2) {
+                locatedContents = YES;
+                
+                NSString *plist;
+                NSString *imageURL;
+                for (NSString *fileName in contents) {
+                    if ([fileName rangeOfString:@".plist"].location != NSNotFound) {
+                        plist = fileName;
+                    } else if ([fileName rangeOfString:@".png"].location != NSNotFound) {
+                        imageURL = fileName;
+                    }
+                }
+                
+                block(imageURL, plist);
+            }
+        }
     });
-}
-
-- (void)queryFoundStuff:(NSNotification *)notification
-{
-    [self.screenshotDirectoryQuery disableUpdates];
-    
-    NSMutableArray *results = [NSMutableArray arrayWithCapacity:self.screenshotDirectoryQuery.resultCount];
-    
-    for (NSUInteger i = 0; i < self.screenshotDirectoryQuery.resultCount; i++) {
-        [results addObject:[[self.self.screenshotDirectoryQuery resultAtIndex:i] valueForAttribute:NSMetadataItemPathKey]];
-    }
-    
-    // do something with you search results
-    // self.results = results;
-    NSLog(@"%@", results);
-    
-    [self.screenshotDirectoryQuery enableUpdates];
 }
 
 #pragma mark - Terminate Simulator
@@ -504,7 +490,15 @@
 - (void)handleURLEvent:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     NSString *url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-    NSLog(@"RECIEVED COMMAND : %@", url);
+    
+    if ([[url lastPathComponent] isEqualToString:@"ListTree"]) {
+        [self monitorForListTreeResultWithCompletion:^(NSString *imageURL, NSString *plist) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSImage *screenshot = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Output/Run 1/%@", self.temporaryDirectory, imageURL]];
+                [self.screenshotImageView setImage:screenshot];
+            });
+        }];
+    }
 }
 
 
