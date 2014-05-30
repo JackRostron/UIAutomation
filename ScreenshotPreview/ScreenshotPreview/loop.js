@@ -21,6 +21,8 @@ while (running == 0) {
 		UIALogger.logMessage(command.stdout);
         UIATarget.localTarget().logElementTree();
 		currentVersion = loopVersion;
+        
+        target.host().performTaskWithPathArgumentsTimeout("/bin/bash", ["IATSUITELISTTREECOMPLETE"], 10);
 	}
 
 	target.delay(1);

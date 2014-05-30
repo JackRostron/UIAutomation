@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04112897193782ED00DBC422 /* NSString+CommandLineScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 04112896193782ED00DBC422 /* NSString+CommandLineScript.m */; };
 		0411289D1937849400DBC422 /* IATJavascriptCommunicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411289C1937849400DBC422 /* IATJavascriptCommunicator.m */; };
+		049CAB4019391D2E0080C1A5 /* listTreeCommandComplete.sh in Resources */ = {isa = PBXBuildFile; fileRef = 049CAB3F19391D2E0080C1A5 /* listTreeCommandComplete.sh */; };
 		04A6609E1937F98A00C90481 /* Automation.tracetemplate in Resources */ = {isa = PBXBuildFile; fileRef = 04A6609D1937F98A00C90481 /* Automation.tracetemplate */; };
 		04A660A219385CA600C90481 /* fileUpdated.sh in Resources */ = {isa = PBXBuildFile; fileRef = 04A6609F19385CA600C90481 /* fileUpdated.sh */; };
 		04A660A319385CA600C90481 /* IATUtilities.js in Sources */ = {isa = PBXBuildFile; fileRef = 04A660A019385CA600C90481 /* IATUtilities.js */; };
@@ -43,6 +44,7 @@
 		04112896193782ED00DBC422 /* NSString+CommandLineScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CommandLineScript.m"; sourceTree = "<group>"; };
 		0411289B1937849400DBC422 /* IATJavascriptCommunicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IATJavascriptCommunicator.h; sourceTree = "<group>"; };
 		0411289C1937849400DBC422 /* IATJavascriptCommunicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IATJavascriptCommunicator.m; sourceTree = "<group>"; };
+		049CAB3F19391D2E0080C1A5 /* listTreeCommandComplete.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = listTreeCommandComplete.sh; sourceTree = "<group>"; };
 		04A6609D1937F98A00C90481 /* Automation.tracetemplate */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Automation.tracetemplate; sourceTree = "<group>"; };
 		04A6609F19385CA600C90481 /* fileUpdated.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = fileUpdated.sh; sourceTree = "<group>"; };
 		04A660A019385CA600C90481 /* IATUtilities.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = IATUtilities.js; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				04A6609F19385CA600C90481 /* fileUpdated.sh */,
+				049CAB3F19391D2E0080C1A5 /* listTreeCommandComplete.sh */,
 				04A660A019385CA600C90481 /* IATUtilities.js */,
 				04A660A119385CA600C90481 /* loop.js */,
 			);
@@ -278,6 +281,7 @@
 				04A660A219385CA600C90481 /* fileUpdated.sh in Resources */,
 				F18333E6192E434A001910F8 /* Images.xcassets in Resources */,
 				F18333DE192E434A001910F8 /* Credits.rtf in Resources */,
+				049CAB4019391D2E0080C1A5 /* listTreeCommandComplete.sh in Resources */,
 				F18333E4192E434A001910F8 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

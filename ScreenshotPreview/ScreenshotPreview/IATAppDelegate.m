@@ -32,6 +32,9 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    //Register for communication
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(handleURLEvent:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+    
     self.temporaryDirectory = [self createTemporaryDirectory];
     
     [self.targetMenu setEnabled:NO];
@@ -102,6 +105,7 @@
     NSString *editedBashScriptLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"fileUpdated.sh"];
     NSString *editedIATUtilitiesLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"IATUtilities.js"];
     NSString *editedLoopJavascriptLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"loop.js"];
+    NSString *fileUpdatedBashLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"listTreeCommandComplete.sh"];
     NSString *outputFilePath = [self.temporaryDirectory stringByAppendingPathComponent:@"output.js"];
     
     //Output file
@@ -116,19 +120,28 @@
     //IAT Utilities - Does not need modifying
     NSString *iatUtilitiesJavascript = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"IATUtilities" ofType:@".js"] encoding:NSUTF8StringEncoding error:nil];
     
+    //ListTreeCommandComplete - Does not need modiyfin
+    NSString *listTreeCommandCompleteBash = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"listTreeCommandComplete" ofType:@".sh"] encoding:NSUTF8StringEncoding error:nil];
+    
     //Loop Javascript
     NSString *loopJavascript = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"loop" ofType:@".js"] encoding:NSUTF8StringEncoding error:nil];
     NSString *loopJavascriptBashStringToReplace = @"IATSUITEFILEUPDATEDBASHSCRIPT";
+    NSString *communicatorStringToReplace = @"IATSUITELISTTREECOMPLETE";
     loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:loopJavascriptBashStringToReplace withString:[NSString stringWithFormat:@"%@", editedBashScriptLocation]];
     loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:bashScriptStringToReplace withString:[NSString stringWithFormat:@"%@", outputFilePath]];
+    loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:communicatorStringToReplace withString:[NSString stringWithFormat:@"%@", fileUpdatedBashLocation]];
     
     //Write to temporary directory - need to remove these when finished
     [bashScript writeToFile:editedBashScriptLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     [iatUtilitiesJavascript writeToFile:editedIATUtilitiesLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    [listTreeCommandCompleteBash writeToFile:fileUpdatedBashLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     [loopJavascript writeToFile:editedLoopJavascriptLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
-    //Allow bash script to be executed
+    //Allow bash scripts to be executed
     NSString *baseExecutableCommand = [NSString stringWithFormat:@"chmod 700 %@", editedBashScriptLocation];
+    [baseExecutableCommand commandLineOutput];
+    
+    baseExecutableCommand = [NSString stringWithFormat:@"chmod 700 %@", fileUpdatedBashLocation];
     [baseExecutableCommand commandLineOutput];
     
     //UIAResultsPath output
@@ -436,17 +449,20 @@
 #pragma mark - Monitor changes in Instruments output directory
 - (void)setupWatchedFolder
 {
-    NSURL *watchedFolder = [NSURL URLWithString:[NSString stringWithFormat:@"%@/Output", self.temporaryDirectory]];
-    
-    self.screenshotDirectoryQuery = [[NSMetadataQuery alloc] init];
-    [self.screenshotDirectoryQuery setSearchScopes:@[watchedFolder]];
-    //[self.screenshotDirectoryQuery setPredicate:[NSPredicate predicateWithFormat:@"kMDItemFSName like '*.png'"]];
-    
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(queryFoundStuff:) name:NSMetadataQueryDidFinishGatheringNotification object:self.screenshotDirectoryQuery];
-    [nc addObserver:self selector:@selector(queryFoundStuff:) name:NSMetadataQueryDidUpdateNotification object:self.screenshotDirectoryQuery];
-    
-    [self.screenshotDirectoryQuery startQuery];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSURL *watchedFolder = [NSURL URLWithString:[[NSString stringWithFormat:@"%@/Output/Run 1/", self.temporaryDirectory] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        self.screenshotDirectoryQuery = [[NSMetadataQuery alloc] init];
+        [self.screenshotDirectoryQuery setSearchScopes:@[watchedFolder]];
+        [self.screenshotDirectoryQuery setPredicate:[NSPredicate predicateWithFormat:@"kMDItemFSName LIKE 'UIATarget*.png'"]];
+        
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc addObserver:self selector:@selector(queryFoundStuff:) name:NSMetadataQueryDidFinishGatheringNotification object:self.screenshotDirectoryQuery];
+        [nc addObserver:self selector:@selector(queryFoundStuff:) name:NSMetadataQueryDidUpdateNotification object:self.screenshotDirectoryQuery];
+        
+        NSLog(@"SETUP AND STARTING MONITORING");
+        [self.screenshotDirectoryQuery startQuery];
+    });
 }
 
 - (void)queryFoundStuff:(NSNotification *)notification
@@ -461,6 +477,7 @@
     
     // do something with you search results
     // self.results = results;
+    NSLog(@"%@", results);
     
     [self.screenshotDirectoryQuery enableUpdates];
 }
@@ -482,6 +499,12 @@
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
     return YES;
+}
+
+- (void)handleURLEvent:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent
+{
+    NSString *url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+    NSLog(@"RECIEVED COMMAND : %@", url);
 }
 
 
