@@ -7,15 +7,15 @@ var currentVersion = target.host().performTaskWithPathArgumentsTimeout("/bin/bas
 var loopVersion;
 var command;
 
-while ( running == 0 ) {
+while (running == 0) {
 	//UIALogger.logMessage("looped");
 	loopVersion = target.host().performTaskWithPathArgumentsTimeout("/bin/bash", ["IATSUITEFILEUPDATEDBASHSCRIPT"], 10);
 	//UIALogger.logMessage(currentVersion.stdout);
 	//UIALogger.logMessage(loopVersion.stdout);
 
-	if ( parseInt(currentVersion.stdout) < parseInt(loopVersion.stdout) ){
+	if (parseInt(currentVersion.stdout) < parseInt(loopVersion.stdout)){
 		//UIALogger.logMessage("Triggered File Update")
-		command = target.host().performTaskWithPathArgumentsTimeout("/bin/cat", ["IATSUITEIATUTILITIESJAVASCRIPT"], 10);
+		command = target.host().performTaskWithPathArgumentsTimeout("/bin/cat", ["IATSUITEOUTPUTFILEPATH"], 10);
 		//eval(command.stdout);
 		UIALogger.logMessage(command.stdout);
 		currentVersion = loopVersion;

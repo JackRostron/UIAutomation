@@ -16,14 +16,14 @@
     
     switch (command) {
         case kInstrumentsCommandListTree:
-            commandString = @"ListTree";
+            commandString = @"UIATarget.localTarget().logElementTree()";
             break;
             break;
     }
     
     if (commandString) {
         NSError *error;
-        [commandString writeToFile:[directory stringByAppendingPathComponent:@"message.txt"] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        [commandString writeToFile:directory atomically:YES encoding:NSUTF8StringEncoding error:&error];
         return (error) ? NO : YES;
     }
     

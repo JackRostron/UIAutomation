@@ -94,15 +94,22 @@
 #pragma mark - Instruments
 - (void)launchInstrumentsWithAppInDirectory:(NSString *)directory
 {
+    [self terminateSimulator];
+    
     //New locations
     NSString *editedBashScriptLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"fileUpdated.sh"];
     NSString *editedIATUtilitiesLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"IATUtilities.js"];
     NSString *editedLoopJavascriptLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"loop.js"];
+    NSString *outputFilePath = [self.temporaryDirectory stringByAppendingPathComponent:@"output.js"];
+    
+    //Output file
+    NSString *outputFileContents = @"";
+    [outputFileContents writeToFile:outputFilePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
     //Bash script
     NSString *bashScript = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"fileUpdated" ofType:@".sh"] encoding:NSUTF8StringEncoding error:nil];
-    NSString *bashScriptStringToReplace = @"IATSUITEIATUTILITIESJAVASCRIPT";
-    bashScript = [bashScript stringByReplacingOccurrencesOfString:bashScriptStringToReplace withString:editedIATUtilitiesLocation];
+    NSString *bashScriptStringToReplace = @"IATSUITEOUTPUTFILEPATH";
+    bashScript = [bashScript stringByReplacingOccurrencesOfString:bashScriptStringToReplace withString:outputFilePath];
     
     //IAT Utilities - Does not need modifying
     NSString *iatUtilitiesJavascript = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"IATUtilities" ofType:@".js"] encoding:NSUTF8StringEncoding error:nil];
@@ -110,17 +117,20 @@
     //Loop Javascript
     NSString *loopJavascript = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"loop" ofType:@".js"] encoding:NSUTF8StringEncoding error:nil];
     NSString *loopJavascriptBashStringToReplace = @"IATSUITEFILEUPDATEDBASHSCRIPT";
-    NSString *loopJavascriptIATStringToReplace = @"IATSUITEIATUTILITIESJAVASCRIPT";
-    loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:loopJavascriptBashStringToReplace withString:[NSString stringWithFormat:@"./%@", editedBashScriptLocation]];
-    loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:loopJavascriptIATStringToReplace withString:[NSString stringWithFormat:@"./%@", editedIATUtilitiesLocation]];
+    loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:loopJavascriptBashStringToReplace withString:[NSString stringWithFormat:@"%@", editedBashScriptLocation]];
+    loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:bashScriptStringToReplace withString:[NSString stringWithFormat:@"%@", outputFilePath]];
     
     //Write to temporary directory - need to remove these when finished
     [bashScript writeToFile:editedBashScriptLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     [iatUtilitiesJavascript writeToFile:editedIATUtilitiesLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     [loopJavascript writeToFile:editedLoopJavascriptLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
+    //Allow bash script to be executed
+    NSString *baseExecutableCommand = [NSString stringWithFormat:@"chmod 700 %@", editedBashScriptLocation];
+    [baseExecutableCommand commandLineOutput];
+    
     //UIAResultsPath output
-    NSString *resultsOutputPath = [self.temporaryDirectory stringByAppendingPathComponent:@"Output"];
+    NSString *resultsOutputPath = [self.temporaryDirectory stringByAppendingPathComponent:@"Output/"];
     [[NSFileManager defaultManager] createDirectoryAtPath:resultsOutputPath withIntermediateDirectories:YES attributes:nil error:nil];
     
     //Trace template
@@ -148,7 +158,7 @@
 #pragma mark - JavaScript Communicator
 - (IBAction)screenshotButtonPressed:(id)sender
 {
-    [IATJavascriptCommunicator sendCommandToInstruments:kInstrumentsCommandListTree throughDirectory:self.temporaryDirectory];
+    [IATJavascriptCommunicator sendCommandToInstruments:kInstrumentsCommandListTree throughDirectory:[self.temporaryDirectory stringByAppendingPathComponent:@"output.js"]];
 }
 
 #pragma mark - Retrieve simulators
@@ -416,12 +426,17 @@
     });
 }
 
-#pragma mark - Application Delegate
-- (void)applicationWillTerminate:(NSNotification *)notification
+#pragma mark - Terminate Simulator
+- (void)terminateSimulator
 {
     NSString *quitSimulatorCommand = @"osascript -e 'tell app \"iPhone Simulator\" to quit'";
     [quitSimulatorCommand commandLineOutput];
-    
+}
+
+#pragma mark - Application Delegate
+- (void)applicationWillTerminate:(NSNotification *)notification
+{
+    [self terminateSimulator];
     [[NSFileManager defaultManager] removeItemAtPath:self.temporaryDirectory error:nil];
 }
 

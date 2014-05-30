@@ -1,2 +1,2 @@
-output=$(stat -f '%m' IATSUITEIATUTILITIESJAVASCRIPT)
+output=$(stat -f '%m' IATSUITEOUTPUTFILEPATH)
 echo "$output"
