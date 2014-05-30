@@ -12,8 +12,6 @@
 
 @interface IATAppDelegate ()
 
-@property (nonatomic, assign) BOOL isProjectRunning;
-
 @property (nonatomic, strong) IBOutlet NSButton *openProjectButton;
 @property (nonatomic, strong) IBOutlet NSPopUpButton *targetMenu;
 @property (nonatomic, strong) IBOutlet NSPopUpButton *configurationMenu;
@@ -32,7 +30,6 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    self.isProjectRunning = NO;
     self.temporaryDirectory = [self createTemporaryDirectory];
     
     [self.targetMenu setEnabled:NO];
@@ -94,7 +91,7 @@
                             }];
 }
 
-#pragma mark - Launch project in Instruments
+#pragma mark - Instruments
 - (void)launchInstrumentsWithAppInDirectory:(NSString *)directory
 {
     //New locations
@@ -122,16 +119,19 @@
     [iatUtilitiesJavascript writeToFile:editedIATUtilitiesLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     [loopJavascript writeToFile:editedLoopJavascriptLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
+    //UIAResultsPath output
+    NSString *resultsOutputPath = [self.temporaryDirectory stringByAppendingPathComponent:@"Output"];
+    [[NSFileManager defaultManager] createDirectoryAtPath:resultsOutputPath withIntermediateDirectories:YES attributes:nil error:nil];
     
-    NSLog(@"Launching Instruments...");
+    //Trace template
     NSString *traceTemplateLocation = [[NSBundle mainBundle] pathForResource:@"Automation" ofType:@".tracetemplate"];
     
-    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, editedLoopJavascriptLocation, self.temporaryDirectory];
+    //Create Instruments command
+    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, editedLoopJavascriptLocation, resultsOutputPath];
     
     NSLog(@"%@", instrumentsCommand);
     
     NSLog(@"%@", [instrumentsCommand commandLineOutput]);
-    //'iPhone Retina (4-inch) - Simulator - iOS 7.1'
 }
 
 #pragma mark - Temporary Directory
@@ -148,12 +148,7 @@
 #pragma mark - JavaScript Communicator
 - (IBAction)screenshotButtonPressed:(id)sender
 {
-    if (self.isProjectRunning) {
-        [IATJavascriptCommunicator sendCommandToInstruments:kInstrumentsCommandListTree throughDirectory:self.temporaryDirectory];
-        
-    } else {
-        NSLog(@"Project not running - handle error");
-    }
+    [IATJavascriptCommunicator sendCommandToInstruments:kInstrumentsCommandListTree throughDirectory:self.temporaryDirectory];
 }
 
 #pragma mark - Retrieve simulators
@@ -426,6 +421,8 @@
 {
     NSString *quitSimulatorCommand = @"osascript -e 'tell app \"iPhone Simulator\" to quit'";
     [quitSimulatorCommand commandLineOutput];
+    
+    [[NSFileManager defaultManager] removeItemAtPath:self.temporaryDirectory error:nil];
 }
 
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
