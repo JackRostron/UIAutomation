@@ -149,7 +149,7 @@
 - (IBAction)screenshotButtonPressed:(id)sender
 {
     if (self.isProjectRunning) {
-        [IATJavascriptCommunicator sendCommandToInstruments:kInstrumentsCommandListTree throughDirectory:@""];
+        [IATJavascriptCommunicator sendCommandToInstruments:kInstrumentsCommandListTree throughDirectory:self.temporaryDirectory];
         
     } else {
         NSLog(@"Project not running - handle error");

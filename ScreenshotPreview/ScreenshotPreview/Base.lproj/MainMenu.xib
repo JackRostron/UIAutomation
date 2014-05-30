@@ -127,12 +127,12 @@
         <window title="ScreenshotPreview" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="1044" height="602"/>
+            <rect key="contentRect" x="335" y="390" width="1092" height="602"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
             <value key="minSize" type="size" width="500" height="602"/>
             <value key="maxSize" type="size" width="1044" height="602"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="1044" height="602"/>
+                <rect key="frame" x="0.0" y="0.0" width="1092" height="602"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c2n-OT-mXB">
@@ -144,14 +144,14 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="XIA-CF-ciH"/>
                     </imageView>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qh4-Wf-dOm">
-                        <rect key="frame" x="339" y="23" width="685" height="556"/>
+                        <rect key="frame" x="339" y="23" width="733" height="556"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" focusRingType="none" id="Ljs-Fr-3Ar">
-                            <rect key="frame" x="1" y="17" width="683" height="538"/>
+                            <rect key="frame" x="1" y="17" width="731" height="538"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="b5y-ba-voX" indentationPerLevel="16" outlineTableColumn="s0D-qA-C8A" id="hkS-64-hBW">
-                                    <rect key="frame" x="0.0" y="0.0" width="683" height="538"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="731" height="538"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -184,7 +184,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <tableHeaderView key="headerView" focusRingType="none" id="b5y-ba-voX">
-                            <rect key="frame" x="0.0" y="0.0" width="683" height="17"/>
+                            <rect key="frame" x="0.0" y="0.0" width="731" height="17"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
@@ -292,6 +292,22 @@
                             </connections>
                         </button>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="0D05CDD4-541B-43A7-8B1C-F6435189C882" label="Capture" paletteLabel="Capture" id="w94-qT-CKy">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="31" height="28"/>
+                        <size key="maxSize" width="66" height="50"/>
+                        <button key="view" verticalHuggingPriority="750" id="VqZ-2Y-JuG">
+                            <rect key="frame" x="0.0" y="14" width="66" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" title="Capture" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NhF-5j-st0">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="screenshotButtonPressed:" target="Voe-Tx-rLC" id="iCx-UR-JMJ"/>
+                            </connections>
+                        </button>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="RAe-or-9to"/>
@@ -300,6 +316,7 @@
                     <toolbarItem reference="gpT-If-HXP"/>
                     <toolbarItem reference="pgQ-n7-IAb"/>
                     <toolbarItem reference="Mlp-Pa-amq"/>
+                    <toolbarItem reference="w94-qT-CKy"/>
                 </defaultToolbarItems>
             </toolbar>
         </window>
