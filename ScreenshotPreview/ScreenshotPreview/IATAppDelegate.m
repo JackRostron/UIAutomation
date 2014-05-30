@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSString *selectedSimulatorString;
 @property (nonatomic, strong) NSString *temporaryDirectory;
 
+@property (nonatomic, strong) NSMetadataQuery *screenshotDirectoryQuery;
+
 @end
 
 
@@ -139,9 +141,14 @@
     //Create Instruments command
     NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, editedLoopJavascriptLocation, resultsOutputPath];
     
+    //Start monitoring for changes in directory
+    [self setupWatchedFolder];
+    
     NSLog(@"%@", instrumentsCommand);
     
-    NSLog(@"%@", [instrumentsCommand commandLineOutput]);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSLog(@"%@", [instrumentsCommand commandLineOutput]);
+    });
 }
 
 #pragma mark - Temporary Directory
@@ -424,6 +431,38 @@
         
         block(success);
     });
+}
+
+#pragma mark - Monitor changes in Instruments output directory
+- (void)setupWatchedFolder
+{
+    NSURL *watchedFolder = [NSURL URLWithString:[NSString stringWithFormat:@"%@/Output", self.temporaryDirectory]];
+    
+    self.screenshotDirectoryQuery = [[NSMetadataQuery alloc] init];
+    [self.screenshotDirectoryQuery setSearchScopes:@[watchedFolder]];
+    //[self.screenshotDirectoryQuery setPredicate:[NSPredicate predicateWithFormat:@"kMDItemFSName like '*.png'"]];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(queryFoundStuff:) name:NSMetadataQueryDidFinishGatheringNotification object:self.screenshotDirectoryQuery];
+    [nc addObserver:self selector:@selector(queryFoundStuff:) name:NSMetadataQueryDidUpdateNotification object:self.screenshotDirectoryQuery];
+    
+    [self.screenshotDirectoryQuery startQuery];
+}
+
+- (void)queryFoundStuff:(NSNotification *)notification
+{
+    [self.screenshotDirectoryQuery disableUpdates];
+    
+    NSMutableArray *results = [NSMutableArray arrayWithCapacity:self.screenshotDirectoryQuery.resultCount];
+    
+    for (NSUInteger i = 0; i < self.screenshotDirectoryQuery.resultCount; i++) {
+        [results addObject:[[self.self.screenshotDirectoryQuery resultAtIndex:i] valueForAttribute:NSMetadataItemPathKey]];
+    }
+    
+    // do something with you search results
+    // self.results = results;
+    
+    [self.screenshotDirectoryQuery enableUpdates];
 }
 
 #pragma mark - Terminate Simulator

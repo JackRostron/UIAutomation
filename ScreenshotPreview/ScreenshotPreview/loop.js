@@ -9,15 +9,17 @@ var command;
 
 while (running == 0) {
 	//UIALogger.logMessage("looped");
-	loopVersion = target.host().performTaskWithPathArgumentsTimeout("/bin/bash", ["IATSUITEFILEUPDATEDBASHSCRIPT"], 10);
 	//UIALogger.logMessage(currentVersion.stdout);
 	//UIALogger.logMessage(loopVersion.stdout);
-
-	if (parseInt(currentVersion.stdout) < parseInt(loopVersion.stdout)){
+    
+    loopVersion = target.host().performTaskWithPathArgumentsTimeout("/bin/bash", ["IATSUITEFILEUPDATEDBASHSCRIPT"], 10);
+	
+    if (parseInt(currentVersion.stdout) < parseInt(loopVersion.stdout)){
 		//UIALogger.logMessage("Triggered File Update")
 		command = target.host().performTaskWithPathArgumentsTimeout("/bin/cat", ["IATSUITEOUTPUTFILEPATH"], 10);
 		//eval(command.stdout);
 		UIALogger.logMessage(command.stdout);
+        UIATarget.localTarget().logElementTree();
 		currentVersion = loopVersion;
 	}
 
