@@ -41,7 +41,6 @@
     [self.runButton setEnabled:NO];
     
     [self getSimulatorMenu];
-    [self launchInstrumentsWithAppInDirectory:@""];
 }
 
 #pragma mark - IBActions
@@ -127,9 +126,12 @@
     NSLog(@"Launching Instruments...");
     NSString *traceTemplateLocation = [[NSBundle mainBundle] pathForResource:@"Automation" ofType:@".tracetemplate"];
     
-    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, @"SCREENSHOT TEST SCRIPT", self.temporaryDirectory];
+    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, editedLoopJavascriptLocation, self.temporaryDirectory];
     
     NSLog(@"%@", instrumentsCommand);
+    
+    NSLog(@"%@", [instrumentsCommand commandLineOutput]);
+    //'iPhone Retina (4-inch) - Simulator - iOS 7.1'
 }
 
 #pragma mark - Temporary Directory
@@ -376,7 +378,7 @@
 - (void)getAppBuildLocationWithDirectory:(NSString *)url andTarget:(NSString *)target andConfiguration:(NSString *)configuration withCompletion:(void(^)(NSString *location))block
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@ -showBuildSettings", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
+        NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@ -sdk iphonesimulator -showBuildSettings", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
         
         NSArray *outputLines = [[buildSettingsCommand commandLineOutput] componentsSeparatedByString:@"\n"];
         
@@ -407,7 +409,7 @@
         
         BOOL success = NO;
         
-        NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
+        NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@ -sdk iphonesimulator", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
         
         NSArray *outputLines = [[buildSettingsCommand commandLineOutput] componentsSeparatedByString:@"\n"];
         
@@ -417,6 +419,13 @@
         
         block(success);
     });
+}
+
+#pragma mark - Application Delegate
+- (void)applicationWillTerminate:(NSNotification *)notification
+{
+    NSString *quitSimulatorCommand = @"osascript -e 'tell app \"iPhone Simulator\" to quit'";
+    [quitSimulatorCommand commandLineOutput];
 }
 
 
