@@ -10,7 +10,7 @@
 #import "NSString+CommandLineScript.h"
 #import "IATJavascriptCommunicator.h"
 
-@interface IATAppDelegate ()
+@interface IATAppDelegate () <NSAlertDelegate>
 
 @property (nonatomic, weak) IBOutlet NSButton *openProjectButton;
 @property (nonatomic, weak) IBOutlet NSPopUpButton *targetMenu;
@@ -23,6 +23,9 @@
 @property (nonatomic, strong) NSDictionary *xcodeProject;
 @property (nonatomic, strong) NSString *selectedSimulatorString;
 @property (nonatomic, strong) NSString *temporaryDirectory;
+
+@property (nonatomic, strong) NSAlert *compilingAlert;
+@property (nonatomic, strong) NSAlert *capturingScreenshotAlert;
 
 @end
 
@@ -41,8 +44,11 @@
     [self.simulatorMenu setEnabled:NO];
     [self.runButton setEnabled:NO];
     
+    [self setupCompilingSheet];
+    [self setupCaptureSheet];
     [self getSimulatorMenu];
 }
+
 
 #pragma mark - IBActions
 - (IBAction)openNewProject:(id)sender
@@ -71,6 +77,8 @@
 
 - (IBAction)run:(id)sender
 {
+    [self.compilingAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:nil contextInfo:nil];
+    
     [self getAppBuildLocationWithDirectory:[self.xcodeProject objectForKey:@"url"]
                                  andTarget:self.targetMenu.selectedItem.title
                           andConfiguration:self.configurationMenu.selectedItem.title
@@ -153,6 +161,9 @@
     //Create Instruments command
     NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, editedLoopJavascriptLocation, resultsOutputPath];
     
+    //Dismiss compile alert
+    [self dismissCompileSheet];
+    
     NSLog(@"%@", instrumentsCommand);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -174,6 +185,7 @@
 #pragma mark - JavaScript Communicator
 - (IBAction)screenshotButtonPressed:(id)sender
 {
+    [self.capturingScreenshotAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:nil contextInfo:nil];
     [IATJavascriptCommunicator sendCommandToInstruments:kInstrumentsCommandListTree throughDirectory:[self.temporaryDirectory stringByAppendingPathComponent:@"output.js"]];
 }
 
@@ -461,7 +473,6 @@
                         imageURL = fileName;
                     }
                 }
-                
                 block(imageURL, plist);
             }
         }
@@ -473,6 +484,52 @@
 {
     NSString *quitSimulatorCommand = @"osascript -e 'tell app \"iPhone Simulator\" to quit'";
     [quitSimulatorCommand commandLineOutput];
+}
+
+#pragma mark - Modal Views
+- (void)setupCompilingSheet
+{
+    NSProgressIndicator *progressIndic = [[NSProgressIndicator alloc] initWithFrame:NSRectFromCGRect(CGRectMake(0, 0, 400, 20))];
+    [progressIndic setStyle:NSProgressIndicatorBarStyle];
+    [progressIndic startAnimation:nil];
+    
+    self.compilingAlert = [NSAlert alertWithMessageText:@"Compiling app..." defaultButton:@"Use" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+    [self.compilingAlert setAccessoryView:progressIndic];
+    
+    NSButton *button = [[self.compilingAlert buttons] objectAtIndex:0];
+    [button setHidden:YES];
+}
+
+- (void)dismissCompileSheet
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [NSApp endSheet:self.compilingAlert.window];
+    });
+}
+
+- (void)setupCaptureSheet
+{
+    NSProgressIndicator *progressIndic = [[NSProgressIndicator alloc] initWithFrame:NSRectFromCGRect(CGRectMake(0, 0, 400, 20))];
+    [progressIndic setStyle:NSProgressIndicatorBarStyle];
+    [progressIndic startAnimation:nil];
+    
+    self.capturingScreenshotAlert = [NSAlert alertWithMessageText:@"Capturing screenshot..." defaultButton:@"Use" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+    [self.capturingScreenshotAlert setAccessoryView:progressIndic];
+    
+    NSButton *button = [[self.capturingScreenshotAlert buttons] objectAtIndex:0];
+    [button setHidden:YES];
+}
+
+- (void)dismissCaptureSheet
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [NSApp endSheet:self.capturingScreenshotAlert.window];
+    });
+}
+
+- (void)didEndSheet:(id)modalSheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
+{
+    [modalSheet orderOut: nil];
 }
 
 #pragma mark - Application Delegate
@@ -496,6 +553,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSImage *screenshot = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Output/Run 1/%@", self.temporaryDirectory, imageURL]];
                 [self.screenshotImageView setImage:screenshot];
+                [self dismissCaptureSheet];
             });
         }];
     }
