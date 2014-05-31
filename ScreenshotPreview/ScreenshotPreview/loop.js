@@ -7,6 +7,10 @@ var currentVersion = target.host().performTaskWithPathArgumentsTimeout("/bin/bas
 var loopVersion;
 var command;
 
+UIATarget.onAlert = function onAlert(alert) {
+	return true;
+}
+
 while (running == 0) {
 	//UIALogger.logMessage("looped");
 	//UIALogger.logMessage(currentVersion.stdout);

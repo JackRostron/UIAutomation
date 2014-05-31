@@ -65,6 +65,10 @@
                 [self.targetMenu setEnabled:YES];
                 [self.configurationMenu setEnabled:YES];
                 [self.runButton setEnabled:YES];
+                
+                if (![self.simulatorMenu isEnabled] && [self.simulatorMenu.itemArray count] > 1) {
+                    [self.simulatorMenu setEnabled:YES];
+                }
             });
             
         } else {
@@ -479,6 +483,11 @@
     });
 }
 
+- (void)clearContentsOfTemporaryDirectory
+{
+    [[NSFileManager defaultManager] removeItemAtPath:[self.temporaryDirectory stringByAppendingString:@"/Output/Run 1"] error:nil];
+}
+
 #pragma mark - Terminate Simulator
 - (void)terminateSimulator
 {
@@ -553,6 +562,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSImage *screenshot = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Output/Run 1/%@", self.temporaryDirectory, imageURL]];
                 [self.screenshotImageView setImage:screenshot];
+                [self clearContentsOfTemporaryDirectory];
                 [self dismissCaptureSheet];
             });
         }];
