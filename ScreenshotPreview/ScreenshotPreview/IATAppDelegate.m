@@ -163,7 +163,7 @@
     NSString *traceTemplateLocation = [[NSBundle mainBundle] pathForResource:@"Automation" ofType:@".tracetemplate"];
     
     //Create Instruments command
-    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, directory, editedLoopJavascriptLocation, resultsOutputPath];
+    NSString *instrumentsCommand = [NSString stringWithFormat:@"instruments -w '%@' -t '%@' -D %@ '%@' -e UIASCRIPT '%@' -e UIARESULTSPATH '%@'", self.selectedSimulatorString, traceTemplateLocation, [self.temporaryDirectory stringByAppendingString:@"/"], directory, editedLoopJavascriptLocation, resultsOutputPath];
     
     //Dismiss compile alert
     [self dismissCompileSheet];
