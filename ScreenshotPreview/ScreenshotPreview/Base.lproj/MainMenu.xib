@@ -14,6 +14,7 @@
         <customObject id="Voe-Tx-rLC" customClass="IATAppDelegate">
             <connections>
                 <outlet property="configurationMenu" destination="5Oz-yk-VW0" id="z6K-1l-R7F"/>
+                <outlet property="listTreeOutlineView" destination="hkS-64-hBW" id="zMh-LI-q90"/>
                 <outlet property="openProjectButton" destination="0LH-XA-XhP" id="n4m-fM-oHJ"/>
                 <outlet property="runButton" destination="iza-RG-ZBn" id="Jv1-Vl-AWi"/>
                 <outlet property="screenshotImageView" destination="c2n-OT-mXB" id="U8X-HM-CMJ"/>
@@ -23,6 +24,14 @@
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <treeController editable="NO" childrenKeyPath="children" id="1qu-Pt-sgT">
+            <declaredKeys>
+                <string>Message</string>
+            </declaredKeys>
+            <connections>
+                <binding destination="Voe-Tx-rLC" name="contentArray" keyPath="self.currentListTree" id="Agh-Ca-0uq"/>
+            </connections>
+        </treeController>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
                 <menuItem title="ScreenshotPreview" id="1Xt-HY-uBw">
@@ -158,7 +167,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                     <tableColumns>
-                                        <tableColumn width="101" minWidth="16" maxWidth="1000" id="s0D-qA-C8A">
+                                        <tableColumn width="728" minWidth="16" maxWidth="1000" id="s0D-qA-C8A">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -170,6 +179,9 @@
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <connections>
+                                                <binding destination="1qu-Pt-sgT" name="value" keyPath="arrangedObjects.Message" id="jgO-Aj-Pik"/>
+                                            </connections>
                                         </tableColumn>
                                     </tableColumns>
                                 </outlineView>

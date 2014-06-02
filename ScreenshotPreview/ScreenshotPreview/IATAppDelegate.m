@@ -19,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet NSButton *runButton;
 
 @property (nonatomic, weak) IBOutlet NSImageView *screenshotImageView;
+@property (nonatomic, weak) IBOutlet NSOutlineView *listTreeOutlineView;
 
 @property (nonatomic, strong) NSDictionary *xcodeProject;
 @property (nonatomic, strong) NSString *selectedSimulatorString;
@@ -562,12 +563,14 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSImage *screenshot = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Output/Run 1/%@", self.temporaryDirectory, imageURL]];
                 [self.screenshotImageView setImage:screenshot];
+                
+                NSDictionary *listTreePlist = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Output/Run 1/%@", self.temporaryDirectory, plist]];
+                self.currentListTree = [[NSMutableArray alloc] initWithArray:[[[listTreePlist objectForKey:@"All Samples"] objectAtIndex:1] objectForKey:@"children"]];
+                
                 [self clearContentsOfTemporaryDirectory];
                 [self dismissCaptureSheet];
             });
         }];
     }
 }
-
-
 @end
