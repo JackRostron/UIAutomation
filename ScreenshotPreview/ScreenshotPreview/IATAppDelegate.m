@@ -117,7 +117,10 @@
 - (void)launchInstrumentsWithAppInDirectory:(NSString *)directory
 {
     [self terminateSimulator];
-    [self.launchingAppAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:nil contextInfo:nil];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.launchingAppAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:nil contextInfo:nil];
+    });
     
     //New locations
     NSString *editedBashScriptLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"fileUpdated.sh"];
@@ -188,7 +191,8 @@
     NSLog(@"%@", instrumentsCommand);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSLog(@"%@", [instrumentsCommand commandLineOutput]);
+        //NSLog(@"%@", [instrumentsCommand commandLineOutput]);
+        [instrumentsCommand commandLineOutput];
     });
 }
 
@@ -596,7 +600,10 @@
     
     if ([[url lastPathComponent] isEqualToString:@"SimulatorDidLaunch"]) {
         [self dismissLaunchingAppSheet];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
         [self.captureButton setEnabled:YES];
+        });
         
     } else if ([[url lastPathComponent] isEqualToString:@"ListTree"]) {
         [self monitorForListTreeResultWithCompletion:^(NSString *imageURL, NSString *plist) {
