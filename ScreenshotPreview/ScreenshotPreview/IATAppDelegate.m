@@ -267,7 +267,7 @@
         NSMutableArray *simulators = [[NSMutableArray alloc] init];
         
         for (NSString *line in sdkLines) {
-            if ([line rangeOfString:@" - Simulator - "].location != NSNotFound) {
+            if ([line rangeOfString:@" - Simulator - "].location != NSNotFound && [line rangeOfString:@"iPhone - Simulator - "].location == NSNotFound) {
                 [simulators addObject:line];
             }
         }
@@ -605,7 +605,7 @@
                 [self.screenshotImageView setImage:screenshot];
                 
                 NSDictionary *listTreePlist = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Output/Run 1/%@", self.temporaryDirectory, plist]];
-                self.currentListTree = [[NSMutableArray alloc] initWithArray:[[[listTreePlist objectForKey:@"All Samples"] objectAtIndex:1] objectForKey:@"children"]];
+                self.currentListTree = [[NSMutableArray alloc] initWithArray:[[[listTreePlist objectForKey:@"All Samples"] lastObject] objectForKey:@"children"]];
                 [self.listTreeOutlineView expandItem:nil expandChildren:YES];
                 
                 [self clearContentsOfTemporaryDirectory];
