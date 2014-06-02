@@ -1,1 +1,1 @@
-open IATScreenshotAutomatorListTreeComplete://ListTree
+open IATScreenshotAutomatorMessage://ListTree

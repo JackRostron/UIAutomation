@@ -11,10 +11,9 @@ UIATarget.onAlert = function onAlert(alert) {
 	return true;
 }
 
+var initialNotify = target.host().performTaskWithPathArgumentsTimeout("/bin/bash", ["IATSUITESIMULATORLAUNCHCOMPLETE"], 10);
+
 while (running == 0) {
-	//UIALogger.logMessage("looped");
-	//UIALogger.logMessage(currentVersion.stdout);
-	//UIALogger.logMessage(loopVersion.stdout);
     
     loopVersion = target.host().performTaskWithPathArgumentsTimeout("/bin/bash", ["IATSUITEFILEUPDATEDBASHSCRIPT"], 10);
 	

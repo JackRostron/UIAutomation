@@ -17,6 +17,7 @@
 @property (nonatomic, weak) IBOutlet NSPopUpButton *configurationMenu;
 @property (nonatomic, weak) IBOutlet NSPopUpButton *simulatorMenu;
 @property (nonatomic, weak) IBOutlet NSButton *runButton;
+@property (nonatomic, weak) IBOutlet NSButton *captureButton;
 
 @property (nonatomic, weak) IBOutlet NSImageView *screenshotImageView;
 @property (nonatomic, weak) IBOutlet NSOutlineView *listTreeOutlineView;
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) NSString *temporaryDirectory;
 
 @property (nonatomic, strong) NSAlert *compilingAlert;
+@property (nonatomic, strong) NSAlert *launchingAppAlert;
 @property (nonatomic, strong) NSAlert *capturingScreenshotAlert;
 
 @end
@@ -44,8 +46,10 @@
     [self.configurationMenu setEnabled:NO];
     [self.simulatorMenu setEnabled:NO];
     [self.runButton setEnabled:NO];
+    [self.captureButton setEnabled:NO];
     
     [self setupCompilingSheet];
+    [self setupLaunchingAppSheet];
     [self setupCaptureSheet];
     [self getSimulatorMenu];
 }
@@ -95,6 +99,7 @@
                                              withCompletion:^(BOOL success) {
                                                  
                                                  if (success) {
+                                                     [self dismissCompileSheet];
                                                      [self launchInstrumentsWithAppInDirectory:location];
                                                      
                                                  } else {
@@ -112,12 +117,14 @@
 - (void)launchInstrumentsWithAppInDirectory:(NSString *)directory
 {
     [self terminateSimulator];
+    [self.launchingAppAlert beginSheetModalForWindow:self.window modalDelegate:self didEndSelector:nil contextInfo:nil];
     
     //New locations
     NSString *editedBashScriptLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"fileUpdated.sh"];
     NSString *editedIATUtilitiesLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"IATUtilities.js"];
     NSString *editedLoopJavascriptLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"loop.js"];
     NSString *fileUpdatedBashLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"listTreeCommandComplete.sh"];
+    NSString *simulatorLaunchedBaseLocation = [self.temporaryDirectory stringByAppendingPathComponent:@"simulatorFinishedLaunching.sh"];
     NSString *outputFilePath = [self.temporaryDirectory stringByAppendingPathComponent:@"output.js"];
     
     //Output file
@@ -132,25 +139,34 @@
     //IAT Utilities - Does not need modifying
     NSString *iatUtilitiesJavascript = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"IATUtilities" ofType:@".js"] encoding:NSUTF8StringEncoding error:nil];
     
-    //ListTreeCommandComplete - Does not need modiyfin
+    //ListTreeCommandComplete - Does not need modifying
     NSString *listTreeCommandCompleteBash = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"listTreeCommandComplete" ofType:@".sh"] encoding:NSUTF8StringEncoding error:nil];
+    
+    //Simulator launched - does not need modifying
+    NSString *simulatorLaunchedBash = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"simulatorFinishedLaunching" ofType:@".sh"] encoding:NSUTF8StringEncoding error:nil];
     
     //Loop Javascript
     NSString *loopJavascript = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"loop" ofType:@".js"] encoding:NSUTF8StringEncoding error:nil];
     NSString *loopJavascriptBashStringToReplace = @"IATSUITEFILEUPDATEDBASHSCRIPT";
+    NSString *simulatorFinishedLaunchingStringToReplace = @"IATSUITESIMULATORLAUNCHCOMPLETE";
     NSString *communicatorStringToReplace = @"IATSUITELISTTREECOMPLETE";
     loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:loopJavascriptBashStringToReplace withString:[NSString stringWithFormat:@"%@", editedBashScriptLocation]];
     loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:bashScriptStringToReplace withString:[NSString stringWithFormat:@"%@", outputFilePath]];
+    loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:simulatorFinishedLaunchingStringToReplace withString:[NSString stringWithFormat:@"%@", simulatorLaunchedBaseLocation]];
     loopJavascript = [loopJavascript stringByReplacingOccurrencesOfString:communicatorStringToReplace withString:[NSString stringWithFormat:@"%@", fileUpdatedBashLocation]];
     
     //Write to temporary directory - need to remove these when finished
     [bashScript writeToFile:editedBashScriptLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     [iatUtilitiesJavascript writeToFile:editedIATUtilitiesLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     [listTreeCommandCompleteBash writeToFile:fileUpdatedBashLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    [simulatorLaunchedBash writeToFile:simulatorLaunchedBaseLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     [loopJavascript writeToFile:editedLoopJavascriptLocation atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
     //Allow bash scripts to be executed
     NSString *baseExecutableCommand = [NSString stringWithFormat:@"chmod 700 %@", editedBashScriptLocation];
+    [baseExecutableCommand commandLineOutput];
+    
+    baseExecutableCommand = [NSString stringWithFormat:@"chmod 700 %@", simulatorLaunchedBaseLocation];
     [baseExecutableCommand commandLineOutput];
     
     baseExecutableCommand = [NSString stringWithFormat:@"chmod 700 %@", fileUpdatedBashLocation];
@@ -503,7 +519,7 @@
     [progressIndic setStyle:NSProgressIndicatorBarStyle];
     [progressIndic startAnimation:nil];
     
-    self.compilingAlert = [NSAlert alertWithMessageText:@"Compiling app..." defaultButton:@"Use" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+    self.compilingAlert = [NSAlert alertWithMessageText:@"Compiling app" defaultButton:@"Use" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
     [self.compilingAlert setAccessoryView:progressIndic];
     
     NSButton *button = [[self.compilingAlert buttons] objectAtIndex:0];
@@ -517,13 +533,33 @@
     });
 }
 
+- (void)setupLaunchingAppSheet
+{
+    NSProgressIndicator *progressIndic = [[NSProgressIndicator alloc] initWithFrame:NSRectFromCGRect(CGRectMake(0, 0, 400, 20))];
+    [progressIndic setStyle:NSProgressIndicatorBarStyle];
+    [progressIndic startAnimation:nil];
+    
+    self.launchingAppAlert = [NSAlert alertWithMessageText:@"Launching app" defaultButton:@"Use" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+    [self.launchingAppAlert setAccessoryView:progressIndic];
+    
+    NSButton *button = [[self.launchingAppAlert buttons] objectAtIndex:0];
+    [button setHidden:YES];
+}
+
+- (void)dismissLaunchingAppSheet
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [NSApp endSheet:self.launchingAppAlert.window];
+    });
+}
+
 - (void)setupCaptureSheet
 {
     NSProgressIndicator *progressIndic = [[NSProgressIndicator alloc] initWithFrame:NSRectFromCGRect(CGRectMake(0, 0, 400, 20))];
     [progressIndic setStyle:NSProgressIndicatorBarStyle];
     [progressIndic startAnimation:nil];
     
-    self.capturingScreenshotAlert = [NSAlert alertWithMessageText:@"Capturing screenshot..." defaultButton:@"Use" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+    self.capturingScreenshotAlert = [NSAlert alertWithMessageText:@"Capturing screenshot" defaultButton:@"Use" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
     [self.capturingScreenshotAlert setAccessoryView:progressIndic];
     
     NSButton *button = [[self.capturingScreenshotAlert buttons] objectAtIndex:0];
@@ -558,7 +594,11 @@
 {
     NSString *url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
     
-    if ([[url lastPathComponent] isEqualToString:@"ListTree"]) {
+    if ([[url lastPathComponent] isEqualToString:@"SimulatorDidLaunch"]) {
+        [self dismissLaunchingAppSheet];
+        [self.captureButton setEnabled:YES];
+        
+    } else if ([[url lastPathComponent] isEqualToString:@"ListTree"]) {
         [self monitorForListTreeResultWithCompletion:^(NSString *imageURL, NSString *plist) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSImage *screenshot = [[NSImage alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Output/Run 1/%@", self.temporaryDirectory, imageURL]];

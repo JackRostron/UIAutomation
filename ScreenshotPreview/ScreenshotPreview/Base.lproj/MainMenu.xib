@@ -13,6 +13,7 @@
         <customObject id="-3" userLabel="Application"/>
         <customObject id="Voe-Tx-rLC" customClass="IATAppDelegate">
             <connections>
+                <outlet property="captureButton" destination="VqZ-2Y-JuG" id="By8-iH-hHu"/>
                 <outlet property="configurationMenu" destination="5Oz-yk-VW0" id="z6K-1l-R7F"/>
                 <outlet property="listTreeOutlineView" destination="hkS-64-hBW" id="zMh-LI-q90"/>
                 <outlet property="openProjectButton" destination="0LH-XA-XhP" id="n4m-fM-oHJ"/>
