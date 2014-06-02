@@ -566,6 +566,7 @@
                 
                 NSDictionary *listTreePlist = [[NSDictionary alloc] initWithContentsOfFile:[NSString stringWithFormat:@"%@/Output/Run 1/%@", self.temporaryDirectory, plist]];
                 self.currentListTree = [[NSMutableArray alloc] initWithArray:[[[listTreePlist objectForKey:@"All Samples"] objectAtIndex:1] objectForKey:@"children"]];
+                [self.listTreeOutlineView expandItem:nil expandChildren:YES];
                 
                 [self clearContentsOfTemporaryDirectory];
                 [self dismissCaptureSheet];
