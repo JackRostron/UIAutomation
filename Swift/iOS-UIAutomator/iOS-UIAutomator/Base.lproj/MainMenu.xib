@@ -13,6 +13,14 @@
         <customObject id="-3" userLabel="Application"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="iOS_UIAutomator" customModuleProvider="target">
             <connections>
+                <outlet property="captureButton" destination="cHK-o4-bo6" id="hk6-Oq-zHM"/>
+                <outlet property="configurationMenu" destination="FCJ-GS-3js" id="ucp-gz-arl"/>
+                <outlet property="listTreeOutlineView" destination="2ck-AH-Jgj" id="Bi3-TC-M2x"/>
+                <outlet property="openProjectButton" destination="iEl-aq-H7e" id="3Ig-yF-ug2"/>
+                <outlet property="runButton" destination="Q8H-oF-VWH" id="uRY-tZ-ooK"/>
+                <outlet property="screenshotImageView" destination="5gA-h9-I1D" id="Sqj-Gt-ZRn"/>
+                <outlet property="simulatorMenu" destination="t0A-0F-UXw" id="deB-9f-QOu"/>
+                <outlet property="targetMenu" destination="ERd-Xy-r0X" id="sJN-NC-5FY"/>
                 <outlet property="window" destination="Wcj-5W-ePC" id="sZO-3B-7mp"/>
             </connections>
         </customObject>
@@ -241,11 +249,7 @@
                             </popUpButtonCell>
                         </popUpButton>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="4C723D0F-9260-44A7-B4CB-632B6DAC0E1D" label="Run" paletteLabel="Run" tag="-1" image="runButton" selectable="YES" id="JFx-bY-yW0">
-                        <size key="maxSize" width="30" height="30"/>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="1FN-QW-MtZ"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="bDj-d6-Zke"/>
                     <toolbarItem implicitItemIdentifier="337FD659-253B-4EAC-933A-4750EFC9614C" label="Start" paletteLabel="Start" image="runButton" id="1XO-Gv-0hL">
                         <nil key="toolTip"/>
                         <size key="minSize" width="31" height="28"/>
