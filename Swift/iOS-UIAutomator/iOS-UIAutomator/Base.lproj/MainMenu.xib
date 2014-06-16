@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6157" systemVersion="14A237a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A238x" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6157"/>
+        <deployment defaultVersion="101000" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6154.17"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -11,9 +12,9 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target">
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="iOS_UIAutomator" customModuleProvider="target">
             <connections>
-                <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
+                <outlet property="window" destination="Wcj-5W-ePC" id="sZO-3B-7mp"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -666,15 +667,192 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="iOS-UIAutomator" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
+        <window title="iOS UIAutomator" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="Wcj-5W-ePC">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="480" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
-            <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
+            <rect key="contentRect" x="335" y="390" width="1092" height="602"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1028"/>
+            <value key="minSize" type="size" width="500" height="602"/>
+            <value key="maxSize" type="size" width="1044" height="602"/>
+            <view key="contentView" id="xge-PS-2Ht">
+                <rect key="frame" x="0.0" y="0.0" width="1092" height="602"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5gA-h9-I1D">
+                        <rect key="frame" x="20" y="20" width="314" height="562"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="308" id="12p-QO-525"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="G8J-88-YhU"/>
+                    </imageView>
+                    <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyK-hZ-GN6">
+                        <rect key="frame" x="339" y="23" width="733" height="556"/>
+                        <clipView key="contentView" focusRingType="none" id="b6j-9x-MtH">
+                            <rect key="frame" x="1" y="17" width="731" height="538"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <outlineView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" autosaveColumns="NO" headerView="wCc-75-dxB" indentationPerLevel="16" outlineTableColumn="lQF-9e-jYF" id="2ck-AH-Jgj">
+                                    <rect key="frame" x="0.0" y="0.0" width="731" height="19"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <tableColumns>
+                                        <tableColumn width="728" minWidth="16" maxWidth="1000" id="lQF-9e-jYF">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="t6I-Dh-pwm">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        </tableColumn>
+                                    </tableColumns>
+                                </outlineView>
+                            </subviews>
+                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" focusRingType="none" verticalHuggingPriority="750" horizontal="YES" id="KNh-rp-men">
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" focusRingType="none" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="wuz-Lq-RVB">
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <tableHeaderView key="headerView" focusRingType="none" id="wCc-75-dxB">
+                            <rect key="frame" x="0.0" y="0.0" width="731" height="17"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </tableHeaderView>
+                    </scrollView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="5gA-h9-I1D" firstAttribute="leading" secondItem="xge-PS-2Ht" secondAttribute="leading" constant="23" id="2l6-24-Z8m"/>
+                    <constraint firstItem="MyK-hZ-GN6" firstAttribute="leading" secondItem="5gA-h9-I1D" secondAttribute="trailing" constant="8" id="A4L-tb-Tzk"/>
+                    <constraint firstAttribute="bottom" secondItem="MyK-hZ-GN6" secondAttribute="bottom" constant="23" id="UVn-FX-zAp"/>
+                    <constraint firstItem="5gA-h9-I1D" firstAttribute="top" secondItem="xge-PS-2Ht" secondAttribute="top" constant="23" id="dY9-Jt-Tjr"/>
+                    <constraint firstAttribute="trailing" secondItem="MyK-hZ-GN6" secondAttribute="trailing" constant="20" id="hY8-vO-0UG"/>
+                    <constraint firstAttribute="bottom" secondItem="5gA-h9-I1D" secondAttribute="bottom" constant="23" id="pAM-5V-sB9"/>
+                    <constraint firstItem="MyK-hZ-GN6" firstAttribute="top" secondItem="xge-PS-2Ht" secondAttribute="top" constant="23" id="sKJ-mB-ZgG"/>
+                </constraints>
             </view>
+            <toolbar key="toolbar" implicitIdentifier="D0145F33-28D0-4091-9164-A6C6CB8E99D2" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="w6D-uf-dz0">
+                <allowedToolbarItems>
+                    <toolbarItem implicitItemIdentifier="390FFF0A-9B43-435F-9212-B243EB1DEB6D" label="" paletteLabel="" id="Cza-IC-Pvx">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="82" height="25"/>
+                        <size key="maxSize" width="110" height="31"/>
+                        <button key="view" verticalHuggingPriority="750" id="iEl-aq-H7e">
+                            <rect key="frame" x="0.0" y="14" width="110" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" title="Open Project" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Moo-Z6-Ih9">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="A8D9A399-B669-4DD5-85CC-1269CF90F158" label="App Target" paletteLabel="App Target" id="55h-o8-M7p">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="100" height="28"/>
+                        <size key="maxSize" width="224" height="31"/>
+                        <popUpButton key="view" verticalHuggingPriority="750" id="ERd-Xy-r0X">
+                            <rect key="frame" x="0.0" y="14" width="220" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <popUpButtonCell key="cell" type="roundTextured" title="No project selected" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="nhJ-Rt-Spd" id="3Hc-3S-2V7">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" title="OtherViews" id="ysm-X8-Wdj">
+                                    <items>
+                                        <menuItem title="No project selected" state="on" id="nhJ-Rt-Spd"/>
+                                    </items>
+                                </menu>
+                            </popUpButtonCell>
+                        </popUpButton>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="F77E3B95-785D-4FFC-AEAD-B0B27F64906C" label="App Configuration" paletteLabel="App Configuration" id="n1N-g6-o9v">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="100" height="28"/>
+                        <size key="maxSize" width="224" height="31"/>
+                        <popUpButton key="view" verticalHuggingPriority="750" id="FCJ-GS-3js">
+                            <rect key="frame" x="0.0" y="14" width="220" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <popUpButtonCell key="cell" type="roundTextured" title="No project selected" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="zgx-H9-sB7" id="ptx-KN-g3e">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" title="OtherViews" id="7gI-R1-E86">
+                                    <items>
+                                        <menuItem title="No project selected" state="on" id="zgx-H9-sB7"/>
+                                    </items>
+                                </menu>
+                            </popUpButtonCell>
+                        </popUpButton>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="6B55C07B-1A70-45C6-B6C1-C3AC142DEB58" label="Simulator to use" paletteLabel="Simulator to use" id="ZrJ-we-soH">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="100" height="28"/>
+                        <size key="maxSize" width="224" height="31"/>
+                        <popUpButton key="view" verticalHuggingPriority="750" id="t0A-0F-UXw">
+                            <rect key="frame" x="0.0" y="14" width="220" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <popUpButtonCell key="cell" type="roundTextured" title="Detecting simulators..." bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ix3-tY-MdS">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="menu"/>
+                                <menu key="menu" title="OtherViews" id="YNo-yr-I2p">
+                                    <items>
+                                        <menuItem title="Detecting simulators..." state="on" id="l8X-TM-bg1"/>
+                                    </items>
+                                </menu>
+                            </popUpButtonCell>
+                        </popUpButton>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="4C723D0F-9260-44A7-B4CB-632B6DAC0E1D" label="Run" paletteLabel="Run" tag="-1" image="runButton" selectable="YES" id="JFx-bY-yW0">
+                        <size key="maxSize" width="30" height="30"/>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="1FN-QW-MtZ"/>
+                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="bDj-d6-Zke"/>
+                    <toolbarItem implicitItemIdentifier="337FD659-253B-4EAC-933A-4750EFC9614C" label="Start" paletteLabel="Start" image="runButton" id="1XO-Gv-0hL">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="31" height="28"/>
+                        <size key="maxSize" width="52" height="50"/>
+                        <button key="view" verticalHuggingPriority="750" id="Q8H-oF-VWH">
+                            <rect key="frame" x="1" y="14" width="31" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="runButton" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rk9-BM-2yH">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="0D05CDD4-541B-43A7-8B1C-F6435189C882" label="Capture" paletteLabel="Capture" id="YPf-rg-Zvq">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="31" height="28"/>
+                        <size key="maxSize" width="66" height="50"/>
+                        <button key="view" verticalHuggingPriority="750" id="cHK-o4-bo6">
+                            <rect key="frame" x="0.0" y="14" width="66" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <buttonCell key="cell" type="roundTextured" title="Capture" bezelStyle="texturedRounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mYz-Tj-6ww">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                    </toolbarItem>
+                </allowedToolbarItems>
+                <defaultToolbarItems>
+                    <toolbarItem reference="Cza-IC-Pvx"/>
+                    <toolbarItem reference="55h-o8-M7p"/>
+                    <toolbarItem reference="n1N-g6-o9v"/>
+                    <toolbarItem reference="ZrJ-we-soH"/>
+                    <toolbarItem reference="1FN-QW-MtZ"/>
+                    <toolbarItem reference="1XO-Gv-0hL"/>
+                    <toolbarItem reference="YPf-rg-Zvq"/>
+                </defaultToolbarItems>
+            </toolbar>
+            <point key="canvasLocation" x="286" y="508"/>
         </window>
     </objects>
+    <resources>
+        <image name="runButton" width="15.104894638061523" height="15.104894638061523"/>
+    </resources>
 </document>
