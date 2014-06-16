@@ -11,7 +11,16 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
                             
     @IBOutlet var window: NSWindow
-
+    
+    @IBOutlet var openProjectButton: NSButton
+    @IBOutlet var targetMenu: NSPopUpButton
+    @IBOutlet var configurationMenu: NSPopUpButton
+    @IBOutlet var simulatorMenu: NSPopUpButton
+    @IBOutlet var runButton: NSButton
+    @IBOutlet var captureButton: NSButton
+    
+    @IBOutlet var screenshotImageView: NSImageView
+    @IBOutlet var listTreeOutlineView: NSOutlineView
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         // Insert code here to initialize your application
