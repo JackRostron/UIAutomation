@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040480D4194F65D1000D776B /* NSString+CommandLineScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040480D3194F65D1000D776B /* NSString+CommandLineScript.swift */; };
+		040480DB194F65F7000D776B /* fileUpdated.sh in Resources */ = {isa = PBXBuildFile; fileRef = 040480D6194F65F7000D776B /* fileUpdated.sh */; };
+		040480DC194F65F7000D776B /* IATUtilities.js in Resources */ = {isa = PBXBuildFile; fileRef = 040480D7194F65F7000D776B /* IATUtilities.js */; };
+		040480DD194F65F7000D776B /* listTreeCommandComplete.sh in Resources */ = {isa = PBXBuildFile; fileRef = 040480D8194F65F7000D776B /* listTreeCommandComplete.sh */; };
+		040480DE194F65F7000D776B /* loop.js in Resources */ = {isa = PBXBuildFile; fileRef = 040480D9194F65F7000D776B /* loop.js */; };
+		040480DF194F65F7000D776B /* simulatorFinishedLaunching.sh in Resources */ = {isa = PBXBuildFile; fileRef = 040480DA194F65F7000D776B /* simulatorFinishedLaunching.sh */; };
+		040480E2194F6665000D776B /* IATJavascriptCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040480E1194F6665000D776B /* IATJavascriptCommunicator.swift */; };
 		0417365C194F654C008900F3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417365B194F654C008900F3 /* main.swift */; };
 		0417365E194F654C008900F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417365D194F654C008900F3 /* AppDelegate.swift */; };
 		04173660194F654C008900F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0417365F194F654C008900F3 /* Images.xcassets */; };
@@ -25,6 +32,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040480D3194F65D1000D776B /* NSString+CommandLineScript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+CommandLineScript.swift"; sourceTree = "<group>"; };
+		040480D6194F65F7000D776B /* fileUpdated.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = fileUpdated.sh; path = ../../Javascript/xcode/fileUpdated.sh; sourceTree = SOURCE_ROOT; };
+		040480D7194F65F7000D776B /* IATUtilities.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = IATUtilities.js; path = ../../Javascript/xcode/IATUtilities.js; sourceTree = SOURCE_ROOT; };
+		040480D8194F65F7000D776B /* listTreeCommandComplete.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = listTreeCommandComplete.sh; path = ../../Javascript/xcode/listTreeCommandComplete.sh; sourceTree = SOURCE_ROOT; };
+		040480D9194F65F7000D776B /* loop.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = loop.js; path = ../../Javascript/xcode/loop.js; sourceTree = SOURCE_ROOT; };
+		040480DA194F65F7000D776B /* simulatorFinishedLaunching.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = simulatorFinishedLaunching.sh; path = ../../Javascript/xcode/simulatorFinishedLaunching.sh; sourceTree = SOURCE_ROOT; };
+		040480E1194F6665000D776B /* IATJavascriptCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IATJavascriptCommunicator.swift; sourceTree = "<group>"; };
 		04173656194F654C008900F3 /* iOS-UIAutomator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-UIAutomator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0417365A194F654C008900F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0417365B194F654C008900F3 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -54,12 +68,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040480D2194F65C0000D776B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				040480D3194F65D1000D776B /* NSString+CommandLineScript.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		040480D5194F65E0000D776B /* Javascript */ = {
+			isa = PBXGroup;
+			children = (
+				040480D6194F65F7000D776B /* fileUpdated.sh */,
+				040480D7194F65F7000D776B /* IATUtilities.js */,
+				040480D8194F65F7000D776B /* listTreeCommandComplete.sh */,
+				040480D9194F65F7000D776B /* loop.js */,
+				040480DA194F65F7000D776B /* simulatorFinishedLaunching.sh */,
+			);
+			name = Javascript;
+			sourceTree = "<group>";
+		};
+		040480E0194F6646000D776B /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				04173661194F654C008900F3 /* MainMenu.xib */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
 		0417364D194F654C008900F3 = {
 			isa = PBXGroup;
 			children = (
 				04173658194F654C008900F3 /* iOS-UIAutomator */,
 				0417366B194F654C008900F3 /* iOS-UIAutomatorTests */,
 				04173657194F654C008900F3 /* Products */,
+				04173659194F654C008900F3 /* Supporting Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,9 +119,11 @@
 			isa = PBXGroup;
 			children = (
 				0417365D194F654C008900F3 /* AppDelegate.swift */,
+				040480E1194F6665000D776B /* IATJavascriptCommunicator.swift */,
+				040480D2194F65C0000D776B /* Extensions */,
 				0417365F194F654C008900F3 /* Images.xcassets */,
-				04173661194F654C008900F3 /* MainMenu.xib */,
-				04173659194F654C008900F3 /* Supporting Files */,
+				040480E0194F6646000D776B /* Interface */,
+				040480D5194F65E0000D776B /* Javascript */,
 			);
 			path = "iOS-UIAutomator";
 			sourceTree = "<group>";
@@ -90,6 +135,7 @@
 				0417365B194F654C008900F3 /* main.swift */,
 			);
 			name = "Supporting Files";
+			path = "iOS-UIAutomator";
 			sourceTree = "<group>";
 		};
 		0417366B194F654C008900F3 /* iOS-UIAutomatorTests */ = {
@@ -189,8 +235,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040480DE194F65F7000D776B /* loop.js in Resources */,
+				040480DC194F65F7000D776B /* IATUtilities.js in Resources */,
 				04173660194F654C008900F3 /* Images.xcassets in Resources */,
 				04173663194F654C008900F3 /* MainMenu.xib in Resources */,
+				040480DB194F65F7000D776B /* fileUpdated.sh in Resources */,
+				040480DF194F65F7000D776B /* simulatorFinishedLaunching.sh in Resources */,
+				040480DD194F65F7000D776B /* listTreeCommandComplete.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +259,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040480E2194F6665000D776B /* IATJavascriptCommunicator.swift in Sources */,
+				040480D4194F65D1000D776B /* NSString+CommandLineScript.swift in Sources */,
 				0417365E194F654C008900F3 /* AppDelegate.swift in Sources */,
 				0417365C194F654C008900F3 /* main.swift in Sources */,
 			);
@@ -399,6 +452,7 @@
 				04173674194F654C008900F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		04173675194F654C008900F3 /* Build configuration list for PBXNativeTarget "iOS-UIAutomatorTests" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +461,7 @@
 				04173677194F654C008900F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
