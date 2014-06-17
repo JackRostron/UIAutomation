@@ -43,6 +43,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     //MARK: - System Checks
     func isRunningYosemiteOrLater() -> Bool {
+        //println("Output of OS check: \(NSProcessInfo.processInfo().operatingSystemVersionString)") //Human readable - documentation says not to parse
+        
+        //WARNING NEED TO VERIFY THIS WILL WORK ON MAVERICKS - public in 10.10, private in 10.9
         if NSProcessInfo.processInfo().operatingSystemVersion.majorVersion >= 10 {
             return true
         } else {
@@ -133,6 +136,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func parseSimulatorsForYosemite(simulators: NSArray) -> NSArray {
+        println("\(simulators)")
+        
+        //Dont need the UUID
+        //Need to filter down by device model
+        //Then add versions after
+        
+        
         return [];
     }
     
