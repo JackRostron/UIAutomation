@@ -41,6 +41,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     
+    //MARK: - System Checks
+    func isRunningYosemiteOrLater() -> Bool {
+        if NSProcessInfo.processInfo().operatingSystemVersion.majorVersion >= 10 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
     //MARK: - Simulator
     func simulatorSelectedFromMenu(menuItem: NSMenuItem) {
         
@@ -114,11 +124,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func getFormattedSimulatorListWithCompletion(block: (NSArray) -> Void) {
         self.loadSimulatorVersionsWithCompletion({(simulators: NSArray) in
-            
-            //println("Callback recieved: \(simulators)")
-            
-            block(simulators)
+            if self.isRunningYosemiteOrLater() {
+                block(self.parseSimulatorsForYosemite(simulators))
+            } else {
+                block(self.parseSimulatorsForMavericks(simulators))
+            }
         })
+    }
+    
+    func parseSimulatorsForYosemite(simulators: NSArray) -> NSArray {
+        return [];
+    }
+    
+    func parseSimulatorsForMavericks(simulators: NSArray) -> NSArray {
+        return []
     }
 //    - (void)getFormattedSimulatorListWithCompletion:(void(^)(NSArray *formattedSimualators))block
 //    {
