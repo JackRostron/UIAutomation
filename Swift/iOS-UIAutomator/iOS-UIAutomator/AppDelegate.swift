@@ -27,7 +27,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to initialize your application
         
         self.getFormattedSimulatorListWithCompletion({(simulators: NSArray) in
-            println("Callback recieved: \(simulators)")
+            
+            println("Callback recieved")
+            for var x = 0; x < simulators.count; x++ {
+                var simulator: IATSimulator = simulators.objectAtIndex(x) as IATSimulator
+                println("\(simulator.name)")
+            }
+            
             })
         
     }
@@ -136,48 +142,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func parseSimulatorsForYosemite(simulators: NSArray) -> NSArray {
-        println("\(simulators)")
-        
-        //Dont need the UUID
-        //Need to filter down by device model
-        //Then add versions after
-        
-        /*
-        "Resizable iPad (8.0 Simulator) (2CC45EF1-58B5-4DCF-8DD4-09D460D29ADA)",
-        "Resizable iPhone (8.0 Simulator) (384BC216-8938-4089-8899-080511DFD8AA)",
-        "iPad 2 (7.1 Simulator) (4317C240-49C6-42C5-BAD0-5F000A54A18F)",
-        "iPad 2 (8.0 Simulator) (B93EFFDF-F7C6-4A5F-9B7F-C6E336A09645)",
-        "iPad Air (7.1 Simulator) (BEFA280B-867F-4F94-9E51-E7E1D0A64BE5)",
-        "iPad Air (8.0 Simulator) (07C1245A-6934-46AF-8579-1DD72DF14787)",
-        "iPad Retina (7.1 Simulator) (FFE47F22-07C8-44A9-8DD7-5CD8B198ED5C)",
-        "iPad Retina (8.0 Simulator) (35BFD334-2C04-4D3E-BF77-B881941E4A08)",
-        "iPhone 4s (7.1 Simulator) (6D17B710-AD1D-437E-AE48-D06EC0B12D69)",
-        "iPhone 4s (8.0 Simulator) (AC380F7D-60FB-450A-A88B-A3B82CFBB582)",
-        "iPhone 5 (7.1 Simulator) (D54FD214-6B3A-440D-B454-F385721B6EA5)",
-        "iPhone 5 (8.0 Simulator) (DA476DD7-8C3E-4BA0-B46F-91ACFFB21F4A)",
-        "iPhone 5s (7.1 Simulator) (3B55F6D7-0594-47F3-AC5D-010388CADD06)",
-        "iPhone 5s (8.0 Simulator) (8B7037CA-0A90-4ECC-BAF9-1E22F0991830)"
-        */
-        
-        /*
-        (lldb) po deviceString
-        iPhone Retina (3.5-inch)
-        
-        (lldb) po simulators
-        iPhone Retina (3.5-inch) - Simulator - iOS 7.1,
-        iPhone Retina (4-inch) - Simulator - iOS 7.1,
-        iPhone Retina (4-inch 64-bit) - Simulator - iOS 7.1,
-        iPad - Simulator - iOS 7.1,
-        iPad Retina - Simulator - iOS 7.1,
-        iPad Retina (64-bit) - Simulator - iOS 7.1
-        */
-        
+        //Get unique simulator models
         var simulatorModelList = String[]()
         
         for var x = 0; x < simulators.count; x++ {
             var simulator: AnyObject = simulators.objectAtIndex(x)
             var simulatorComponents = simulator.componentsSeparatedByString(" (")
-            
             var simulatorNameString: String = ""
             
             if simulatorComponents.count >= 3 { //Last 2 components will be "(UUID)" and "* Simulator)"
@@ -191,62 +161,55 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 return []; //Error out, return nothing
             }
             
-            simulatorModelList.append(simulatorNameString)
+            if !simulatorModelList.contains(simulatorNameString) {
+                simulatorModelList.append(simulatorNameString)
+            }
         }
         
-        println("Simulators: \(simulatorModelList)")
+        //Get version numbers for each simulator
+        var finalSimulatorArray = IATSimulator[]()
         
-        return [];
+        for var x = 0; x < simulatorModelList.count; x++ {
+            let device = simulatorModelList[x] as String
+            let versions = self.getVersionsForSimulatorDeviceTypeFromSimulatorList(device, list: simulators)
+            let simulator = IATSimulator(name: device, versions: versions)
+            
+            finalSimulatorArray.append(simulator)
+        }
+        
+        return finalSimulatorArray;
     }
     
     func parseSimulatorsForMavericks(simulators: NSArray) -> NSArray {
+        /*
+        (lldb) po deviceString
+        iPhone Retina (3.5-inch)
+        
+        (lldb) po simulators
+        iPhone Retina (3.5-inch) - Simulator - iOS 7.1,
+        iPhone Retina (4-inch) - Simulator - iOS 7.1,
+        iPhone Retina (4-inch 64-bit) - Simulator - iOS 7.1,
+        iPad - Simulator - iOS 7.1,
+        iPad Retina - Simulator - iOS 7.1,
+        iPad Retina (64-bit) - Simulator - iOS 7.1
+        */
         return []
     }
-    //    - (void)getFormattedSimulatorListWithCompletion:(void(^)(NSArray *formattedSimualators))block
-    //    {
-    //    [self loadSimulatorVersionsWithCompletion:^(NSArray *simulators) {
-    //    NSMutableArray *simulatorArray = [[NSMutableArray alloc] init];
-    //
-    //    for (int x = 0; x < [simulators count]; x++) {
-    //    NSString *line = [simulators objectAtIndex:x];
-    //    NSArray *brokenLine = [line componentsSeparatedByString:@" - "];
-    //
-    //    if (![simulatorArray containsObject:[brokenLine firstObject]]) {
-    //    [simulatorArray addObject:[brokenLine firstObject]];
-    //    }
-    //    }
-    //
-    //    NSMutableArray *finalArray = [[NSMutableArray alloc] initWithCapacity:[simulators count]];
-    //
-    //    for (int x = 0; x < [simulatorArray count]; x++) {
-    //    NSDictionary *simulatorSetup = @{@"device" : [simulatorArray objectAtIndex:x],
-    //    @"versions" : [self getVersionsForSimulatorDeviceType:[simulatorArray objectAtIndex:x] fromSimulatorList:simulators]};
-    //
-    //    [finalArray addObject:simulatorSetup];
-    //    }
-    //
-    //    block(finalArray);
-    //    }];
-    //    }
     
-    func getVersionsForSimulatorDeviceTypeFromSimulatorList(device: String, list: NSArray) {
+    func getVersionsForSimulatorDeviceTypeFromSimulatorList(device: String, list: NSArray) -> String[] {
+        var versionArray = String[]()
         
+        for var x = 0; x < list.count; x++ {
+            var line = list.objectAtIndex(x) as String
+            
+            if line.hasPrefix("\(device) (") {
+                var versionPrefix = line.stringByReplacingOccurrencesOfString("\(device) (", withString: "")
+                var versionNumber = versionPrefix.substringToIndex(3)
+                versionArray.append(versionNumber)
+            }
+        }
+        
+        return versionArray
     }
-    //    - (NSArray *)getVersionsForSimulatorDeviceType:(NSString *)deviceString fromSimulatorList:(NSArray *)simulators
-    //    {
-    //    NSMutableArray *versionsAvailable = [[NSMutableArray alloc] init];
-    //
-    //    for (int x = 0; x < [simulators count]; x++) {
-    //    NSString *line = [simulators objectAtIndex:x];
-    //    NSArray *brokenLine = [line componentsSeparatedByString:@" - "];
-    //    
-    //    if ([[brokenLine firstObject] isEqualToString:deviceString]) {
-    //    [versionsAvailable addObject:[brokenLine lastObject]];
-    //    }
-    //    }
-    //    
-    //    return versionsAvailable;
-    //    }
-    
 }
 
