@@ -42,15 +42,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     //MARK: - System Checks
-    func isRunningYosemiteOrLater() -> Bool {
-        //println("Output of OS check: \(NSProcessInfo.processInfo().operatingSystemVersionString)") //Human readable - documentation says not to parse
-        
-        //WARNING NEED TO VERIFY THIS WILL WORK ON MAVERICKS - public in 10.10, private in 10.9
+    func isRunningYosemiteOrLater2() -> Bool {
+        //WORKS TO CHECK SYSTEM VERSION, BUT WE ACTUALLY NEED TO CHECK COMMAND LINE TOOLS VERSION
         if NSProcessInfo.processInfo().operatingSystemVersion.majorVersion >= 10 {
             return true
         } else {
             return false
         }
+    }
+    
+    func isXcode6orGreater() -> Bool {
+        //THIS SHOULD WORK - NEEDS CONFIRMING ON MAVERICKS THOUGH
+        let xcodeVersionCommand = "xcodebuild -version"
+        let xcodeOutput = xcodeVersionCommand.commandLineOutput()
+        let trimToVersionStart = xcodeOutput.stringByReplacingOccurrencesOfString("Xcode ", withString: "")
+        let xcodeMajorNumber = trimToVersionStart.substringToIndex(1).toInt()
+        return (xcodeMajorNumber >= 6) ? true : false
     }
     
     
@@ -125,7 +132,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func getFormattedSimulatorListWithCompletion(block: (NSArray) -> Void) {
         self.loadSimulatorVersionsWithCompletion({(simulators: NSArray) in
-            if self.isRunningYosemiteOrLater() {
+            if self.isXcode6orGreater() {
                 block(self.parseSimulatorsForYosemite(simulators))
             } else {
                 block(self.parseSimulatorsForMavericks(simulators))
