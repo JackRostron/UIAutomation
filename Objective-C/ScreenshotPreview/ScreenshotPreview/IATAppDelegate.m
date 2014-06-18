@@ -214,6 +214,15 @@
     [IATJavascriptCommunicator sendCommandToInstruments:kInstrumentsCommandListTree throughDirectory:[self.temporaryDirectory stringByAppendingPathComponent:@"output.js"]];
 }
 
+#pragma mark - Check Xcode version
+- (BOOL)isXcode6orGreater {
+    NSString *xcodeVersionCommand = @"xcodebuild -version";
+    NSString *xcodeOutput = [xcodeVersionCommand commandLineOutput];
+    NSString *trimToVersionStart = [xcodeOutput stringByReplacingOccurrencesOfString:@"Xcode " withString:@""];
+    NSString *xcodeMajorNumber = [trimToVersionStart substringToIndex:1];
+    return ([xcodeMajorNumber integerValue] >= 6) ? YES : NO;
+}
+
 #pragma mark - Retrieve simulators
 - (void)simulatorSelectedFromMenu:(id)sender
 {
@@ -231,7 +240,12 @@
     [selectedMenuItem setState:NSOnState];
     [self.simulatorMenu selectItemWithTitle:selectedMenuItem.menu.title];
     
-    self.selectedSimulatorString = [NSString stringWithFormat:@"%@ - Simulator - %@", selectedMenuItem.menu.title, selectedMenuItem.title];
+    if ([self isXcode6orGreater]) {
+        //self.selectedSimulatorString = "\(selectedMenuItem.menu.title) (\(selectedMenuItem.title) Simulator)"
+        self.selectedSimulatorString = [NSString stringWithFormat:@"%@ (%@ Simulator)", selectedMenuItem.menu.title, selectedMenuItem.title];
+    } else {
+        self.selectedSimulatorString = [NSString stringWithFormat:@"%@ - Simulator - %@", selectedMenuItem.menu.title, selectedMenuItem.title];
+    }
 }
 
 - (void)getSimulatorMenu
@@ -270,9 +284,18 @@
         
         NSMutableArray *simulators = [[NSMutableArray alloc] init];
         
-        for (NSString *line in sdkLines) {
-            if ([line rangeOfString:@" - Simulator - "].location != NSNotFound && [line rangeOfString:@"iPhone - Simulator - "].location == NSNotFound) {
-                [simulators addObject:line];
+        if ([self isXcode6orGreater]) {
+            for (NSString *line in sdkLines) {
+                if ([line rangeOfString:@" Simulator) ("].location != NSNotFound) {
+                    [simulators addObject:line];
+                }
+            }
+            
+        } else {
+            for (NSString *line in sdkLines) {
+                if ([line rangeOfString:@" - Simulator - "].location != NSNotFound && [line rangeOfString:@"iPhone - Simulator - "].location == NSNotFound) {
+                    [simulators addObject:line];
+                }
             }
         }
         
@@ -283,27 +306,45 @@
 - (void)getFormattedSimulatorListWithCompletion:(void(^)(NSArray *formattedSimualators))block
 {
     [self loadSimulatorVersionsWithCompletion:^(NSArray *simulators) {
-        NSMutableArray *simulatorArray = [[NSMutableArray alloc] init];
         
-        for (int x = 0; x < [simulators count]; x++) {
-            NSString *line = [simulators objectAtIndex:x];
-            NSArray *brokenLine = [line componentsSeparatedByString:@" - "];
+        if ([self isXcode6orGreater]) {
+            NSLog(@"Xcode 6 or greater, terminating");
+            NSArray *xcode6Simulators = [self xcode6GetDeviceModelList:simulators];
             
-            if (![simulatorArray containsObject:[brokenLine firstObject]]) {
-                [simulatorArray addObject:[brokenLine firstObject]];
+            NSMutableArray *finalArray = [[NSMutableArray alloc] initWithCapacity:[simulators count]];
+            
+            for (int x = 0; x < [xcode6Simulators count]; x++) {
+                NSDictionary *simulatorSetup = @{@"device" : [xcode6Simulators objectAtIndex:x],
+                                                 @"versions" : [self xcode6GetVersionsForSimulatorDeviceType:[xcode6Simulators objectAtIndex:x] fromSimulatorList:simulators]};
+                
+                [finalArray addObject:simulatorSetup];
             }
-        }
-        
-        NSMutableArray *finalArray = [[NSMutableArray alloc] initWithCapacity:[simulators count]];
-        
-        for (int x = 0; x < [simulatorArray count]; x++) {
-            NSDictionary *simulatorSetup = @{@"device" : [simulatorArray objectAtIndex:x],
-                                             @"versions" : [self getVersionsForSimulatorDeviceType:[simulatorArray objectAtIndex:x] fromSimulatorList:simulators]};
             
-            [finalArray addObject:simulatorSetup];
+            block(finalArray);
+            
+        } else {
+            NSMutableArray *simulatorArray = [[NSMutableArray alloc] init];
+            
+            for (int x = 0; x < [simulators count]; x++) {
+                NSString *line = [simulators objectAtIndex:x];
+                NSArray *brokenLine = [line componentsSeparatedByString:@" - "];
+                
+                if (![simulatorArray containsObject:[brokenLine firstObject]]) {
+                    [simulatorArray addObject:[brokenLine firstObject]];
+                }
+            }
+            
+            NSMutableArray *finalArray = [[NSMutableArray alloc] initWithCapacity:[simulators count]];
+            
+            for (int x = 0; x < [simulatorArray count]; x++) {
+                NSDictionary *simulatorSetup = @{@"device" : [simulatorArray objectAtIndex:x],
+                                                 @"versions" : [self getVersionsForSimulatorDeviceType:[simulatorArray objectAtIndex:x] fromSimulatorList:simulators]};
+                
+                [finalArray addObject:simulatorSetup];
+            }
+            
+            block(finalArray);
         }
-        
-        block(finalArray);
     }];
 }
 
@@ -621,4 +662,48 @@
         }];
     }
 }
+
+#pragma mark - Xcode 6 fixes
+- (NSArray *)xcode6GetDeviceModelList:(NSArray *)simulators
+{
+    NSMutableArray *simulatorArray = [[NSMutableArray alloc] init];
+    
+    for (int x = 0; x < [simulators count]; x++) {
+        NSString *line = [simulators objectAtIndex:x];
+        NSArray *brokenLine = [line componentsSeparatedByString:@" ("];
+        NSMutableString *simulatorName = [[NSMutableString alloc] initWithString:@""];
+        
+        if (brokenLine.count >= 3) {
+            for (int y = 0; y < (brokenLine.count - 2); y++) {
+                if (y != 0) {
+                    [simulatorName appendString:@" ("];
+                }
+                [simulatorName appendString:[brokenLine objectAtIndex:y]];
+            }
+        }
+        
+        if (![simulatorArray containsObject:simulatorName]) {
+            [simulatorArray addObject:simulatorName];
+        }
+    }
+    return simulatorArray;
+}
+
+- (NSArray *)xcode6GetVersionsForSimulatorDeviceType:(NSString *)deviceString fromSimulatorList:(NSArray *)simulators
+{
+    NSMutableArray *versionsAvailable = [[NSMutableArray alloc] init];
+    
+    for (int x = 0; x < [simulators count]; x++) {
+        NSString *line = [simulators objectAtIndex:x];
+        
+        if ([line hasPrefix:[NSString stringWithFormat:@"%@ (", deviceString]]) {
+            NSString *versionPrefix = [line stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@ (", deviceString] withString:@""];
+            NSString *versionNumber = [versionPrefix substringToIndex:3];
+            [versionsAvailable addObject:versionNumber];
+        }
+    }
+    
+    return versionsAvailable;
+}
+
 @end
