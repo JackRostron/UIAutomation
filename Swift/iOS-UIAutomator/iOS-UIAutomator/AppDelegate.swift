@@ -133,16 +133,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func getFormattedSimulatorListWithCompletion(block: (NSArray) -> Void) {
         self.loadSimulatorVersionsWithCompletion({(simulators: NSArray) in
             if self.isXcode6orGreater() {
-                block(self.parseSimulatorsForYosemite(simulators))
+                block(self.parseSimulatorsForXcode6(simulators))
             } else {
-                block(self.parseSimulatorsForMavericks(simulators))
+                block(self.parseSimulatorsForXcode5(simulators))
             }
             })
     }
     
-    func parseSimulatorsForYosemite(simulators: NSArray) -> NSArray {
-        //Get unique simulator models
-        var simulatorModelList = String[]()
+    func parseSimulatorsForXcode6(simulators: NSArray) -> NSArray {
+        var simulatorModelList = String[]() //Get unique simulator models
         
         for var x = 0; x < simulators.count; x++ {
             var simulator: AnyObject = simulators.objectAtIndex(x)
@@ -165,8 +164,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
         
-        //Get version numbers for each simulator
-        var finalSimulatorArray = IATSimulator[]()
+        var finalSimulatorArray = IATSimulator[]() //Get version numbers for each simulator
         
         for var x = 0; x < simulatorModelList.count; x++ {
             let device = simulatorModelList[x] as String
@@ -179,7 +177,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return finalSimulatorArray;
     }
     
-    func parseSimulatorsForMavericks(simulators: NSArray) -> NSArray {
+    func parseSimulatorsForXcode5(simulators: NSArray) -> NSArray {
         /*
         (lldb) po deviceString
         iPhone Retina (3.5-inch)
