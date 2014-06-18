@@ -26,15 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         // Insert code here to initialize your application
         
-        self.getFormattedSimulatorListWithCompletion({(simulators: NSArray) in
-            
-            println("Callback recieved")
-            for var x = 0; x < simulators.count; x++ {
-                var simulator: IATSimulator = simulators.objectAtIndex(x) as IATSimulator
-                println("\(simulator.name)")
-            }
-            
-            })
+        self.getSimulatorMenu()
         
     }
     
@@ -62,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     //MARK: - Simulator
     func simulatorSelectedFromMenu(menuItem: NSMenuItem) {
-        
+        println("Simulator selected from menu")
     }
     //    - (void)simulatorSelectedFromMenu:(id)sender
     //    {
@@ -84,34 +76,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     //    }
     
     func getSimulatorMenu() {
-        
+        self.getFormattedSimulatorListWithCompletion({(simulators: NSArray) in
+            
+            var compiledMenu = NSMenu()
+            
+            for var x = 0; x < simulators.count; x++ {
+                var simulator = simulators.objectAtIndex(x) as IATSimulator
+                var menuItem = NSMenuItem(title: simulator.name, action: nil, keyEquivalent: "")
+                
+                var versionMenu = NSMenu(title: simulator.name)
+                for var y = 0; y < simulator.versions.count; y++ {
+                    versionMenu.addItemWithTitle(simulator.versions[y], action: Selector("simulatorSelectedFromMenu:"), keyEquivalent: "")
+                }
+                
+                menuItem.submenu = versionMenu
+                compiledMenu.addItem(menuItem)
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.simulatorMenu.menu = compiledMenu
+                self.simulatorMenu.enabled = true
+                self.simulatorMenu.itemAtIndex(0).state = NSOnState
+                self.simulatorSelectedFromMenu(self.simulatorMenu.menu.itemAtIndex(0).submenu.itemAtIndex(0))
+            })
+            
+            })
     }
-    //    - (void)getSimulatorMenu
-    //    {
-    //    [self getFormattedSimulatorListWithCompletion:^(NSArray *formattedSimualators) {
-    //    NSMenu *compiledMenu = [[NSMenu alloc] init];
-    //
-    //    for (NSDictionary *simulator in formattedSimualators) {
-    //    NSMenuItem *simulatorMenu = [[NSMenuItem alloc] initWithTitle:[simulator objectForKey:@"device"] action:NULL keyEquivalent:@""];
-    //    NSArray *versionList = [simulator objectForKey:@"versions"];
-    //
-    //    NSMenu *versionMenu = [[NSMenu alloc] initWithTitle:[simulator objectForKey:@"device"]];
-    //    for (NSString *version in versionList) {
-    //    [versionMenu addItemWithTitle:version action:@selector(simulatorSelectedFromMenu:) keyEquivalent:@""];
-    //    }
-    //
-    //    [simulatorMenu setSubmenu:versionMenu];
-    //    [compiledMenu addItem:simulatorMenu];
-    //    }
-    //
-    //    dispatch_async(dispatch_get_main_queue(), ^{
-    //    self.simulatorMenu.menu = compiledMenu;
-    //    [self.simulatorMenu setEnabled:YES];
-    //    [[self.simulatorMenu.menu itemAtIndex:0] setState:NSOnState];
-    //    [self simulatorSelectedFromMenu:[[self.simulatorMenu.menu itemAtIndex:0].submenu itemAtIndex:0]];
-    //    });
-    //    }];
-    //    }
     
     func loadSimulatorVersionsWithCompletion(block: (NSArray) -> Void) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
