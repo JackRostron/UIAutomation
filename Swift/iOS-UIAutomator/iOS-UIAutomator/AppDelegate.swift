@@ -9,7 +9,7 @@
 import Cocoa
 import Dispatch
 
-class AppDelegate: NSObject, NSApplicationDelegate, NSAlertDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet var window: NSWindow
     
@@ -205,79 +205,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSAlertDelegate {
     
     
     //MARK: - Modal alerts
-    func showAlertWithTitle(title: String) {
+    func showAlertSheetWithTitle(title: String) {
         self.modalAlert.title.stringValue = title
         self.modalAlert.progressIndicator.startAnimation(nil)
         NSApp.beginSheet(self.modalAlert.window, modalForWindow: self.window, modalDelegate: nil, didEndSelector: nil, contextInfo: nil)
     }
     
-    
-    /*
-    - (void)setupCompilingSheet
-    {
-    NSProgressIndicator *progressIndic = [[NSProgressIndicator alloc] initWithFrame:NSRectFromCGRect(CGRectMake(0, 0, 400, 20))];
-    [progressIndic setStyle:NSProgressIndicatorBarStyle];
-    [progressIndic startAnimation:nil];
-    
-    self.compilingAlert = [NSAlert alertWithMessageText:@"Compiling app" defaultButton:@"Use" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
-    [self.compilingAlert setAccessoryView:progressIndic];
-    
-    NSButton *button = [[self.compilingAlert buttons] objectAtIndex:0];
-    [button setHidden:YES];
+    func endAlertSheet() {
+        dispatch_async(dispatch_get_main_queue(), {
+            NSApp.endSheet(self.modalAlert.window)
+            })
     }
-    
-    - (void)dismissCompileSheet
-    {
-    dispatch_async(dispatch_get_main_queue(), ^{
-    [NSApp endSheet:self.compilingAlert.window];
-    });
-    }
-    
-    - (void)setupLaunchingAppSheet
-    {
-    NSProgressIndicator *progressIndic = [[NSProgressIndicator alloc] initWithFrame:NSRectFromCGRect(CGRectMake(0, 0, 400, 20))];
-    [progressIndic setStyle:NSProgressIndicatorBarStyle];
-    [progressIndic startAnimation:nil];
-    
-    self.launchingAppAlert = [NSAlert alertWithMessageText:@"Launching app" defaultButton:@"Use" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
-    [self.launchingAppAlert setAccessoryView:progressIndic];
-    
-    NSButton *button = [[self.launchingAppAlert buttons] objectAtIndex:0];
-    [button setHidden:YES];
-    }
-    
-    - (void)dismissLaunchingAppSheet
-    {
-    dispatch_async(dispatch_get_main_queue(), ^{
-    [NSApp endSheet:self.launchingAppAlert.window];
-    });
-    }
-    
-    - (void)setupCaptureSheet
-    {
-    NSProgressIndicator *progressIndic = [[NSProgressIndicator alloc] initWithFrame:NSRectFromCGRect(CGRectMake(0, 0, 400, 20))];
-    [progressIndic setStyle:NSProgressIndicatorBarStyle];
-    [progressIndic startAnimation:nil];
-    
-    self.capturingScreenshotAlert = [NSAlert alertWithMessageText:@"Capturing screenshot" defaultButton:@"Use" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
-    [self.capturingScreenshotAlert setAccessoryView:progressIndic];
-    
-    NSButton *button = [[self.capturingScreenshotAlert buttons] objectAtIndex:0];
-    [button setHidden:YES];
-    }
-    
-    - (void)dismissCaptureSheet
-    {
-    dispatch_async(dispatch_get_main_queue(), ^{
-    [NSApp endSheet:self.capturingScreenshotAlert.window];
-    });
-    }
-    
-    - (void)didEndSheet:(id)modalSheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo
-    {
-    [modalSheet orderOut: nil];
-    }
-    */
 }
 
 
