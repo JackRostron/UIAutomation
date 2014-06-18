@@ -23,11 +23,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var screenshotImageView: NSImageView
     @IBOutlet var listTreeOutlineView: NSOutlineView
     
+    var selectedSimulatorString : String?
+    
+    
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         // Insert code here to initialize your application
         
         self.getSimulatorMenu()
-        
     }
     
     func applicationWillTerminate(aNotification: NSNotification?) {
@@ -55,25 +57,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     //MARK: - Simulator
     func simulatorSelectedFromMenu(menuItem: NSMenuItem) {
         println("Simulator selected from menu")
+        
+        var selectedMenuItem = menuItem
+        
+        for menuItem:NSMenuItem! in self.simulatorMenu.menu.itemArray {
+            menuItem.state = NSOffState
+            if menuItem.submenu {
+                for var x = 0; x < menuItem.submenu.itemArray.count; x++ {
+                    var submenu = menuItem.submenu.itemArray[x] as NSMenuItem
+                    submenu.state = NSOffState
+                }
+            }
+        }
+        
+        selectedMenuItem.state = NSOnState
+        self.simulatorMenu.selectItemWithTitle(selectedMenuItem.menu.title)
+        
+        //THIS NEEDS CONFIRMING - UNSURE WHETHER THIS WILL ACTUALLY WORK - MIGHT NEED TO STORE AND RETRIEVE UUID OF SIMULATORS
+        self.selectedSimulatorString = "\(selectedMenuItem.menu.title) (\(selectedMenuItem.title) Simulator)"
     }
-    //    - (void)simulatorSelectedFromMenu:(id)sender
-    //    {
-    //    NSMenuItem *selectedMenuItem = sender;
-    //
-    //    for (NSMenuItem *menuItem in self.simulatorMenu.menu.itemArray) {
-    //    [menuItem setState:NSOffState];
-    //    if (menuItem.submenu) {
-    //    for (NSMenuItem *subMenuItem in menuItem.submenu.itemArray) {
-    //    [subMenuItem setState:NSOffState];
-    //    }
-    //    }
-    //    }
-    //
-    //    [selectedMenuItem setState:NSOnState];
-    //    [self.simulatorMenu selectItemWithTitle:selectedMenuItem.menu.title];
-    //
-    //    self.selectedSimulatorString = [NSString stringWithFormat:@"%@ - Simulator - %@", selectedMenuItem.menu.title, selectedMenuItem.title];
-    //    }
     
     func getSimulatorMenu() {
         self.getFormattedSimulatorListWithCompletion({(simulators: NSArray) in
