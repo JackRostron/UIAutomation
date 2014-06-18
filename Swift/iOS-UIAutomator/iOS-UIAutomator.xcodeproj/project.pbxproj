@@ -22,6 +22,8 @@
 		0417366F194F654C008900F3 /* iOS_UIAutomatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417366E194F654C008900F3 /* iOS_UIAutomatorTests.swift */; };
 		04C80DA61951722600E2E1BF /* IATSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C80DA51951722600E2E1BF /* IATSimulator.swift */; };
 		04C80DA819517BE300E2E1BF /* Array+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C80DA719517BE300E2E1BF /* Array+Contains.swift */; };
+		04CA2F071951AB3C00EFB4EA /* UnknownTaskAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA2F051951AB3C00EFB4EA /* UnknownTaskAlert.swift */; };
+		04CA2F081951AB3C00EFB4EA /* UnknownTaskAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CA2F061951AB3C00EFB4EA /* UnknownTaskAlert.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		0417366E194F654C008900F3 /* iOS_UIAutomatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_UIAutomatorTests.swift; sourceTree = "<group>"; };
 		04C80DA51951722600E2E1BF /* IATSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IATSimulator.swift; sourceTree = "<group>"; };
 		04C80DA719517BE300E2E1BF /* Array+Contains.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Contains.swift"; sourceTree = "<group>"; };
+		04CA2F051951AB3C00EFB4EA /* UnknownTaskAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownTaskAlert.swift; sourceTree = "<group>"; };
+		04CA2F061951AB3C00EFB4EA /* UnknownTaskAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UnknownTaskAlert.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +81,8 @@
 		040480D2194F65C0000D776B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				040480D3194F65D1000D776B /* NSString+CommandLineScript.swift */,
 				04C80DA719517BE300E2E1BF /* Array+Contains.swift */,
+				040480D3194F65D1000D776B /* NSString+CommandLineScript.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -99,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				04173661194F654C008900F3 /* MainMenu.xib */,
+				04CA2F061951AB3C00EFB4EA /* UnknownTaskAlert.xib */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -128,6 +133,7 @@
 				0417365D194F654C008900F3 /* AppDelegate.swift */,
 				04C80DA51951722600E2E1BF /* IATSimulator.swift */,
 				040480E1194F6665000D776B /* IATJavascriptCommunicator.swift */,
+				04CA2F051951AB3C00EFB4EA /* UnknownTaskAlert.swift */,
 				040480D2194F65C0000D776B /* Extensions */,
 				0417365F194F654C008900F3 /* Images.xcassets */,
 				040480E0194F6646000D776B /* Interface */,
@@ -252,6 +258,7 @@
 				040480DB194F65F7000D776B /* fileUpdated.sh in Resources */,
 				040480DF194F65F7000D776B /* simulatorFinishedLaunching.sh in Resources */,
 				040480DD194F65F7000D776B /* listTreeCommandComplete.sh in Resources */,
+				04CA2F081951AB3C00EFB4EA /* UnknownTaskAlert.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +282,7 @@
 				0417365E194F654C008900F3 /* AppDelegate.swift in Sources */,
 				04C80DA819517BE300E2E1BF /* Array+Contains.swift in Sources */,
 				0417365C194F654C008900F3 /* main.swift in Sources */,
+				04CA2F071951AB3C00EFB4EA /* UnknownTaskAlert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
