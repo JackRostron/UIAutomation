@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     var selectedSimulatorString: String?
     var modalAlert: UnknownTaskAlert = UnknownTaskAlert(windowNibName: "UnknownTaskAlert")
+    var temporaryDirectory = AppDelegate.createTemporaryDirectory()
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
@@ -60,14 +61,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     
-    //MARK: - System Checks
+    //MARK: - System checks & setup
     func isXcode6orGreater() -> Bool {
-        //THIS SHOULD WORK - NEEDS CONFIRMING ON MAVERICKS THOUGH
         let xcodeVersionCommand = "xcodebuild -version"
         let xcodeOutput = xcodeVersionCommand.commandLineOutput()
         let trimToVersionStart = xcodeOutput.stringByReplacingOccurrencesOfString("Xcode ", withString: "")
         let xcodeMajorNumber = trimToVersionStart.substringToIndex(1).toInt()
         return (xcodeMajorNumber >= 6) ? true : false
+    }
+    
+    class func createTemporaryDirectory() -> String? {
+        let guid = NSProcessInfo.processInfo().globallyUniqueString
+        let path = NSTemporaryDirectory().stringByAppendingPathComponent(guid)
+        if NSFileManager.defaultManager().createDirectoryAtPath(path, withIntermediateDirectories: false, attributes: nil, error: nil) {
+            return path
+        } else {
+            return nil
+        }
     }
     
     
