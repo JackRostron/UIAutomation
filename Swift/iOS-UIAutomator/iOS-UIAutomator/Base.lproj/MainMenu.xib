@@ -192,6 +192,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="openProjectPressed:" target="Voe-Tx-rLC" id="RrP-Xg-3tK"/>
+                            </connections>
                         </button>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="A8D9A399-B669-4DD5-85CC-1269CF90F158" label="App Target" paletteLabel="App Target" id="55h-o8-M7p">
@@ -260,6 +263,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="runButtonPressed:" target="Voe-Tx-rLC" id="G4q-cC-Wef"/>
+                            </connections>
                         </button>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="0D05CDD4-541B-43A7-8B1C-F6435189C882" label="Capture" paletteLabel="Capture" id="YPf-rg-Zvq">
@@ -273,6 +279,9 @@
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
+                            <connections>
+                                <action selector="captureButtonPressed:" target="Voe-Tx-rLC" id="1Lh-g7-W66"/>
+                            </connections>
                         </button>
                     </toolbarItem>
                 </allowedToolbarItems>

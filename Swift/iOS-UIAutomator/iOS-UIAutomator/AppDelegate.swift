@@ -24,14 +24,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var listTreeOutlineView: NSOutlineView
     
     var selectedSimulatorString: String?
-    
     var modalAlert: UnknownTaskAlert = UnknownTaskAlert(windowNibName: "UnknownTaskAlert")
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         // Insert code here to initialize your application
         
-        self.getSimulatorMenu()
+        //var xcodeProj = IATXcodeProject(projectLocation: "/Users/Jack/Documents/Repos/Personal/KeyboardTests/KeyboardTests.xcodeproj")
+        //var xcodeProj = IATXcodeProject(projectLocation: "/Users/Jack/Documents/Repos/BullOrBear/any-bet-ios/AnyBet/AnyBet.xcworkspace")
+        
+        //self.getSimulatorMenu()
         //self.showAlertWithTitle("Compiling")
     }
     
@@ -41,6 +43,52 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationShouldTerminateAfterLastWindowClosed(theApplication: NSApplication!) -> Bool {
         return true
+    }
+    
+    
+    //MARK: - IBActions
+    @IBAction func openProjectPressed(sender: AnyObject) {
+        
+        self.loadXcodeProject({(project: IATXcodeProject) in
+            self.window.title = "iOS UIAutomator - \(project.name)"
+        })
+    
+        /*
+        [self loadXcodeProjectWithCompletionHandler:^(NSDictionary *project) {
+        
+        self.xcodeProject = project;
+        
+        if (self.xcodeProject) {
+        self.targetMenu.menu = [self getTargetsMenuForProject:self.xcodeProject];
+        self.configurationMenu.menu = [self getConfigurationsMenuForProject:self.xcodeProject];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+        [self.targetMenu setEnabled:YES];
+        [self.configurationMenu setEnabled:YES];
+        [self.runButton setEnabled:YES];
+        
+        if (![self.simulatorMenu isEnabled] && [self.simulatorMenu.itemArray count] > 1) {
+        [self.simulatorMenu setEnabled:YES];
+        }
+        });
+        
+        } else {
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = @"There was an error opening the Xcode project. Please try again.";
+        [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {}];
+        }
+        }];
+        */
+    }
+    
+    @IBAction func runButtonPressed(sender: AnyObject) {
+        self.showAlertSheetWithTitle("Compiling Xcode project")
+    }
+    
+    @IBAction func captureButtonPressed(sender: AnyObject) {
+        self.showAlertSheetWithTitle("Capturing simulator state")
+        let communicator = IATJavascriptCommunicator()
+        //communicator.sendCommandToInstrumentsThroughDirectory(kInstrumentsCommand.ListTree, directory: "")
     }
     
     
@@ -216,6 +264,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NSApp.endSheet(self.modalAlert.window)
             })
     }
+    
+    
+    //MARK: - Xcode Project
+    func loadXcodeProject(block: (IATXcodeProject) -> Void) {
+        var openPanel = NSOpenPanel()
+        openPanel.canChooseFiles = true
+        openPanel.canChooseDirectories = false
+        openPanel.allowsMultipleSelection = false
+        openPanel.allowedFileTypes = ["xcodeproj", "xcworkspace"]
+        
+        openPanel.runModal()
+        var selectedFile = openPanel.URL
+        
+        if let fileURL = selectedFile {
+            block(IATXcodeProject(projectLocation: fileURL.absoluteString))
+        }
+    }
+    
 }
 
 

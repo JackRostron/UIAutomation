@@ -20,6 +20,7 @@
 		04173660194F654C008900F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0417365F194F654C008900F3 /* Images.xcassets */; };
 		04173663194F654C008900F3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04173661194F654C008900F3 /* MainMenu.xib */; };
 		0417366F194F654C008900F3 /* iOS_UIAutomatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417366E194F654C008900F3 /* iOS_UIAutomatorTests.swift */; };
+		0428521E195201E800A80672 /* IATXcodeProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428521D195201E800A80672 /* IATXcodeProject.swift */; };
 		04C80DA61951722600E2E1BF /* IATSimulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C80DA51951722600E2E1BF /* IATSimulator.swift */; };
 		04C80DA819517BE300E2E1BF /* Array+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C80DA719517BE300E2E1BF /* Array+Contains.swift */; };
 		04CA2F071951AB3C00EFB4EA /* UnknownTaskAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA2F051951AB3C00EFB4EA /* UnknownTaskAlert.swift */; };
@@ -54,6 +55,7 @@
 		04173668194F654C008900F3 /* iOS-UIAutomatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-UIAutomatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0417366D194F654C008900F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0417366E194F654C008900F3 /* iOS_UIAutomatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_UIAutomatorTests.swift; sourceTree = "<group>"; };
+		0428521D195201E800A80672 /* IATXcodeProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IATXcodeProject.swift; sourceTree = "<group>"; };
 		04C80DA51951722600E2E1BF /* IATSimulator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IATSimulator.swift; sourceTree = "<group>"; };
 		04C80DA719517BE300E2E1BF /* Array+Contains.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Contains.swift"; sourceTree = "<group>"; };
 		04CA2F051951AB3C00EFB4EA /* UnknownTaskAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnknownTaskAlert.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				0417365D194F654C008900F3 /* AppDelegate.swift */,
 				04C80DA51951722600E2E1BF /* IATSimulator.swift */,
+				0428521D195201E800A80672 /* IATXcodeProject.swift */,
 				040480E1194F6665000D776B /* IATJavascriptCommunicator.swift */,
 				04CA2F051951AB3C00EFB4EA /* UnknownTaskAlert.swift */,
 				040480D2194F65C0000D776B /* Extensions */,
@@ -276,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0428521E195201E800A80672 /* IATXcodeProject.swift in Sources */,
 				04C80DA61951722600E2E1BF /* IATSimulator.swift in Sources */,
 				040480E2194F6665000D776B /* IATJavascriptCommunicator.swift in Sources */,
 				040480D4194F65D1000D776B /* NSString+CommandLineScript.swift in Sources */,
