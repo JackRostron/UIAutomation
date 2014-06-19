@@ -57,6 +57,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //self.showAlertSheetWithTitle("Compiling Xcode project")
         if let xcProj = self.xcodeProject {
             println("Project selected")
+            
+            xcProj.compileProject(self.targetMenu.selectedItem.title, configuration: self.configurationMenu.selectedItem.title, {(success: Bool) in
+                println("COMPILATION CALLBACK WAS: \(success)")
+                })
+            
         } else {
             println("Not selected project yet")
         }

@@ -64,6 +64,8 @@ class IATXcodeProject: NSObject {
                 println("COMPILE FAILED")
             }
             
+            println("\(outputLines)")
+            
             block(success)
             })
         
