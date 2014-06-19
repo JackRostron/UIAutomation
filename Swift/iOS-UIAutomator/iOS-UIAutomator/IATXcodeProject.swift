@@ -43,6 +43,49 @@ class IATXcodeProject: NSObject {
     }
     
     
+    //MARK: - Compilation
+    func getAppBuildLocation(block: (String) -> Void) {
+        
+        block("LOCATION")
+    }
+    
+    func compileProject(target: String, configuration: String, block: (Bool) -> Void) {
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+            var success = false
+            var projectWorkspaceToggle = (self.isProject) ? "-project" : "-workspace"
+            var buildCommand = "xcodebuild \(projectWorkspaceToggle) \(self.location) -scheme \(target) -configuration \(configuration) -sdk iphonesimulator"
+            
+            let outputLines = buildCommand.commandLineOutput().componentsSeparatedByString("\n")
+            if outputLines[outputLines.count - 3] == "** BUILD SUCCEEDED **" {
+                println("COMPILE SUCCESSFUL")
+                success = true
+            } else {
+                println("COMPILE FAILED")
+            }
+            
+            block(success)
+            })
+        
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            
+//            BOOL success = NO;
+//            
+//            NSString *buildSettingsCommand = [NSString stringWithFormat:@"xcodebuild %@ %@ -scheme %@ -configuration %@ -sdk iphonesimulator", ([url rangeOfString:@"xcodeproj"].location != NSNotFound) ? @"-project" : @"-workspace", url, target, configuration];
+//            
+//            NSArray *outputLines = [[buildSettingsCommand commandLineOutput] componentsSeparatedByString:@"\n"];
+//            
+//            if ([[outputLines objectAtIndex:([outputLines count] - 3)] isEqualToString:@"** BUILD SUCCEEDED **"]) {
+//                success = YES;
+//            }
+//            
+//            block(success);
+//            });
+        
+        block(true)
+    }
+    
+    
     //MARK: - Parsers & Setup
     class func removeProjectURLPrefix(location: String) -> String {
         if location.hasPrefix("file:///") {

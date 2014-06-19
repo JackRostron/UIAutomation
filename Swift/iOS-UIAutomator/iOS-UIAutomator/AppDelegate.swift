@@ -26,6 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var selectedSimulatorString: String?
     var modalAlert: UnknownTaskAlert = UnknownTaskAlert(windowNibName: "UnknownTaskAlert")
     var temporaryDirectory = AppDelegate.createTemporaryDirectory()
+    var xcodeProject: IATXcodeProject?
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
@@ -34,6 +35,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationWillTerminate(aNotification: NSNotification?) {
         self.terminateSimulator()
+        NSFileManager.defaultManager().removeItemAtPath(self.temporaryDirectory, error: nil)
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(theApplication: NSApplication!) -> Bool {
@@ -47,11 +49,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.window.title = "iOS UIAutomator - \(project.name)"
             self.targetMenu.menu = project.getMenuFromStringArray(project.targets)
             self.configurationMenu.menu = project.getMenuFromStringArray(project.configurations)
+            self.xcodeProject = project
         })
     }
     
     @IBAction func runButtonPressed(sender: AnyObject) {
-        self.showAlertSheetWithTitle("Compiling Xcode project")
+        //self.showAlertSheetWithTitle("Compiling Xcode project")
+        if let xcProj = self.xcodeProject {
+            println("Project selected")
+        } else {
+            println("Not selected project yet")
+        }
+        
     }
     
     @IBAction func captureButtonPressed(sender: AnyObject) {
