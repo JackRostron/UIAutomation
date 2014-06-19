@@ -28,17 +28,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
-        // Insert code here to initialize your application
-        
-        //var xcodeProj = IATXcodeProject(projectLocation: "/Users/Jack/Documents/Repos/Personal/KeyboardTests/KeyboardTests.xcodeproj")
-        //var xcodeProj = IATXcodeProject(projectLocation: "/Users/Jack/Documents/Repos/BullOrBear/any-bet-ios/AnyBet/AnyBet.xcworkspace")
-        
-        //self.getSimulatorMenu()
-        //self.showAlertWithTitle("Compiling")
+        self.getSimulatorMenu()
     }
     
     func applicationWillTerminate(aNotification: NSNotification?) {
-        // Insert code here to tear down your application
+        self.terminateSimulator()
     }
     
     func applicationShouldTerminateAfterLastWindowClosed(theApplication: NSApplication!) -> Bool {
@@ -78,6 +72,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     //MARK: - Simulator
+    func terminateSimulator() {
+        let quitSimulatorCommand = "osascript -e 'tell app \"iPhone Simulator\" to quit'"
+        quitSimulatorCommand.commandLineOutput()
+    }
+    
     func simulatorSelectedFromMenu(menuItem: NSMenuItem) {
         println("Simulator selected from menu")
         
@@ -257,16 +256,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
