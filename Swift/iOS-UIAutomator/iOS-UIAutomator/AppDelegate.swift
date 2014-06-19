@@ -48,37 +48,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     //MARK: - IBActions
     @IBAction func openProjectPressed(sender: AnyObject) {
-        
         self.loadXcodeProject({(project: IATXcodeProject) in
             self.window.title = "iOS UIAutomator - \(project.name)"
+            self.targetMenu.menu = project.getMenuFromStringArray(project.targets)
+            self.configurationMenu.menu = project.getMenuFromStringArray(project.configurations)
         })
-    
-        /*
-        [self loadXcodeProjectWithCompletionHandler:^(NSDictionary *project) {
-        
-        self.xcodeProject = project;
-        
-        if (self.xcodeProject) {
-        self.targetMenu.menu = [self getTargetsMenuForProject:self.xcodeProject];
-        self.configurationMenu.menu = [self getConfigurationsMenuForProject:self.xcodeProject];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-        [self.targetMenu setEnabled:YES];
-        [self.configurationMenu setEnabled:YES];
-        [self.runButton setEnabled:YES];
-        
-        if (![self.simulatorMenu isEnabled] && [self.simulatorMenu.itemArray count] > 1) {
-        [self.simulatorMenu setEnabled:YES];
-        }
-        });
-        
-        } else {
-        NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"There was an error opening the Xcode project. Please try again.";
-        [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {}];
-        }
-        }];
-        */
     }
     
     @IBAction func runButtonPressed(sender: AnyObject) {

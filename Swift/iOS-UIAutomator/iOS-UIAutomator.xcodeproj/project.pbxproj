@@ -133,9 +133,9 @@
 			isa = PBXGroup;
 			children = (
 				0417365D194F654C008900F3 /* AppDelegate.swift */,
+				040480E1194F6665000D776B /* IATJavascriptCommunicator.swift */,
 				04C80DA51951722600E2E1BF /* IATSimulator.swift */,
 				0428521D195201E800A80672 /* IATXcodeProject.swift */,
-				040480E1194F6665000D776B /* IATJavascriptCommunicator.swift */,
 				04CA2F051951AB3C00EFB4EA /* UnknownTaskAlert.swift */,
 				040480D2194F65C0000D776B /* Extensions */,
 				0417365F194F654C008900F3 /* Images.xcassets */,

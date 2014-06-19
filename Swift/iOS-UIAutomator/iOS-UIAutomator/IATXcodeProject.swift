@@ -71,9 +71,15 @@ class IATXcodeProject: NSObject {
         
         return targets;
     }
+    
+    
+    //MARK: - NSMenus
+    func getMenuFromStringArray(array: String[]) -> NSMenu {
+        var menu = NSMenu()
+        for target in array {
+            menu.addItemWithTitle(target, action: nil, keyEquivalent: "")
+        }
+        return menu
+    }
 
 }
-
-
-
-
